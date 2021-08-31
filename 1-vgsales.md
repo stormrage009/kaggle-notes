@@ -14,26 +14,6 @@ output:
 ```r
 file <- "D:/Tools/Rwork/0.Study R/kaggle-project/data/vgsales.csv"
 df <- read_csv(file)
-```
-
-```
-## Rows: 19600 Columns: 9
-```
-
-```
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## chr (4): Name, Platform, Publisher, Developer
-## dbl (5): Rank, Critic_Score, User_Score, Total_Shipped, Year
-```
-
-```
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-```r
 str(df)
 ```
 
