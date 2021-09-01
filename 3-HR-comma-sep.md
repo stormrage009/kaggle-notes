@@ -182,6 +182,10 @@ hr_model <- hr %>%
            number_project>=5)
 ```
 
+```
+## Warning in Ops.factor(number_project, 5): '>=' not meaningful for factors
+```
+
 ### 确定交叉验证方法
 
 
@@ -272,6 +276,44 @@ conPart
 nbModel <- train(left~., data = trainData,
                  trControl = train_control,
                  method = "nb")
+```
+
+```
+## Warning: model fit failed for Fold1: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+##   Zero variances for at least one class in variables: number_project7
+```
+
+```
+## Warning: model fit failed for Fold2: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+##   Zero variances for at least one class in variables: number_project7
+```
+
+```
+## Warning: model fit failed for Fold3: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+##   Zero variances for at least one class in variables: number_project7
+```
+
+```
+## Warning: model fit failed for Fold4: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+##   Zero variances for at least one class in variables: number_project7
+```
+
+```
+## Warning: model fit failed for Fold5: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+##   Zero variances for at least one class in variables: number_project7
+```
+
+```
+## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
+## There were missing values in resampled performance measures.
+```
+
+```
+## Warning in train.default(x, y, weights = w, ...): missing values found in
+## aggregated results
+```
+
+```r
 predNb <- predict(nbModel, testData[-7])
 conNb <- table(predNb, testData$left)
 conNb
@@ -328,7 +370,17 @@ predNb <- as.numeric(predNb)
 ```r
 # 获取后续绘图使用的信息
 rocPart <- roc(testData$left, predRpart)
+```
 
+```
+## Setting levels: control = 0, case = 1
+```
+
+```
+## Setting direction: controls < cases
+```
+
+```r
 # 计算两个关键值
 # 假正例率
 specificityRp <- rocPart$specificities
@@ -340,7 +392,17 @@ sensitivityRp <- rocPart$sensitivities
 ```r
 # 获取后续绘图使用的信息
 rocNb <- roc(testData$left, predNb)
+```
 
+```
+## Setting levels: control = 0, case = 1
+```
+
+```
+## Setting direction: controls < cases
+```
+
+```r
 # 计算两个关键值
 # 假正例率
 specificityNb <- rocNb$specificities

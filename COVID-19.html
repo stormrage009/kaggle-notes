@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 COVID-19 epidemiology with R | Kaggle数据项目实战</title>
+  <meta name="description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 COVID-19 epidemiology with R | Kaggle数据项目实战" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 COVID-19 epidemiology with R | Kaggle数据项目实战" />
+  
+  <meta name="twitter:description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  
+
+<meta name="author" content="LEE" />
+
+
+<meta name="date" content="2021-09-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="HR-comma-sep.html"/>
+<link rel="next" href="creditcard.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/SVG"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+   src="../../../MathJax/MathJax.js">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>简介</a></li>
+<li class="chapter" data-level="1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html"><i class="fa fa-check"></i><b>1</b> Video Games Sales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#game-sales-intro"><i class="fa fa-check"></i><b>1.1</b> 准备</a></li>
+<li class="chapter" data-level="1.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#缺失值处理"><i class="fa fa-check"></i><b>1.2</b> 缺失值处理</a></li>
+<li class="chapter" data-level="1.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#描述性分析"><i class="fa fa-check"></i><b>1.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#sec:Frequency-Distribution"><i class="fa fa-check"></i><b>1.3.1</b> 频数分布</a></li>
+<li class="chapter" data-level="1.3.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#sec:Central-Trend-Measures"><i class="fa fa-check"></i><b>1.3.2</b> 中心分布指标</a></li>
+<li class="chapter" data-level="1.3.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#separating-measures"><i class="fa fa-check"></i><b>1.3.3</b> Separating Measures</a></li>
+<li class="chapter" data-level="1.3.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#dispersion-measures"><i class="fa fa-check"></i><b>1.3.4</b> Dispersion Measures</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#探索性分析"><i class="fa fa-check"></i><b>1.4</b> 探索性分析</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#世界最畅销游戏"><i class="fa fa-check"></i><b>1.4.1</b> 世界最畅销游戏</a></li>
+<li class="chapter" data-level="1.4.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#游戏发型平台"><i class="fa fa-check"></i><b>1.4.2</b> 游戏发型平台</a></li>
+<li class="chapter" data-level="1.4.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#游戏发行商发型游戏书"><i class="fa fa-check"></i><b>1.4.3</b> 游戏发行商发型游戏书</a></li>
+<li class="chapter" data-level="1.4.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#每年世界销量"><i class="fa fa-check"></i><b>1.4.4</b> 每年世界销量</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#其它分析"><i class="fa fa-check"></i><b>1.5</b> 其它分析</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户打分与游戏销量关系"><i class="fa fa-check"></i><b>1.5.1</b> 用户打分与游戏销量关系</a></li>
+<li class="chapter" data-level="1.5.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#从业者打分与游戏销量关系"><i class="fa fa-check"></i><b>1.5.2</b> 从业者打分与游戏销量关系</a></li>
+<li class="chapter" data-level="1.5.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户与从业者分别最喜欢哪个发行商"><i class="fa fa-check"></i><b>1.5.3</b> 用户与从业者分别最喜欢哪个发行商</a></li>
+<li class="chapter" data-level="1.5.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户与从业者分别最喜欢哪个发行商-1"><i class="fa fa-check"></i><b>1.5.4</b> 用户与从业者分别最喜欢哪个发行商</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Olympic-history.html"><a href="Olympic-history.html"><i class="fa fa-check"></i><b>2</b> Olympic history</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Olympic-history.html"><a href="Olympic-history.html#olympic-intro"><i class="fa fa-check"></i><b>2.1</b> 介绍</a></li>
+<li class="chapter" data-level="2.2" data-path="Olympic-history.html"><a href="Olympic-history.html#运动员国家和时间"><i class="fa fa-check"></i><b>2.2</b> 运动员、国家和时间</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Olympic-history.html"><a href="Olympic-history.html#随着时间的推移运动员国家和赛事的数量是否发生了变化"><i class="fa fa-check"></i><b>2.2.1</b> 随着时间的推移，运动员、国家和赛事的数量是否发生了变化？</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="Olympic-history.html"><a href="Olympic-history.html#sec:art-com"><i class="fa fa-check"></i><b>2.3</b> 艺术竞赛（The Art Competitions）</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="Olympic-history.html"><a href="Olympic-history.html#运动员时间参赛项目"><i class="fa fa-check"></i><b>2.3.1</b> 运动员、时间、参赛项目</a></li>
+<li class="chapter" data-level="2.3.2" data-path="Olympic-history.html"><a href="Olympic-history.html#获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多"><i class="fa fa-check"></i><b>2.3.2</b> 获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="Olympic-history.html"><a href="Olympic-history.html#奥林匹克中的女将们"><i class="fa fa-check"></i><b>2.4</b> 奥林匹克中的女将们</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="Olympic-history.html"><a href="Olympic-history.html#男女运动员数量比较"><i class="fa fa-check"></i><b>2.4.1</b> 男女运动员数量比较</a></li>
+<li class="chapter" data-level="2.4.2" data-path="Olympic-history.html"><a href="Olympic-history.html#各国参赛男女运动员间数量关系"><i class="fa fa-check"></i><b>2.4.2</b> 各国参赛男女运动员间数量关系</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="Olympic-history.html"><a href="Olympic-history.html#奖牌榜medal-count"><i class="fa fa-check"></i><b>2.5</b> 奖牌榜（Medal Count）</a></li>
+<li class="chapter" data-level="2.6" data-path="Olympic-history.html"><a href="Olympic-history.html#地理信息地图"><i class="fa fa-check"></i><b>2.6</b> 地理信息地图</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况"><i class="fa fa-check"></i><b>2.6.1</b> 1928年奥运会情况</a></li>
+<li class="chapter" data-level="2.6.2" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况-1"><i class="fa fa-check"></i><b>2.6.2</b> 1972年奥运会情况</a></li>
+<li class="chapter" data-level="2.6.3" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况-2"><i class="fa fa-check"></i><b>2.6.3</b> 2016年奥运会情况</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="Olympic-history.html"><a href="Olympic-history.html#参赛运动员身高体重"><i class="fa fa-check"></i><b>2.7</b> 参赛运动员身高体重</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="Olympic-history.html"><a href="Olympic-history.html#数据完整性及可用性检测"><i class="fa fa-check"></i><b>2.7.1</b> 数据完整性及可用性检测</a></li>
+<li class="chapter" data-level="2.7.2" data-path="Olympic-history.html"><a href="Olympic-history.html#身高体重"><i class="fa fa-check"></i><b>2.7.2</b> 身高体重</a></li>
+<li class="chapter" data-level="2.7.3" data-path="Olympic-history.html"><a href="Olympic-history.html#change-in-weight-vs-change-in-height-over-times-across-mens-sports"><i class="fa fa-check"></i><b>2.7.3</b> change in Weight VS change in Height over times across men’s sports</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html"><i class="fa fa-check"></i><b>3</b> 员工离职分析</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first2"><i class="fa fa-check"></i><b>3.1</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first21"><i class="fa fa-check"></i><b>3.1.1</b> 数据概览</a></li>
+<li class="chapter" data-level="3.1.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first22"><i class="fa fa-check"></i><b>3.1.2</b> 员工离职情况与员工满意度、月均工作时间、绩效评估和在职年限的关系</a></li>
+<li class="chapter" data-level="3.1.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first23"><i class="fa fa-check"></i><b>3.1.3</b> 员工离职情况与项目参与个数、五年内升职情况和薪资的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model1"><i class="fa fa-check"></i><b>3.2</b> 建模预测1-回归树+混淆矩阵</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#提取数据"><i class="fa fa-check"></i><b>3.2.1</b> 提取数据</a></li>
+<li class="chapter" data-level="3.2.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#确定交叉验证方法"><i class="fa fa-check"></i><b>3.2.2</b> 确定交叉验证方法</a></li>
+<li class="chapter" data-level="3.2.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#分层抽样-分层抽样"><i class="fa fa-check"></i><b>3.2.3</b> 分层抽样</a></li>
+<li class="chapter" data-level="3.2.4" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#实际建模"><i class="fa fa-check"></i><b>3.2.4</b> 实际建模</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model2"><i class="fa fa-check"></i><b>3.3</b> 建模预测2-朴素贝叶斯</a></li>
+<li class="chapter" data-level="3.4" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model-use"><i class="fa fa-check"></i><b>3.4</b> 模型评估及应用</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#roc曲线绘制"><i class="fa fa-check"></i><b>3.4.1</b> <code>ROC</code>曲线绘制</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#模型应用"><i class="fa fa-check"></i><b>3.5</b> 模型应用</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="COVID-19.html"><a href="COVID-19.html"><i class="fa fa-check"></i><b>4</b> COVID-19 epidemiology with R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five1"><i class="fa fa-check"></i><b>4.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="4.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five2"><i class="fa fa-check"></i><b>4.2</b> 数据预处理</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five22"><i class="fa fa-check"></i><b>4.2.1</b> 分层抽样</a></li>
+<li class="chapter" data-level="4.2.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five23"><i class="fa fa-check"></i><b>4.2.2</b> 标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five3"><i class="fa fa-check"></i><b>4.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="COVID-19.html"><a href="COVID-19.html#不同时间诈骗次数-条形图"><i class="fa fa-check"></i><b>4.3.1</b> 不同时间诈骗次数-条形图</a></li>
+<li class="chapter" data-level="4.3.2" data-path="COVID-19.html"><a href="COVID-19.html#不同时间诈骗金额-箱线图"><i class="fa fa-check"></i><b>4.3.2</b> 不同时间诈骗金额-箱线图</a></li>
+<li class="chapter" data-level="4.3.3" data-path="COVID-19.html"><a href="COVID-19.html#不同时间平均诈骗金额-条形图"><i class="fa fa-check"></i><b>4.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="COVID-19.html"><a href="COVID-19.html#sec:five4"><i class="fa fa-check"></i><b>4.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
+<li class="chapter" data-level="4.5" data-path="COVID-19.html"><a href="COVID-19.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> 模型预测</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five51"><i class="fa fa-check"></i><b>4.5.1</b> 交叉验证</a></li>
+<li class="chapter" data-level="4.5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five52"><i class="fa fa-check"></i><b>4.5.2</b> 随机森林建模</a></li>
+<li class="chapter" data-level="4.5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five53"><i class="fa fa-check"></i><b>4.5.3</b> knn建模</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="COVID-19.html"><a href="COVID-19.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="creditcard.html"><a href="creditcard.html"><i class="fa fa-check"></i><b>5</b> 信用卡欺诈识别</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five1"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five2"><i class="fa fa-check"></i><b>5.2</b> 数据预处理</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five22"><i class="fa fa-check"></i><b>5.2.1</b> 分层抽样</a></li>
+<li class="chapter" data-level="5.2.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five23"><i class="fa fa-check"></i><b>5.2.2</b> 标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five3"><i class="fa fa-check"></i><b>5.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="creditcard.html"><a href="creditcard.html#不同时间诈骗次数-条形图-1"><i class="fa fa-check"></i><b>5.3.1</b> 不同时间诈骗次数-条形图</a></li>
+<li class="chapter" data-level="5.3.2" data-path="creditcard.html"><a href="creditcard.html#不同时间诈骗金额-箱线图-1"><i class="fa fa-check"></i><b>5.3.2</b> 不同时间诈骗金额-箱线图</a></li>
+<li class="chapter" data-level="5.3.3" data-path="creditcard.html"><a href="creditcard.html#不同时间平均诈骗金额-条形图-1"><i class="fa fa-check"></i><b>5.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="COVID-19.html"><a href="COVID-19.html#sec:five4"><i class="fa fa-check"></i><b>5.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
+<li class="chapter" data-level="5.5" data-path="COVID-19.html"><a href="COVID-19.html#sec:five5"><i class="fa fa-check"></i><b>5.5</b> 模型预测</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five51"><i class="fa fa-check"></i><b>5.5.1</b> 交叉验证</a></li>
+<li class="chapter" data-level="5.5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five52"><i class="fa fa-check"></i><b>5.5.2</b> 随机森林建模</a></li>
+<li class="chapter" data-level="5.5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five53"><i class="fa fa-check"></i><b>5.5.3</b> knn建模</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="COVID-19.html"><a href="COVID-19.html#sec:five6"><i class="fa fa-check"></i><b>5.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Kaggle数据项目实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="COVID-19" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> COVID-19 epidemiology with R</h1>
+<div id="sec:five1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> 数据变量说明</h2>
+<p><a href="https://www.kaggle.com/arockiaselciaa/creditcardcsv">变量说明</a></p>
+<p><code>class</code>变量：0表示非欺诈，1表示非欺诈。</p>
+</div>
+<div id="sec:five2" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> 数据预处理</h2>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="COVID-19.html#cb99-1" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/creditcard.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 284807 Columns: 31</code></pre>
+<pre><code>## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## dbl (31): Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14,...</code></pre>
+<pre><code>## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="COVID-19.html#cb103-1" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(card)</span>
+<span id="cb103-2"><a href="COVID-19.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(card) <span class="co"># 查看数据基本结构和数据类型</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    284807 obs. of  31 variables:
+##  $ Time  : num  0 0 1 1 2 2 4 7 7 9 ...
+##  $ V1    : num  -1.36 1.192 -1.358 -0.966 -1.158 ...
+##  $ V2    : num  -0.0728 0.2662 -1.3402 -0.1852 0.8777 ...
+##  $ V3    : num  2.536 0.166 1.773 1.793 1.549 ...
+##  $ V4    : num  1.378 0.448 0.38 -0.863 0.403 ...
+##  $ V5    : num  -0.3383 0.06 -0.5032 -0.0103 -0.4072 ...
+##  $ V6    : num  0.4624 -0.0824 1.8005 1.2472 0.0959 ...
+##  $ V7    : num  0.2396 -0.0788 0.7915 0.2376 0.5929 ...
+##  $ V8    : num  0.0987 0.0851 0.2477 0.3774 -0.2705 ...
+##  $ V9    : num  0.364 -0.255 -1.515 -1.387 0.818 ...
+##  $ V10   : num  0.0908 -0.167 0.2076 -0.055 0.7531 ...
+##  $ V11   : num  -0.552 1.613 0.625 -0.226 -0.823 ...
+##  $ V12   : num  -0.6178 1.0652 0.0661 0.1782 0.5382 ...
+##  $ V13   : num  -0.991 0.489 0.717 0.508 1.346 ...
+##  $ V14   : num  -0.311 -0.144 -0.166 -0.288 -1.12 ...
+##  $ V15   : num  1.468 0.636 2.346 -0.631 0.175 ...
+##  $ V16   : num  -0.47 0.464 -2.89 -1.06 -0.451 ...
+##  $ V17   : num  0.208 -0.115 1.11 -0.684 -0.237 ...
+##  $ V18   : num  0.0258 -0.1834 -0.1214 1.9658 -0.0382 ...
+##  $ V19   : num  0.404 -0.146 -2.262 -1.233 0.803 ...
+##  $ V20   : num  0.2514 -0.0691 0.525 -0.208 0.4085 ...
+##  $ V21   : num  -0.01831 -0.22578 0.248 -0.1083 -0.00943 ...
+##  $ V22   : num  0.27784 -0.63867 0.77168 0.00527 0.79828 ...
+##  $ V23   : num  -0.11 0.101 0.909 -0.19 -0.137 ...
+##  $ V24   : num  0.0669 -0.3398 -0.6893 -1.1756 0.1413 ...
+##  $ V25   : num  0.129 0.167 -0.328 0.647 -0.206 ...
+##  $ V26   : num  -0.189 0.126 -0.139 -0.222 0.502 ...
+##  $ V27   : num  0.13356 -0.00898 -0.05535 0.06272 0.21942 ...
+##  $ V28   : num  -0.0211 0.0147 -0.0598 0.0615 0.2152 ...
+##  $ Amount: num  149.62 2.69 378.66 123.5 69.99 ...
+##  $ Class : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="COVID-19.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(card) <span class="co"># 查看数据的主要描述性统计量</span></span></code></pre></div>
+<pre><code>##       Time              V1                  V2                  V3          
+##  Min.   :     0   Min.   :-56.40751   Min.   :-72.71573   Min.   :-48.3256  
+##  1st Qu.: 54202   1st Qu.: -0.92037   1st Qu.: -0.59855   1st Qu.: -0.8904  
+##  Median : 84692   Median :  0.01811   Median :  0.06549   Median :  0.1799  
+##  Mean   : 94814   Mean   :  0.00000   Mean   :  0.00000   Mean   :  0.0000  
+##  3rd Qu.:139321   3rd Qu.:  1.31564   3rd Qu.:  0.80372   3rd Qu.:  1.0272  
+##  Max.   :172792   Max.   :  2.45493   Max.   : 22.05773   Max.   :  9.3826  
+##        V4                 V5                   V6                 V7          
+##  Min.   :-5.68317   Min.   :-113.74331   Min.   :-26.1605   Min.   :-43.5572  
+##  1st Qu.:-0.84864   1st Qu.:  -0.69160   1st Qu.: -0.7683   1st Qu.: -0.5541  
+##  Median :-0.01985   Median :  -0.05434   Median : -0.2742   Median :  0.0401  
+##  Mean   : 0.00000   Mean   :   0.00000   Mean   :  0.0000   Mean   :  0.0000  
+##  3rd Qu.: 0.74334   3rd Qu.:   0.61193   3rd Qu.:  0.3986   3rd Qu.:  0.5704  
+##  Max.   :16.87534   Max.   :  34.80167   Max.   : 73.3016   Max.   :120.5895  
+##        V8                  V9                 V10                 V11          
+##  Min.   :-73.21672   Min.   :-13.43407   Min.   :-24.58826   Min.   :-4.79747  
+##  1st Qu.: -0.20863   1st Qu.: -0.64310   1st Qu.: -0.53543   1st Qu.:-0.76249  
+##  Median :  0.02236   Median : -0.05143   Median : -0.09292   Median :-0.03276  
+##  Mean   :  0.00000   Mean   :  0.00000   Mean   :  0.00000   Mean   : 0.00000  
+##  3rd Qu.:  0.32735   3rd Qu.:  0.59714   3rd Qu.:  0.45392   3rd Qu.: 0.73959  
+##  Max.   : 20.00721   Max.   : 15.59500   Max.   : 23.74514   Max.   :12.01891  
+##       V12                V13                V14                V15          
+##  Min.   :-18.6837   Min.   :-5.79188   Min.   :-19.2143   Min.   :-4.49894  
+##  1st Qu.: -0.4056   1st Qu.:-0.64854   1st Qu.: -0.4256   1st Qu.:-0.58288  
+##  Median :  0.1400   Median :-0.01357   Median :  0.0506   Median : 0.04807  
+##  Mean   :  0.0000   Mean   : 0.00000   Mean   :  0.0000   Mean   : 0.00000  
+##  3rd Qu.:  0.6182   3rd Qu.: 0.66251   3rd Qu.:  0.4931   3rd Qu.: 0.64882  
+##  Max.   :  7.8484   Max.   : 7.12688   Max.   : 10.5268   Max.   : 8.87774  
+##       V16                 V17                 V18           
+##  Min.   :-14.12985   Min.   :-25.16280   Min.   :-9.498746  
+##  1st Qu.: -0.46804   1st Qu.: -0.48375   1st Qu.:-0.498850  
+##  Median :  0.06641   Median : -0.06568   Median :-0.003636  
+##  Mean   :  0.00000   Mean   :  0.00000   Mean   : 0.000000  
+##  3rd Qu.:  0.52330   3rd Qu.:  0.39968   3rd Qu.: 0.500807  
+##  Max.   : 17.31511   Max.   :  9.25353   Max.   : 5.041069  
+##       V19                 V20                 V21           
+##  Min.   :-7.213527   Min.   :-54.49772   Min.   :-34.83038  
+##  1st Qu.:-0.456299   1st Qu.: -0.21172   1st Qu.: -0.22839  
+##  Median : 0.003735   Median : -0.06248   Median : -0.02945  
+##  Mean   : 0.000000   Mean   :  0.00000   Mean   :  0.00000  
+##  3rd Qu.: 0.458949   3rd Qu.:  0.13304   3rd Qu.:  0.18638  
+##  Max.   : 5.591971   Max.   : 39.42090   Max.   : 27.20284  
+##       V22                  V23                 V24          
+##  Min.   :-10.933144   Min.   :-44.80774   Min.   :-2.83663  
+##  1st Qu.: -0.542350   1st Qu.: -0.16185   1st Qu.:-0.35459  
+##  Median :  0.006782   Median : -0.01119   Median : 0.04098  
+##  Mean   :  0.000000   Mean   :  0.00000   Mean   : 0.00000  
+##  3rd Qu.:  0.528554   3rd Qu.:  0.14764   3rd Qu.: 0.43953  
+##  Max.   : 10.503090   Max.   : 22.52841   Max.   : 4.58455  
+##       V25                 V26                V27            
+##  Min.   :-10.29540   Min.   :-2.60455   Min.   :-22.565679  
+##  1st Qu.: -0.31715   1st Qu.:-0.32698   1st Qu.: -0.070840  
+##  Median :  0.01659   Median :-0.05214   Median :  0.001342  
+##  Mean   :  0.00000   Mean   : 0.00000   Mean   :  0.000000  
+##  3rd Qu.:  0.35072   3rd Qu.: 0.24095   3rd Qu.:  0.091045  
+##  Max.   :  7.51959   Max.   : 3.51735   Max.   : 31.612198  
+##       V28                Amount             Class         
+##  Min.   :-15.43008   Min.   :    0.00   Min.   :0.000000  
+##  1st Qu.: -0.05296   1st Qu.:    5.60   1st Qu.:0.000000  
+##  Median :  0.01124   Median :   22.00   Median :0.000000  
+##  Mean   :  0.00000   Mean   :   88.35   Mean   :0.001728  
+##  3rd Qu.:  0.07828   3rd Qu.:   77.17   3rd Qu.:0.000000  
+##  Max.   : 33.84781   Max.   :25691.16   Max.   :1.000000</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="COVID-19.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(card<span class="sc">$</span>Class)),<span class="dv">4</span>)<span class="co"># 查看数据类别比例</span></span></code></pre></div>
+<pre><code>## 
+##      0      1 
+## 0.9983 0.0017</code></pre>
+<div id="sec:five22" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> 分层抽样</h3>
+<p>处理类别不平衡的数据需要了解的几个概念点：</p>
+<ol style="list-style-type: decimal">
+<li><p>类别不平衡：指分类任务重不同类别的训练样本树木差别很大的情况。</p></li>
+<li><p>欠抽样：指某类（样本数占比很大）的样本中抽取出与另一类样本（样本数占比很小）个数一样的样本。即从大类别中抽取与小类别数目一样的样本。</p></li>
+<li><p>过抽样：指针对样本数占比很小的类别，重新塑造一些数据，使其与另一类数据接近。</p></li>
+</ol>
+<p>对数据进行一些基本转化。</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="COVID-19.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Time列转换为小时</span></span>
+<span id="cb109-2"><a href="COVID-19.html#cb109-2" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> card <span class="sc">%&gt;%</span> </span>
+<span id="cb109-3"><a href="COVID-19.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Time_Hour =</span> <span class="fu">round</span>(card[, <span class="dv">1</span>]<span class="sc">/</span><span class="dv">3600</span>, <span class="dv">0</span>))</span>
+<span id="cb109-4"><a href="COVID-19.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="COVID-19.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Class列转化为因子型</span></span>
+<span id="cb109-6"><a href="COVID-19.html#cb109-6" aria-hidden="true" tabindex="-1"></a>card<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(card<span class="sc">$</span>Class)</span>
+<span id="cb109-7"><a href="COVID-19.html#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-8"><a href="COVID-19.html#cb109-8" aria-hidden="true" tabindex="-1"></a>card_1 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;1&quot;</span>, ] <span class="co"># 欺诈样本</span></span>
+<span id="cb109-9"><a href="COVID-19.html#cb109-9" aria-hidden="true" tabindex="-1"></a>card_0 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;0&quot;</span>, ] <span class="co"># 非欺诈样本</span></span></code></pre></div>
+<p>随机抽取与诈骗样本个数相同的非欺诈样本数据，并与元欺诈样本合并为新的数据。此处使用的欠抽样的方法。</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="COVID-19.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb110-2"><a href="COVID-19.html#cb110-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(card_0), <span class="at">size =</span> <span class="fu">nrow</span>(card_1))</span>
+<span id="cb110-3"><a href="COVID-19.html#cb110-3" aria-hidden="true" tabindex="-1"></a>card_0_new <span class="ot">&lt;-</span> card_0[index, ]</span>
+<span id="cb110-4"><a href="COVID-19.html#cb110-4" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> <span class="fu">rbind</span>(card_0_new, card_1)</span>
+<span id="cb110-5"><a href="COVID-19.html#cb110-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-6"><a href="COVID-19.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 剔除Time列，用Time_Hour列代替。everything()选择所有的变量</span></span>
+<span id="cb110-7"><a href="COVID-19.html#cb110-7" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> card_end[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb110-8"><a href="COVID-19.html#cb110-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Time_Hour, <span class="fu">everything</span>())</span></code></pre></div>
+<p>按照类别进行分层抽样，建立训练集和测试集。</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="COVID-19.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb111-2"><a href="COVID-19.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照新数据的目标变量进行8：2</span></span>
+<span id="cb111-3"><a href="COVID-19.html#cb111-3" aria-hidden="true" tabindex="-1"></a>index2 <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(card_end<span class="sc">$</span>Class,</span>
+<span id="cb111-4"><a href="COVID-19.html#cb111-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb111-5"><a href="COVID-19.html#cb111-5" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> card_end[index2, ] <span class="co"># 创建训练集</span></span>
+<span id="cb111-6"><a href="COVID-19.html#cb111-6" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> card_end[<span class="sc">-</span>index2, ] <span class="co"># 创建测试集</span></span>
+<span id="cb111-7"><a href="COVID-19.html#cb111-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-8"><a href="COVID-19.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 验证抽样结果，统计三个数据集中正反样本比例是否一致</span></span>
+<span id="cb111-9"><a href="COVID-19.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(card_end<span class="sc">$</span>Class)</span></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 492 492</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="COVID-19.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train_data<span class="sc">$</span>Clas)</span></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 394 394</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="COVID-19.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test_data<span class="sc">$</span>Class)</span></code></pre></div>
+<pre><code>## 
+##  0  1 
+## 98 98</code></pre>
+</div>
+<div id="sec:five23" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> 标准化</h3>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="COVID-19.html#cb117-1" aria-hidden="true" tabindex="-1"></a>standard <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(card_end, <span class="at">method =</span> <span class="st">&quot;range&quot;</span>) </span>
+<span id="cb117-2"><a href="COVID-19.html#cb117-2" aria-hidden="true" tabindex="-1"></a>card_s <span class="ot">&lt;-</span> <span class="fu">predict</span>(standard, card_end)</span>
+<span id="cb117-3"><a href="COVID-19.html#cb117-3" aria-hidden="true" tabindex="-1"></a>train_data2 <span class="ot">&lt;-</span> card_s[index2, ]</span>
+<span id="cb117-4"><a href="COVID-19.html#cb117-4" aria-hidden="true" tabindex="-1"></a>test_data2 <span class="ot">&lt;-</span> card_s[index2, ]</span></code></pre></div>
+</div>
+</div>
+<div id="sec:five3" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> 描述性分析</h2>
+<div id="不同时间诈骗次数-条形图" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> 不同时间诈骗次数-条形图</h3>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="COVID-19.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), </span>
+<span id="cb118-2"><a href="COVID-19.html#cb118-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour)))<span class="sc">+</span></span>
+<span id="cb118-3"><a href="COVID-19.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb118-4"><a href="COVID-19.html#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb118-5"><a href="COVID-19.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb118-6"><a href="COVID-19.html#cb118-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb118-7"><a href="COVID-19.html#cb118-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb118-8"><a href="COVID-19.html#cb118-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-times"></span>
+<img src="4-MultipleChoiceResponses_files/figure-html/card-times-1.png" alt="不同时间诈骗次数" width="672" />
+<p class="caption">
+图4.1: 不同时间诈骗次数
+</p>
+</div>
+<p>由图<a href="COVID-19.html#fig:card-times">4.1</a>可知：</p>
+<ul>
+<li><p>第一天（0<sub>24h）的诈骗总次数大于第二天（25</sub>48h）。</p></li>
+<li><p>诈骗发生次数最多的三个时间段分别是：</p>
+<ol style="list-style-type: decimal">
+<li>第二天凌晨2点左右。</li>
+<li>第一天上午11点左右。</li>
+<li>第一天凌晨2点左右。</li>
+</ol></li>
+</ul>
+</div>
+<div id="不同时间诈骗金额-箱线图" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> 不同时间诈骗金额-箱线图</h3>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="COVID-19.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour),</span>
+<span id="cb119-2"><a href="COVID-19.html#cb119-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> Amount, </span>
+<span id="cb119-3"><a href="COVID-19.html#cb119-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
+<span id="cb119-4"><a href="COVID-19.html#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb119-5"><a href="COVID-19.html#cb119-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span><span class="dv">250</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb119-6"><a href="COVID-19.html#cb119-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">500</span>, <span class="at">label =</span> <span class="st">&quot;Amount = 250&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb119-7"><a href="COVID-19.html#cb119-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">450</span>, <span class="at">xend =</span> <span class="dv">5</span>, <span class="at">yend =</span> <span class="dv">250</span>, <span class="at">angle =</span> <span class="dv">25</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb119-8"><a href="COVID-19.html#cb119-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb119-9"><a href="COVID-19.html#cb119-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb119-10"><a href="COVID-19.html#cb119-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount&quot;</span>) <span class="sc">+</span></span>
+<span id="cb119-11"><a href="COVID-19.html#cb119-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb119-12"><a href="COVID-19.html#cb119-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="cb119-13"><a href="COVID-19.html#cb119-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-amount"></span>
+<img src="4-MultipleChoiceResponses_files/figure-html/card-amount-1.png" alt="不同时间诈骗金额" width="672" />
+<p class="caption">
+图4.2: 不同时间诈骗金额
+</p>
+</div>
+<p>由图<a href="COVID-19.html#fig:card-amount">4.2</a>可知：</p>
+<ul>
+<li><p>诈骗金额最多的一次发生在第二天下午1点作用（34h），诈骗金额达到2000欧元左右。</p></li>
+<li><p>诈骗金额普遍在250欧元之内。</p></li>
+</ul>
+</div>
+<div id="不同时间平均诈骗金额-条形图" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> 不同时间平均诈骗金额-条形图</h3>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="COVID-19.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 提取所需数据</span></span>
+<span id="cb120-2"><a href="COVID-19.html#cb120-2" aria-hidden="true" tabindex="-1"></a>card_1_mean <span class="ot">&lt;-</span> card_1 <span class="sc">%&gt;%</span> </span>
+<span id="cb120-3"><a href="COVID-19.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Time_Hour) <span class="sc">%&gt;%</span> </span>
+<span id="cb120-4"><a href="COVID-19.html#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MeanAmount =</span> <span class="fu">mean</span>(Amount))</span>
+<span id="cb120-5"><a href="COVID-19.html#cb120-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-6"><a href="COVID-19.html#cb120-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-7"><a href="COVID-19.html#cb120-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1_mean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), <span class="at">y =</span> MeanAmount, <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
+<span id="cb120-8"><a href="COVID-19.html#cb120-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-9"><a href="COVID-19.html#cb120-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">200</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb120-10"><a href="COVID-19.html#cb120-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">26</span>, <span class="at">y =</span> <span class="dv">240</span>, <span class="at">label =</span> <span class="st">&quot;Mean_Amount = 200&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-11"><a href="COVID-19.html#cb120-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">23</span>, <span class="at">y =</span> <span class="dv">220</span>, <span class="at">xend =</span> <span class="dv">24</span>, <span class="at">yend =</span> <span class="dv">200</span>, </span>
+<span id="cb120-12"><a href="COVID-19.html#cb120-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">curvature =</span> <span class="fl">0.3</span>, <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-13"><a href="COVID-19.html#cb120-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb120-14"><a href="COVID-19.html#cb120-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb120-15"><a href="COVID-19.html#cb120-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb120-16"><a href="COVID-19.html#cb120-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean_Amount&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-mean"></span>
+<img src="4-MultipleChoiceResponses_files/figure-html/card-mean-1.png" alt="不同时间平均诈骗金额-条形图" width="672" />
+<p class="caption">
+图4.3: 不同时间平均诈骗金额-条形图
+</p>
+</div>
+<p>如图<a href="COVID-19.html#fig:card-mean">4.3</a>所示：</p>
+<ul>
+<li>平均诈骗金额最多的时间段为第二天下午1点，此时间点包含诈骗金额最多的观测。</li>
+<li>总体而言，平均诈骗金额普遍在200欧元以内。</li>
+</ul>
+</div>
+</div>
+<div id="sec:five4" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> 自动参数调整调参-使用<code>caret</code>包</h2>
+<p><strong>参数调整</strong>是提升模型性能的一个重要过程，而大多数机器学习算法都可以至少调整一个参数。复杂的模型通常可以通过调节多个参数值来调整模型从而达到更好的拟合效果。</p>
+<p>e.g.，寻找最合适的k值来调整k近邻模型、调节隐藏层层数和隐藏层的节点数来优化神经网络模型；又如支持向量机模型中的调节核函数以及“软边界”惩罚大小等优化。</p>
+<p>值得注意的是，如果对所有可能的调参选项均进行尝试，其复杂度非常大，耗时且不科学，需要一种更系统、科学的方式对模型的参数进行调节。</p>
+<p>下表列举了使用<code>caret</code>包进行自动参数调整的模型及其参数：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">模型</th>
+<th align="center">方法名</th>
+<th align="center">参数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">k近邻</td>
+<td align="center">knn</td>
+<td align="center">k</td>
+</tr>
+<tr class="even">
+<td align="center">朴素贝叶斯</td>
+<td align="center">nb</td>
+<td align="center">fL、usekernel</td>
+</tr>
+<tr class="odd">
+<td align="center">决策树</td>
+<td align="center">C5.0</td>
+<td align="center">model、trials、winnow</td>
+</tr>
+<tr class="even">
+<td align="center">OneR规则学习器</td>
+<td align="center">OneR</td>
+<td align="center">无</td>
+</tr>
+<tr class="odd">
+<td align="center">线性回归</td>
+<td align="center">lm</td>
+<td align="center">无</td>
+</tr>
+<tr class="even">
+<td align="center">回归树</td>
+<td align="center">rpart</td>
+<td align="center">cp</td>
+</tr>
+<tr class="odd">
+<td align="center">模型树</td>
+<td align="center">M5</td>
+<td align="center">pruned、smoothed、rules</td>
+</tr>
+<tr class="even">
+<td align="center">支持向量机（径向基核）</td>
+<td align="center">svmRadial</td>
+<td align="center">C, sigma</td>
+</tr>
+<tr class="odd">
+<td align="center">随机森林</td>
+<td align="center">rf</td>
+<td align="center">mtry</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://topepo.github.io/caret/available-models.html">更多可调节参数的详细信息</a></p>
+<p>本案例我们使用knn和随机森林两个模型。</p>
+<p>我们用iris数据对自动调参的步骤进行演示。</p>
+<ol style="list-style-type: decimal">
+<li>创建简单的调整的模型</li>
+</ol>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="COVID-19.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb121-2"><a href="COVID-19.html#cb121-2" aria-hidden="true" tabindex="-1"></a>m_C50 <span class="ot">&lt;-</span> <span class="fu">train</span>(Species<span class="sc">~</span>., <span class="at">data =</span> iris, <span class="at">method =</span> <span class="st">&quot;C5.0&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 3 for this object. Predictions generated using 3
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 3 for this object. Predictions generated using 3
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="COVID-19.html#cb146-1" aria-hidden="true" tabindex="-1"></a>m_C50</span></code></pre></div>
+<pre><code>## C5.0 
+## 
+## 150 samples
+##   4 predictor
+##   3 classes: &#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 150, 150, 150, 150, 150, 150, ... 
+## Resampling results across tuning parameters:
+## 
+##   model  winnow  trials  Accuracy   Kappa    
+##   rules  FALSE    1      0.9353579  0.9019696
+##   rules  FALSE   10      0.9370844  0.9045424
+##   rules  FALSE   20      0.9325835  0.8976068
+##   rules   TRUE    1      0.9382311  0.9062975
+##   rules   TRUE   10      0.9407392  0.9099910
+##   rules   TRUE   20      0.9385430  0.9066136
+##   tree   FALSE    1      0.9347127  0.9009924
+##   tree   FALSE   10      0.9369888  0.9044013
+##   tree   FALSE   20      0.9332286  0.8985820
+##   tree    TRUE    1      0.9375860  0.9053246
+##   tree    TRUE   10      0.9399845  0.9088007
+##   tree    TRUE   20      0.9392443  0.9076915
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final values used for the model were trials = 10, model = rules and
+##  winnow = TRUE.</code></pre>
+<p>由上面的结果可以看出，基于<code>model</code>、<code>trials</code>和<code>winnow</code>三个参数，建立并测试了12个决策树（C5.0）模型，每个模型均给出了精度及Kappa统计量，最下方同时展示了最佳候选模型所对应的参数值。其中Kappa统计量用来衡量模型的稳定性：</p>
+<ul>
+<li>很差的一致性： &lt;0.2</li>
+<li>尚可的一致性： 0.2~0.4</li>
+<li>中等的一致性： 0.4~0.6</li>
+<li>不错的一致性： 0.6~0.8</li>
+<li>很好的一致性： 0.8~1</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>定制调参</li>
+</ol>
+<ul>
+<li><p>使用trainCotrol()函数创建一些列配置选项，这些选项考虑了包括重抽样策略以及用于选择最佳模型的度量这些模型评价标准的管理。主要专注于两个重要的参数：method和selectionFuncio。</p>
+<ul>
+<li><p>method为冲抽样的方法。</p></li>
+<li><p>selectionFunction参数可以设定一个函数，用于在各个候选者中选取特定的模型，共3个函数：</p>
+<ul>
+<li><strong>best</strong>函数：默认选项，简单的选择具有最好的某特定度量值的候选者。</li>
+<li><strong>oneSE</strong>函数：选择最好性能标准差之内的最简单的候选者。</li>
+<li><strong>Tolerance</strong>函数：选择某个用户制定比例之内最简单的候选者。</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="COVID-19.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb148-2"><a href="COVID-19.html#cb148-2" aria-hidden="true" tabindex="-1"></a>model_rf <span class="ot">&lt;-</span> <span class="fu">train</span>(Class<span class="sc">~</span>., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
+<span id="cb148-3"><a href="COVID-19.html#cb148-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb148-4"><a href="COVID-19.html#cb148-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">number =</span> <span class="dv">5</span>,</span>
+<span id="cb148-5"><a href="COVID-19.html#cb148-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">selectionFunction =</span> <span class="st">&quot;oneSE&quot;</span>))</span>
+<span id="cb148-6"><a href="COVID-19.html#cb148-6" aria-hidden="true" tabindex="-1"></a>model_rf</span></code></pre></div>
+<pre><code>## Random Forest 
+## 
+## 788 samples
+##  30 predictor
+##   2 classes: &#39;0&#39;, &#39;1&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 631, 631, 630, 630, 630 
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy   Kappa    
+##    2    0.9276465  0.8552977
+##   16    0.9314521  0.8628921
+##   30    0.9276627  0.8553120
+## 
+## Accuracy was used to select the optimal model using  the one SE rule.
+## The final value used for the model was mtry = 2.</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="COVID-19.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行预测</span></span>
+<span id="cb150-2"><a href="COVID-19.html#cb150-2" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rf, test_data[<span class="sc">-</span><span class="dv">31</span>]) </span></code></pre></div>
+</div>
+<div id="sec:five5" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> 模型预测</h2>
+<div id="sec:five51" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> 交叉验证</h3>
+</div>
+<div id="sec:five52" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> 随机森林建模</h3>
+</div>
+<div id="sec:five53" class="section level3" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> knn建模</h3>
+</div>
+</div>
+<div id="sec:five6" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> 模型评估</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="HR-comma-sep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creditcard.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CBook.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

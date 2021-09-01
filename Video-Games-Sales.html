@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Video Games Sales | Kaggle数据项目实战</title>
+  <meta name="description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Video Games Sales | Kaggle数据项目实战" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Video Games Sales | Kaggle数据项目实战" />
+  
+  <meta name="twitter:description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
+  
+
+<meta name="author" content="LEE" />
+
+
+<meta name="date" content="2021-09-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="Olympic-history.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/SVG"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+   src="../../../MathJax/MathJax.js">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>简介</a></li>
+<li class="chapter" data-level="1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html"><i class="fa fa-check"></i><b>1</b> Video Games Sales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#game-sales-intro"><i class="fa fa-check"></i><b>1.1</b> 准备</a></li>
+<li class="chapter" data-level="1.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#缺失值处理"><i class="fa fa-check"></i><b>1.2</b> 缺失值处理</a></li>
+<li class="chapter" data-level="1.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#描述性分析"><i class="fa fa-check"></i><b>1.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#sec:Frequency-Distribution"><i class="fa fa-check"></i><b>1.3.1</b> 频数分布</a></li>
+<li class="chapter" data-level="1.3.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#sec:Central-Trend-Measures"><i class="fa fa-check"></i><b>1.3.2</b> 中心分布指标</a></li>
+<li class="chapter" data-level="1.3.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#separating-measures"><i class="fa fa-check"></i><b>1.3.3</b> Separating Measures</a></li>
+<li class="chapter" data-level="1.3.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#dispersion-measures"><i class="fa fa-check"></i><b>1.3.4</b> Dispersion Measures</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#探索性分析"><i class="fa fa-check"></i><b>1.4</b> 探索性分析</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#世界最畅销游戏"><i class="fa fa-check"></i><b>1.4.1</b> 世界最畅销游戏</a></li>
+<li class="chapter" data-level="1.4.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#游戏发型平台"><i class="fa fa-check"></i><b>1.4.2</b> 游戏发型平台</a></li>
+<li class="chapter" data-level="1.4.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#游戏发行商发型游戏书"><i class="fa fa-check"></i><b>1.4.3</b> 游戏发行商发型游戏书</a></li>
+<li class="chapter" data-level="1.4.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#每年世界销量"><i class="fa fa-check"></i><b>1.4.4</b> 每年世界销量</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#其它分析"><i class="fa fa-check"></i><b>1.5</b> 其它分析</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户打分与游戏销量关系"><i class="fa fa-check"></i><b>1.5.1</b> 用户打分与游戏销量关系</a></li>
+<li class="chapter" data-level="1.5.2" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#从业者打分与游戏销量关系"><i class="fa fa-check"></i><b>1.5.2</b> 从业者打分与游戏销量关系</a></li>
+<li class="chapter" data-level="1.5.3" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户与从业者分别最喜欢哪个发行商"><i class="fa fa-check"></i><b>1.5.3</b> 用户与从业者分别最喜欢哪个发行商</a></li>
+<li class="chapter" data-level="1.5.4" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#用户与从业者分别最喜欢哪个发行商-1"><i class="fa fa-check"></i><b>1.5.4</b> 用户与从业者分别最喜欢哪个发行商</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Olympic-history.html"><a href="Olympic-history.html"><i class="fa fa-check"></i><b>2</b> Olympic history</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Olympic-history.html"><a href="Olympic-history.html#olympic-intro"><i class="fa fa-check"></i><b>2.1</b> 介绍</a></li>
+<li class="chapter" data-level="2.2" data-path="Olympic-history.html"><a href="Olympic-history.html#运动员国家和时间"><i class="fa fa-check"></i><b>2.2</b> 运动员、国家和时间</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Olympic-history.html"><a href="Olympic-history.html#随着时间的推移运动员国家和赛事的数量是否发生了变化"><i class="fa fa-check"></i><b>2.2.1</b> 随着时间的推移，运动员、国家和赛事的数量是否发生了变化？</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="Olympic-history.html"><a href="Olympic-history.html#sec:art-com"><i class="fa fa-check"></i><b>2.3</b> 艺术竞赛（The Art Competitions）</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="Olympic-history.html"><a href="Olympic-history.html#运动员时间参赛项目"><i class="fa fa-check"></i><b>2.3.1</b> 运动员、时间、参赛项目</a></li>
+<li class="chapter" data-level="2.3.2" data-path="Olympic-history.html"><a href="Olympic-history.html#获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多"><i class="fa fa-check"></i><b>2.3.2</b> 获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="Olympic-history.html"><a href="Olympic-history.html#奥林匹克中的女将们"><i class="fa fa-check"></i><b>2.4</b> 奥林匹克中的女将们</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="Olympic-history.html"><a href="Olympic-history.html#男女运动员数量比较"><i class="fa fa-check"></i><b>2.4.1</b> 男女运动员数量比较</a></li>
+<li class="chapter" data-level="2.4.2" data-path="Olympic-history.html"><a href="Olympic-history.html#各国参赛男女运动员间数量关系"><i class="fa fa-check"></i><b>2.4.2</b> 各国参赛男女运动员间数量关系</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="Olympic-history.html"><a href="Olympic-history.html#奖牌榜medal-count"><i class="fa fa-check"></i><b>2.5</b> 奖牌榜（Medal Count）</a></li>
+<li class="chapter" data-level="2.6" data-path="Olympic-history.html"><a href="Olympic-history.html#地理信息地图"><i class="fa fa-check"></i><b>2.6</b> 地理信息地图</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况"><i class="fa fa-check"></i><b>2.6.1</b> 1928年奥运会情况</a></li>
+<li class="chapter" data-level="2.6.2" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况-1"><i class="fa fa-check"></i><b>2.6.2</b> 1972年奥运会情况</a></li>
+<li class="chapter" data-level="2.6.3" data-path="Olympic-history.html"><a href="Olympic-history.html#年奥运会情况-2"><i class="fa fa-check"></i><b>2.6.3</b> 2016年奥运会情况</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="Olympic-history.html"><a href="Olympic-history.html#参赛运动员身高体重"><i class="fa fa-check"></i><b>2.7</b> 参赛运动员身高体重</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="Olympic-history.html"><a href="Olympic-history.html#数据完整性及可用性检测"><i class="fa fa-check"></i><b>2.7.1</b> 数据完整性及可用性检测</a></li>
+<li class="chapter" data-level="2.7.2" data-path="Olympic-history.html"><a href="Olympic-history.html#身高体重"><i class="fa fa-check"></i><b>2.7.2</b> 身高体重</a></li>
+<li class="chapter" data-level="2.7.3" data-path="Olympic-history.html"><a href="Olympic-history.html#change-in-weight-vs-change-in-height-over-times-across-mens-sports"><i class="fa fa-check"></i><b>2.7.3</b> change in Weight VS change in Height over times across men’s sports</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html"><i class="fa fa-check"></i><b>3</b> 员工离职分析</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first2"><i class="fa fa-check"></i><b>3.1</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first21"><i class="fa fa-check"></i><b>3.1.1</b> 数据概览</a></li>
+<li class="chapter" data-level="3.1.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first22"><i class="fa fa-check"></i><b>3.1.2</b> 员工离职情况与员工满意度、月均工作时间、绩效评估和在职年限的关系</a></li>
+<li class="chapter" data-level="3.1.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:first23"><i class="fa fa-check"></i><b>3.1.3</b> 员工离职情况与项目参与个数、五年内升职情况和薪资的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model1"><i class="fa fa-check"></i><b>3.2</b> 建模预测1-回归树+混淆矩阵</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#提取数据"><i class="fa fa-check"></i><b>3.2.1</b> 提取数据</a></li>
+<li class="chapter" data-level="3.2.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#确定交叉验证方法"><i class="fa fa-check"></i><b>3.2.2</b> 确定交叉验证方法</a></li>
+<li class="chapter" data-level="3.2.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#分层抽样-分层抽样"><i class="fa fa-check"></i><b>3.2.3</b> 分层抽样</a></li>
+<li class="chapter" data-level="3.2.4" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#实际建模"><i class="fa fa-check"></i><b>3.2.4</b> 实际建模</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model2"><i class="fa fa-check"></i><b>3.3</b> 建模预测2-朴素贝叶斯</a></li>
+<li class="chapter" data-level="3.4" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model-use"><i class="fa fa-check"></i><b>3.4</b> 模型评估及应用</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#roc曲线绘制"><i class="fa fa-check"></i><b>3.4.1</b> <code>ROC</code>曲线绘制</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#模型应用"><i class="fa fa-check"></i><b>3.5</b> 模型应用</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="COVID-19.html"><a href="COVID-19.html"><i class="fa fa-check"></i><b>4</b> COVID-19 epidemiology with R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five1"><i class="fa fa-check"></i><b>4.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="4.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five2"><i class="fa fa-check"></i><b>4.2</b> 数据预处理</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five22"><i class="fa fa-check"></i><b>4.2.1</b> 分层抽样</a></li>
+<li class="chapter" data-level="4.2.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five23"><i class="fa fa-check"></i><b>4.2.2</b> 标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five3"><i class="fa fa-check"></i><b>4.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="COVID-19.html"><a href="COVID-19.html#不同时间诈骗次数-条形图"><i class="fa fa-check"></i><b>4.3.1</b> 不同时间诈骗次数-条形图</a></li>
+<li class="chapter" data-level="4.3.2" data-path="COVID-19.html"><a href="COVID-19.html#不同时间诈骗金额-箱线图"><i class="fa fa-check"></i><b>4.3.2</b> 不同时间诈骗金额-箱线图</a></li>
+<li class="chapter" data-level="4.3.3" data-path="COVID-19.html"><a href="COVID-19.html#不同时间平均诈骗金额-条形图"><i class="fa fa-check"></i><b>4.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="COVID-19.html"><a href="COVID-19.html#sec:five4"><i class="fa fa-check"></i><b>4.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
+<li class="chapter" data-level="4.5" data-path="COVID-19.html"><a href="COVID-19.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> 模型预测</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five51"><i class="fa fa-check"></i><b>4.5.1</b> 交叉验证</a></li>
+<li class="chapter" data-level="4.5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five52"><i class="fa fa-check"></i><b>4.5.2</b> 随机森林建模</a></li>
+<li class="chapter" data-level="4.5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five53"><i class="fa fa-check"></i><b>4.5.3</b> knn建模</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="COVID-19.html"><a href="COVID-19.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="creditcard.html"><a href="creditcard.html"><i class="fa fa-check"></i><b>5</b> 信用卡欺诈识别</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five1"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five2"><i class="fa fa-check"></i><b>5.2</b> 数据预处理</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five22"><i class="fa fa-check"></i><b>5.2.1</b> 分层抽样</a></li>
+<li class="chapter" data-level="5.2.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five23"><i class="fa fa-check"></i><b>5.2.2</b> 标准化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five3"><i class="fa fa-check"></i><b>5.3</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="creditcard.html"><a href="creditcard.html#不同时间诈骗次数-条形图-1"><i class="fa fa-check"></i><b>5.3.1</b> 不同时间诈骗次数-条形图</a></li>
+<li class="chapter" data-level="5.3.2" data-path="creditcard.html"><a href="creditcard.html#不同时间诈骗金额-箱线图-1"><i class="fa fa-check"></i><b>5.3.2</b> 不同时间诈骗金额-箱线图</a></li>
+<li class="chapter" data-level="5.3.3" data-path="creditcard.html"><a href="creditcard.html#不同时间平均诈骗金额-条形图-1"><i class="fa fa-check"></i><b>5.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="COVID-19.html"><a href="COVID-19.html#sec:five4"><i class="fa fa-check"></i><b>5.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
+<li class="chapter" data-level="5.5" data-path="COVID-19.html"><a href="COVID-19.html#sec:five5"><i class="fa fa-check"></i><b>5.5</b> 模型预测</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="COVID-19.html"><a href="COVID-19.html#sec:five51"><i class="fa fa-check"></i><b>5.5.1</b> 交叉验证</a></li>
+<li class="chapter" data-level="5.5.2" data-path="COVID-19.html"><a href="COVID-19.html#sec:five52"><i class="fa fa-check"></i><b>5.5.2</b> 随机森林建模</a></li>
+<li class="chapter" data-level="5.5.3" data-path="COVID-19.html"><a href="COVID-19.html#sec:five53"><i class="fa fa-check"></i><b>5.5.3</b> knn建模</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="COVID-19.html"><a href="COVID-19.html#sec:five6"><i class="fa fa-check"></i><b>5.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Kaggle数据项目实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Video-Games-Sales" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Video Games Sales</h1>
+<div id="game-sales-intro" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 准备</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="Video-Games-Sales.html#cb1-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;D:/Tools/Rwork/0.Study R/kaggle-project/data/vgsales.csv&quot;</span></span>
+<span id="cb1-2"><a href="Video-Games-Sales.html#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(file)</span></code></pre></div>
+<pre><code>## Rows: 19600 Columns: 9</code></pre>
+<pre><code>## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (4): Name, Platform, Publisher, Developer
+## dbl (5): Rank, Critic_Score, User_Score, Total_Shipped, Year</code></pre>
+<pre><code>## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="Video-Games-Sales.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## spec_tbl_df [19,600 x 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Rank         : num [1:19600] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Name         : chr [1:19600] &quot;Wii Sports&quot; &quot;Super Mario Bros.&quot; &quot;Counter-Strike: Global Offensive&quot; &quot;Mario Kart Wii&quot; ...
+##  $ Platform     : chr [1:19600] &quot;Wii&quot; &quot;NES&quot; &quot;PC&quot; &quot;Wii&quot; ...
+##  $ Publisher    : chr [1:19600] &quot;Nintendo&quot; &quot;Nintendo&quot; &quot;Valve&quot; &quot;Nintendo&quot; ...
+##  $ Developer    : chr [1:19600] &quot;Nintendo EAD&quot; &quot;Nintendo EAD&quot; &quot;Valve Corporation&quot; &quot;Nintendo EAD&quot; ...
+##  $ Critic_Score : num [1:19600] 7.7 10 8 8.2 8.6 10 8 9.4 9.1 8.6 ...
+##  $ User_Score   : num [1:19600] 8 8.2 7.5 9.1 4.7 7.8 8.8 8.8 8.1 9.2 ...
+##  $ Total_Shipped: num [1:19600] 82.9 40.2 40 37.3 36.6 ...
+##  $ Year         : num [1:19600] 2006 1985 2012 2008 2017 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Rank = col_double(),
+##   ..   Name = col_character(),
+##   ..   Platform = col_character(),
+##   ..   Publisher = col_character(),
+##   ..   Developer = col_character(),
+##   ..   Critic_Score = col_double(),
+##   ..   User_Score = col_double(),
+##   ..   Total_Shipped = col_double(),
+##   ..   Year = col_double()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="Video-Games-Sales.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 9
+##    Rank Name  Platform Publisher Developer Critic_Score User_Score Total_Shipped
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+## 1     1 Wii ~ Wii      Nintendo  Nintendo~          7.7        8            82.9
+## 2     2 Supe~ NES      Nintendo  Nintendo~         10          8.2          40.2
+## 3     3 Coun~ PC       Valve     Valve Co~          8          7.5          40  
+## # ... with 1 more variable: Year &lt;dbl&gt;</code></pre>
+<p>数据共包括11列，具体变量说明如下表所示：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="Video-Games-Sales.html#cb9-1" aria-hidden="true" tabindex="-1"></a>table_var <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data-intro.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="dv">3</span>)</span>
+<span id="cb9-2"><a href="Video-Games-Sales.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(table_var, <span class="at">align =</span> <span class="st">&quot;c&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="Video-Games-Sales.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+变量
+</th>
+<th style="text-align:center;">
+说明
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Rank
+</td>
+<td style="text-align:center;">
+销量排名
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Name
+</td>
+<td style="text-align:center;">
+游戏名称
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Platform
+</td>
+<td style="text-align:center;">
+发型平台
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Publisher
+</td>
+<td style="text-align:center;">
+发行商
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Develooper
+</td>
+<td style="text-align:center;">
+开发商
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Critic_Score
+</td>
+<td style="text-align:center;">
+从业人评分
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+User_Score
+</td>
+<td style="text-align:center;">
+用户评分
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Total_shipped
+</td>
+<td style="text-align:center;">
+总出货量
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Year
+</td>
+<td style="text-align:center;">
+发型年份
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="缺失值处理" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 缺失值处理</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Video-Games-Sales.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre><code>##       Rank           Name             Platform          Publisher        
+##  Min.   :    1   Length:19600       Length:19600       Length:19600      
+##  1st Qu.: 4899   Class :character   Class :character   Class :character  
+##  Median : 9798   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 9799                                                           
+##  3rd Qu.:14698                                                           
+##  Max.   :19598                                                           
+##                                                                          
+##   Developer          Critic_Score      User_Score     Total_Shipped    
+##  Length:19600       Min.   : 0.800   Min.   : 1.000   Min.   : 0.0100  
+##  Class :character   1st Qu.: 6.100   1st Qu.: 6.300   1st Qu.: 0.0500  
+##  Mode  :character   Median : 7.300   Median : 7.200   Median : 0.1600  
+##                     Mean   : 7.035   Mean   : 6.995   Mean   : 0.5511  
+##                     3rd Qu.: 8.200   3rd Qu.: 8.000   3rd Qu.: 0.4600  
+##                     Max.   :10.000   Max.   :10.000   Max.   :82.9000  
+##                     NA&#39;s   :9631     NA&#39;s   :17377                     
+##       Year     
+##  Min.   :1977  
+##  1st Qu.:2004  
+##  Median :2008  
+##  Mean   :2008  
+##  3rd Qu.:2012  
+##  Max.   :2020  
+## </code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="Video-Games-Sales.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df))</span></code></pre></div>
+<pre><code>## [1] 27010</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="Video-Games-Sales.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_miss</span>(df)</span></code></pre></div>
+<pre><code>## [1] 27010</code></pre>
+<p>数据中有27010个缺失值，而缺失值主要存在与<code>Critic_Score</code>和<code>User_Score</code>，主要原因在于并不是每个用户和从业者都会对游戏进行评分。
+需要对其进行一些处理，未打分的我们认为其打分为5.0分，即使用5.0代替所有缺失值。</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="Video-Games-Sales.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 采用每一列的众数替换该列的缺失值</span></span>
+<span id="cb16-2"><a href="Video-Games-Sales.html#cb16-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="Video-Games-Sales.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfc</span>(<span class="sc">~</span><span class="fu">replace_na</span>(.x, rstatix<span class="sc">::</span><span class="fu">get_mode</span>(.x)[<span class="dv">1</span>]))</span></code></pre></div>
+</div>
+<div id="描述性分析" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 描述性分析</h2>
+<p>描述性统计是一个统计范围，它应用各种技术来描述和总结任何数据集，并研究观察到的数据的一般行为，以促进问题的解决。这可以通过频率表、图形和集中趋势的度量来完成，例如平均值、中位数、众数、离散度量（例如标准偏差、百分位数和四分位数）。</p>
+<p>创建<code>Percent</code>列计算公式如下式<a href="Video-Games-Sales.html#eq:per">(1.1)</a>：</p>
+<p><span class="math display" id="eq:per">\[\begin{align}
+  p = 100 * \frac{Freq_x}{\sum_{i=0}^{n}(Freq_i)}
+  \tag{1.1}
+\end{align}\]</span></p>
+<p>式中：<span class="math inline">\(p\)</span>为百分比；<span class="math inline">\(Freq_x\)</span>为元素<span class="math inline">\(x\)</span>出现的频数；<span class="math inline">\(\sum_{i=0}^{n}(Freq_i)\)</span>为所有元素的总频数。</p>
+<div id="sec:Frequency-Distribution" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> 频数分布</h3>
+<div id="哪一年的游戏总销量最高" class="section level4" number="1.3.1.1">
+<h4><span class="header-section-number">1.3.1.1</span> 哪一年的游戏总销量最高</h4>
+</div>
+<div id="游戏总销量排名" class="section level4" number="1.3.1.2">
+<h4><span class="header-section-number">1.3.1.2</span> 游戏总销量排名</h4>
+</div>
+<div id="游戏平台销量排名" class="section level4" number="1.3.1.3">
+<h4><span class="header-section-number">1.3.1.3</span> 游戏平台销量排名</h4>
+</div>
+<div id="开发商排名" class="section level4" number="1.3.1.4">
+<h4><span class="header-section-number">1.3.1.4</span> 开发商排名</h4>
+</div>
+<div id="发行商总销量排名" class="section level4" number="1.3.1.5">
+<h4><span class="header-section-number">1.3.1.5</span> 发行商总销量排名</h4>
+</div>
+</div>
+<div id="sec:Central-Trend-Measures" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> 中心分布指标</h3>
+<div id="平均值" class="section level4" number="1.3.2.1">
+<h4><span class="header-section-number">1.3.2.1</span> 平均值</h4>
+</div>
+<div id="中数" class="section level4" number="1.3.2.2">
+<h4><span class="header-section-number">1.3.2.2</span> 中数</h4>
+</div>
+<div id="众数" class="section level4" number="1.3.2.3">
+<h4><span class="header-section-number">1.3.2.3</span> 众数</h4>
+</div>
+</div>
+<div id="separating-measures" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Separating Measures</h3>
+</div>
+<div id="dispersion-measures" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Dispersion Measures</h3>
+</div>
+</div>
+<div id="探索性分析" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 探索性分析</h2>
+<div id="世界最畅销游戏" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> 世界最畅销游戏</h3>
+</div>
+<div id="游戏发型平台" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> 游戏发型平台</h3>
+</div>
+<div id="游戏发行商发型游戏书" class="section level3" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> 游戏发行商发型游戏书</h3>
+</div>
+<div id="每年世界销量" class="section level3" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> 每年世界销量</h3>
+</div>
+</div>
+<div id="其它分析" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 其它分析</h2>
+<div id="用户打分与游戏销量关系" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> 用户打分与游戏销量关系</h3>
+</div>
+<div id="从业者打分与游戏销量关系" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> 从业者打分与游戏销量关系</h3>
+</div>
+<div id="用户与从业者分别最喜欢哪个发行商" class="section level3" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> 用户与从业者分别最喜欢哪个发行商</h3>
+</div>
+<div id="用户与从业者分别最喜欢哪个发行商-1" class="section level3" number="1.5.4">
+<h3><span class="header-section-number">1.5.4</span> 用户与从业者分别最喜欢哪个发行商</h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Olympic-history.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CBook.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
