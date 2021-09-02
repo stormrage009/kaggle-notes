@@ -69,13 +69,6 @@ counts <- data %>%
     Nations = length(unique(NOC)),
     Events = length(unique(Event))
   )
-```
-
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
-```r
 counts
 ```
 
@@ -297,13 +290,7 @@ medal_counts_arts <- art %>%
   filter(!is.na(Medal)) %>% 
   group_by(Team, Medal) %>% 
   summarize(Count = length(Medal))
-```
 
-```
-## `summarise()` has grouped output by 'Team'. You can override using the `.groups` argument.
-```
-
-```r
 # 根据奖牌数量对国家进行排序
 levs_art <- medal_counts_arts %>% 
   group_by(Team) %>% 
@@ -373,13 +360,6 @@ data$Year <- as.integer(data$Year)
 counts_sex <- data %>% 
   group_by(Year, Sex) %>% 
   summarize(Athletes = length(unique(ID)))
-```
-
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
-```r
 counts_sex$Year <- as.integer(counts_sex$Year)
 ```
 
@@ -434,13 +414,6 @@ counts_NOC <- data %>%
   summarize(Count = length(unique(ID))) %>% 
   spread(Sex, Count) %>% # 按照Sex为key，Count为value的规则进行pivot_wider()操作。
   mutate(Total = sum(M, F, na.rm = T)) # 计算运动员总数
-```
-
-```
-## `summarise()` has grouped output by 'Year', 'NOC'. You can override using the `.groups` argument.
-```
-
-```r
 names(counts_NOC)[3: 4] <- c("Male", "Female")
 
 # 将缺失值变为0
@@ -477,10 +450,6 @@ ggplot(counts_NOC, aes(x = Male, y = Female, group = Year, color = Year)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-```
-## `geom_smooth()` using formula 'y ~ x'
-```
-
 <div class="figure" style="text-align: center">
 <img src="2-Olympic-history_files/figure-html/5-years-regression-1.png" alt="(ref:fig-5-years)" width="672" />
 <p class="caption">(\#fig:5-years-regression)(ref:fig-5-years)</p>
@@ -499,13 +468,7 @@ medalCount <- data %>%
   filter(Sport != "Art Competitions") %>% 
   group_by(Team, Medal) %>% 
   summarize(Count = length(Medal))
-```
-
-```
-## `summarise()` has grouped output by 'Team'. You can override using the `.groups` argument.
-```
-
-```r
+  
 medalCountLevs <- medalCount %>% 
   group_by(Team) %>% 
   summarize(Total = sum(Count)) %>% 
@@ -542,10 +505,6 @@ medalChina <- data %>%
   summarize(Count = length(Medal))
 ```
 
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
 ```r
 ggplot(medalChina, aes(x = reorder(Year, -Count), y = Count, fill = Medal)) +
   geom_col() +
@@ -576,19 +535,7 @@ noc <- read_csv("D:/Tools/Rwork/0.Study R/kaggle-project/data/olympics/noc_regio
                   NOC = col_character(),
                   region = col_character()
                 ))
-```
 
-```
-## New names:
-## * Australia -> Australia...18
-## * Australia -> Australia...28
-## * `Czech Republic` -> `Czech Republic...56`
-## * Canada -> Canada...76
-## * China -> China...86
-## * ...
-```
-
-```r
 # 增加regions数据，去除缺失值
 dataRegions <- data %>% 
   left_join(noc, by = "NOC") %>% 
@@ -694,10 +641,6 @@ data %>% group_by(Year, Sex) %>%
         axis.text.x = element_text(face = "bold", angle = 90)) +
   labs(title = "Height/Weight data completeness from each Olympics") +
   scale_x_continuous(breaks = seq(1896, 2016, 4))
-```
-
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
 ```
 
 <div class="figure" style="text-align: center">

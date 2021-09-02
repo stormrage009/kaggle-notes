@@ -19,25 +19,6 @@ output:
 
 ```r
 card <- read_csv("data/creditcard.csv")
-```
-
-```
-## Rows: 284807 Columns: 31
-```
-
-```
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## dbl (31): Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14,...
-```
-
-```
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-```r
 card <- as.data.frame(card)
 str(card) # 查看数据基本结构和数据类型
 ```
@@ -264,7 +245,7 @@ ggplot(card_1, aes(x = factor(Time_Hour),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="5-creditcard_files/figure-html/card-times-1.png" alt="不同时间诈骗次数" width="672" />
+<img src="4-creditcard_files/figure-html/card-times-1.png" alt="不同时间诈骗次数" width="672" />
 <p class="caption">(\#fig:card-times)不同时间诈骗次数</p>
 </div>
 
@@ -297,7 +278,7 @@ ggplot(card_1, aes(x = factor(Time_Hour),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="5-creditcard_files/figure-html/card-amount-1.png" alt="不同时间诈骗金额" width="672" />
+<img src="4-creditcard_files/figure-html/card-amount-1.png" alt="不同时间诈骗金额" width="672" />
 <p class="caption">(\#fig:card-amount)不同时间诈骗金额</p>
 </div>
 
@@ -330,7 +311,7 @@ ggplot(card_1_mean, aes(x = factor(Time_Hour), y = MeanAmount, fill = factor(Tim
 ```
 
 <div class="figure" style="text-align: center">
-<img src="5-creditcard_files/figure-html/card-mean-1.png" alt="不同时间平均诈骗金额-条形图" width="672" />
+<img src="4-creditcard_files/figure-html/card-mean-1.png" alt="不同时间平均诈骗金额-条形图" width="672" />
 <p class="caption">(\#fig:card-mean)不同时间平均诈骗金额-条形图</p>
 </div>
 
@@ -374,177 +355,6 @@ e.g.，寻找最合适的k值来调整k近邻模型、调节隐藏层层数和�
 ```r
 set.seed(1234)
 m_C50 <- train(Species~., data = iris, method = "C5.0")
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```r
 m_C50
 ```
 

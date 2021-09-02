@@ -1,7 +1,7 @@
 ---
 title: "Kaggle数据项目实战"
 author: "LEE"
-date: "2021-09-01"
+date: "2021-09-02"
 description: "这是用R的bookdown功能制作的kaggle数据项目实战集。"
 documentclass: book
 site: bookdown::bookdown_site

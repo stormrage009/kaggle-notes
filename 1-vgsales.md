@@ -77,7 +77,7 @@ head(df, 3)
 ## # ... with 1 more variable: Year <dbl>
 ```
 
-数据共包括11列，具体变量说明如下表所示：
+数据共包括11列，包含了从1977年~2020年中的游戏销量数据，具体变量说明如下表所示：
 
 
 ```r
@@ -124,7 +124,7 @@ kable(table_var, align = "c") %>%
   </tr>
   <tr>
    <td style="text-align:center;"> Total_shipped </td>
-   <td style="text-align:center;"> 总出货量 </td>
+   <td style="text-align:center;"> 总销量(百万套) </td>
   </tr>
   <tr>
    <td style="text-align:center;"> Year </td>
@@ -197,60 +197,337 @@ df <- df %>%
 
 描述性统计是一个统计范围，它应用各种技术来描述和总结任何数据集，并研究观察到的数据的一般行为，以促进问题的解决。这可以通过频率表、图形和集中趋势的度量来完成，例如平均值、中位数、众数、离散度量（例如标准偏差、百分位数和四分位数）。
 
-创建`Percent`列计算公式如下式\@ref(eq:per)：
-
-\begin{align}
-  p = 100 * \frac{Freq_x}{\sum_{i=0}^{n}(Freq_i)}
-  (\#eq:per)
-\end{align}
-
-式中：$p$为百分比；$Freq_x$为元素$x$出现的频数；$\sum_{i=0}^{n}(Freq_i)$为所有元素的总频数。
+>由于2020年只有前半段的数据，我们分析时将2020年的数据剔除，以便更好的分析对比各年份的差异。同时剔除`Rank`列。
 
 
-### 频数分布 {#sec:Frequency-Distribution}
+```r
+df <- df %>% 
+  filter(Year != 2020) %>% 
+  select(-Rank)
+
+df$Year <- factor(df$Year)
+```
 
 
+### 常规分析
 
 #### 哪一年的游戏总销量最高
 
-#### 游戏总销量排名
 
-#### 游戏平台销量排名
+```r
+df_shipped <- df %>% 
+  select(Year, Total_Shipped) %>% 
+  group_by(Year) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
 
-#### 开发商排名
+p1 <- ggplot(head(df_shipped,10), aes(x = Year, y = count, 
+                       fill = Year)) + 
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_label(aes(label = count), fontface = "bold",
+             fill = "#006400", 
+             color = "white",
+             size = 3) +
+  theme_bw() +
+  labs(x = " ", y = " ") +
+  ggtitle("销量排名前十的年份") +
+  theme(legend.position = "none", 
+        plot.background = element_rect(color = "black", size = 1.1), 
+        axis.text.x = element_text(face = "bold"),
+        axis.text.y = element_text(face = "bold"),
+        axis.title = element_text(face = "bold")
+        )
 
-#### 发行商总销量排名
+p2 <- ggplot(df_shipped, aes(x = Year, y = count, group = 1)) +
+  geom_point() +
+  geom_line() +
+  theme_bw() +
+  ggtitle("游戏销量变化") +
+  labs(x = " ", y = " ") +
+  theme(plot.background = element_rect(color = "black", size = 1.1),
+        axis.text.x = element_text(face = "bold", angle = 90)) +
+  geom_curve(x = 40, y = 450, xend = 42, yend = 500,
+             angle = 35,
+             arrow = arrow(length = unit(0.3, "cm")),
+             color = "red") +
+  annotate("text", x = 42, y = 550,  
+           label = "COVID-19", color = "red", size = 3)
+p1/p2
+```
+
+<img src="1-vgsales_files/figure-html/shipped-1.png" width="672" style="display: block; margin: auto;" />
+由图\@ref(fig:shipped)可以看出：  
+- 销量排名前十的年份均在21世纪，且2009年销量最高。2009年之后，游戏销量逐渐下滑，在2011年左右趋于平稳。
+
+- 2018~2019年，游戏销量急剧下滑。猜测原因为新冠肺炎疫情的爆发导致的游戏产能下降、经济下滑，从而大幅影响了游戏的销量。
+
+下面我们将具体看一下各游戏平台的表现。                      
+
+#### 游戏平台排名（销量、游戏数量）
 
 
-### 中心分布指标 {#sec:Central-Trend-Measures}
+```r
+df_platform <- df %>% 
+  select(Platform, Total_Shipped) %>% 
+  group_by(Platform) %>% 
+  summarize(amount = sum(Total_Shipped)) %>% 
+  arrange(desc(amount)) %>% 
+  head(10)
 
-#### 平均值
+p3 <- ggplot(df_platform, aes(x = reorder(Platform, amount), y = amount, 
+                                    fill = Platform)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  labs(x = " ", y = " ") +
+  ggtitle("游戏平台排名", subtitle = "平台销量排名") +
+  coord_flip() +
+  theme_bw() +
+  theme(legend.position = "none",
+        axis.text = element_text(face = "bold"), 
+        plot.title = element_text(face = "bold"),
+        plot.background = element_rect(color = "black"))
 
-#### 中数
+df_platform2 <- as.data.frame(table(df$Platform)) %>% 
+  rename(Platform = Var1) %>% 
+  arrange(desc(Freq)) %>% 
+  head(10)
 
-#### 众数
+p4 <- ggplot(df_platform2, aes(x = reorder(Platform, Freq), y = Freq, 
+                         fill = Platform)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  labs(x = " ", y = " ") +
+  ggtitle("游戏平台排名", subtitle = "平台游戏数量排名") +
+  coord_flip() +
+  theme_bw() +
+  theme(plot.background = element_rect(color = "black"), 
+        legend.position = "none",
+        plot.title = element_text(face = "bold"),
+        axis.text = element_text(face = "bold"))
+p3|p4
+```
 
-### Separating Measures
+<div class="figure" style="text-align: center">
+<img src="1-vgsales_files/figure-html/platform-1.png" alt="游戏平台排名" width="672" />
+<p class="caption">(\#fig:platform)游戏平台排名</p>
+</div>
+由图\@ref(fig:platform)可以看出：
 
-### Dispersion Measures
+- PS2不愧是有史以来最成功的的家用主机，发行在其上的游戏销量排名第一、游戏数量排名第二。
+- PC游戏仍有一定竞争力。
+- 御三家统治了主机游戏。
 
+下面我们看一下游戏开发商的情况。
+
+#### 开发商和发行商排名
+
+
+```r
+df_developer <-  df %>% 
+  select(Developer, Total_Shipped) %>% 
+  group_by(Developer) %>% 
+  summarise(amount = sum(Total_Shipped)) %>% 
+  arrange(desc(amount)) %>% 
+  head(10)
+
+p5 <- ggplot(df_developer, aes(x = reorder(Developer, amount), y = amount,
+                         fill = Developer)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  coord_flip() +
+  ggtitle("开发商销量排名") +
+  labs(x = " ", y = "") +
+  theme_bw() +
+  theme(legend.position = "none",
+        plot.background = element_rect(color = "black"))
+```
+
+
+```r
+df_publisher <- df %>% 
+  select(Publisher, Total_Shipped) %>% 
+  group_by(Publisher) %>% 
+  summarise(amount = sum(Total_Shipped)) %>% 
+  arrange(desc(amount)) %>% 
+  head(10)
+
+p6 <- ggplot(df_publisher, aes(x = reorder(Publisher, amount), y = amount,
+                         fill = Publisher)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  coord_flip() +
+  ggtitle("发行商销量排名") +
+  labs(x = " ", y = "") +
+  theme_bw() +
+  theme(legend.position = "none",
+        plot.background = element_rect(color = "black"))
+p5|p6
+```
+
+<img src="1-vgsales_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+- 任天堂作为开发商和发行商均独占鳌头。
+- Game Freak依靠王牌IP精灵宝可梦占据开发商销量第三名。
+- 大家耳熟能详的游戏开发商和发行商均有上榜。
 
 ## 探索性分析
 
+在统计学中，探索性数据分析 (EAD) 是一种分析数据集以总结其主要特征的方法，通常使用可视化方法。
+
 ### 世界最畅销游戏
 
-### 游戏发型平台
+#### 最畅销的5个游戏
 
-### 游戏发行商发型游戏书
+那么，1977年~2019年间，到底哪个游戏销量是最高的呢？
 
-### 每年世界销量
 
-## 其它分析
+```r
+options(repr.plot.width = 20, repr.plot.height = 8)
 
-### 用户打分与游戏销量关系
+df_games <- df %>% 
+  select(Name, Total_Shipped) %>% 
+  group_by(Name) %>% 
+  summarise(amount = sum(Total_Shipped)) %>% 
+  arrange(desc(amount)) %>% 
+  head(5)
 
-### 从业者打分与游戏销量关系
+p7 <- ggplot(df_games, aes(x = reorder(Name, amount), y = amount,
+                     fill = Name)) +
+  geom_col(aes(alpha = 0.9)) +
+  geom_label(aes(label = amount), size = 3,
+             fontface = "bold",
+             color = "white") +
+  labs(x = " ", y = " ") +
+  coord_flip() +
+  theme_bw() +
+  theme(legend.position = "none",
+        plot.background = element_rect(color = "black", size = 1.1),
+        axis.text.x = element_text( face = "bold"),
+        axis.text.y = element_text(face = "bold"))
 
-### 用户与从业者分别最喜欢哪个发行商
+p8 <- ggplot(df_games, aes(x = Name, y = amount)) +
+  geom_line(alpha = 0.7, group = 1) +
+  geom_point(aes(fill = Name), shape = 2) +
+  theme_bw()+ 
+  theme(legend.position = "none",
+        plot.background = element_rect(color = "black"),
+        axis.text.x = element_text(face = "bold")) +
+  labs(x = "", y = "") +
+  coord_polar()
+p7|p8
+```
 
-### 用户与从业者分别最喜欢哪个发行商
+<div class="figure" style="text-align: center">
+<img src="1-vgsales_files/figure-html/games-1.png" alt="游戏总销量排名" width="672" />
+<p class="caption">(\#fig:games)游戏总销量排名</p>
+</div>
+由图\@ref(fig:games)可知：
+
+- 游戏销量排名前3的游戏为：Wii Sports、GTA5和我的世界。
+- GTV5和我的世界在多个游戏平台均有发售，Wii Sports为任天堂平台独占。
+- 任天堂游戏平台发售的游戏占前十的大多数，**任天堂就是世界的主宰！**
+
+#### 最畅销的5个游戏逐年分布
+
+
+```r
+df_games_top5 <- df %>% 
+  filter(Name == "Wii Sports" |
+         Name == "Grand Theft Auto V"|
+         Name == "Minecraft"|
+         Name == "Super Mario Bros."|
+         Name == "Counter-Strike: Global Offensive") %>% 
+  select(Name, Year, Total_Shipped)
+
+ggplot(df_games_top5, aes(x = Year, y = Total_Shipped)) +
+  geom_bar(stat = "identity", aes(fill = Name, 
+                                  color = Name),
+           alpha = 8) +
+  facet_wrap(~Name) +
+  labs(x = "", y = "总销量（百万套）") +
+  theme_bw()+
+  theme(legend.position = "none",
+        strip.text.x = element_text(
+          margin = margin(7, 7, 7, 7), size = 7, 
+          face = "bold", color = "white"),
+        strip.background = element_rect(fill = "#B45F04",
+                                        color = "black"),
+        plot.title = element_text(face = "bold"),
+        axis.text.x = element_text(face = "bold",
+                                   angle = 90,
+                                   vjust = 0.5),
+        axis.text.y = element_text(face = "bold"))
+```
+
+<img src="1-vgsales_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+
+## 媒体打分与玩家打分的关系系
+
+俗话说，“低分信媒体，高分信自己”。如果一款游戏媒体打分低，那肯定不行，但如果一个游戏媒体打高分，也不一定好玩（有可能是塞了钱）。
+
+下面我们就分析一下媒体打分与玩家打分的关系。
+
+
+```r
+df_score <- df %>% 
+  select(Name, User_Score, Critic_Score) 
+
+cor <- cor.test(df_score$User_Score, df_score$Critic_Score,
+                method = "pearson")
+p.value  <-  cor$p.value
+coef  <- cor$estimate 
+
+ggplot(df_score, aes(x = User_Score, y = Critic_Score)) +
+  geom_smooth(method = lm)
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+<img src="1-vgsales_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+
+可以看到两个打分的相关系数为0.16，且p值小于0.05，表明两者呈现显著的正相关。看来游戏媒体和玩家对游戏的口味还是一样的，某种程度上说，高分也可以信媒体。
+
+## 玩家与媒体分别最喜欢哪个发行商
+
+### 玩家
+
+那么，玩家最喜欢（打分最高）的游戏发行商是谁呢？
+
+
+```r
+df_player <- df %>% 
+  select(Publisher, User_Score)
+
+df_player$Publisher <- df_player$Publisher %>% 
+  map(~
+        str_detect(.x,"Sony") %>% 
+        ifelse("Sony", .x)) %>% 
+  unlist() 
+
+df_player <- df_player%>% 
+  group_by(Publisher) %>% 
+  summarise(count = n(),
+            mean_score = mean(User_Score)) %>% 
+  filter(count >= 50) %>% 
+  select(Publisher, mean_score) %>% 
+  arrange(desc(mean_score))
+df_player
+```
+
+```
+## # A tibble: 62 x 2
+##    Publisher                mean_score
+##    <chr>                         <dbl>
+##  1 Rockstar Games                 7.84
+##  2 Microsoft Game Studios         7.77
+##  3 Nintendo                       7.77
+##  4 Sierra Entertainment           7.72
+##  5 DreamCatcher Interactive       7.71
+##  6 5pb                            7.71
+##  7 Sony                           7.70
+##  8 Eidos Interactive              7.70
+##  9 Acclaim Entertainment          7.7 
+## 10 Agetec                         7.7 
+## # ... with 52 more rows
+```
+在发行过50个以上游戏的老牌发行商中：
+
+- R星凭借GTA、荒野大镖客等重量级IP以7.842的评分独占鳌头。
+- 所有发行商的评分均超过7分，说明现代游戏的质量还是有保障的。
