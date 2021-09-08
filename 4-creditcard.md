@@ -19,6 +19,25 @@ output:
 
 ```r
 card <- read_csv("data/creditcard.csv")
+```
+
+```
+## Rows: 284807 Columns: 31
+```
+
+```
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## dbl (31): Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14,...
+```
+
+```
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+```r
 card <- as.data.frame(card)
 str(card) # 查看数据基本结构和数据类型
 ```
@@ -225,7 +244,7 @@ table(test_data$Class)
 standard <- preProcess(card_end, method = "range") 
 card_s <- predict(standard, card_end)
 train_data2 <- card_s[index2, ]
-test_data2 <- card_s[index2, ]
+test_data2 <- card_s[-index2, ]
 ```
 
 ## 描述性分析 {#sec:five3}
@@ -355,6 +374,177 @@ e.g.，寻找最合适的k值来调整k近邻模型、调节隐藏层层数和�
 ```r
 set.seed(1234)
 m_C50 <- train(Species~., data = iris, method = "C5.0")
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
+## trials
+```
+
+```
+## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
+## trials
+```
+
+```r
 m_C50
 ```
 
@@ -407,8 +597,6 @@ m_C50
       - **oneSE**函数：选择最好性能标准差之内的最简单的候选者。
       - **Tolerance**函数：选择某个用户制定比例之内最简单的候选者。
       
-      
-
 
 ```r
 set.seed(1234)
@@ -445,13 +633,147 @@ model_rf
 pred_rf <- predict(model_rf, test_data[-31]) 
 ```
 
-## 模型预测 {#sec:five5}
+```r
+# 建立混淆矩阵
+confusionMatrix(data = pred_rf, reference = test_data$Class,
+                positive = "1")
+```
 
-### 交叉验证 {#sec:five51}
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 98  7
+##          1  0 91
+##                                           
+##                Accuracy : 0.9643          
+##                  95% CI : (0.9278, 0.9855)
+##     No Information Rate : 0.5             
+##     P-Value [Acc > NIR] : < 2e-16         
+##                                           
+##                   Kappa : 0.9286          
+##                                           
+##  Mcnemar's Test P-Value : 0.02334         
+##                                           
+##             Sensitivity : 0.9286          
+##             Specificity : 1.0000          
+##          Pos Pred Value : 1.0000          
+##          Neg Pred Value : 0.9333          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4643          
+##    Detection Prevalence : 0.4643          
+##       Balanced Accuracy : 0.9643          
+##                                           
+##        'Positive' Class : 1               
+## 
+```
+
+```r
+plot(varImp(model_rf)) # 查看变量的重要性
+```
+
+<img src="4-creditcard_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+
+## kNN建模 {#sec:five5}
+
+### 原理
+
+knn，即邻近分类器，就是把未标记的案例归类为与他们最相似的带有标记的案例所在的类。
+
+算法流程：
+
+1. 依次计算测试样本与哥哥训练样本间的距离（常用欧式距离）；
+
+2. 将这些距离按照升序排列；
+
+3. 选取距离最小的k（3~10）个训练样本点；
+
+4. 确定这k个点中不同类别的占比；
+
+5. 返回这k个点中占比最大的类别作为测试样本的预测分类。
+
+### 模型建立
 
 
-### 随机森林建模 {#sec:five52}
+```r
+# 创建空向量
+results <- c()
 
-### knn建模 {#sec:five53}
+for (i in 3:10){
+  set.seed(1234)
+  pred_knn <- knn(train_data2[-31], test_data2[-31],
+                  train_data2$Class, i)
+  Table <- table(pred_knn, test_data2$Class) # 得到混淆矩阵
+  accuracy <- sum(diag(Table))/sum(Table) # diag()提取对角线的值
+  results <- c(results, accuracy)
+}
+
+ggplot(as.data.frame(results), aes(x = 3:10, y = results)) +
+  geom_point()+
+  geom_line() +
+  theme_bw() +
+  labs(xlab = " ")
+```
+
+<img src="4-creditcard_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+
+
+
+```r
+set.seed(1234)
+pred_knn <- knn(train = train_data2[-31], test = test_data2[-31],
+                cl = train_data2$Class, k = 4)
+confusionMatrix(pred_knn,test_data2$Class, positive = "1")
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 97  7
+##          1  1 91
+##                                           
+##                Accuracy : 0.9592          
+##                  95% CI : (0.9212, 0.9822)
+##     No Information Rate : 0.5             
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.9184          
+##                                           
+##  Mcnemar's Test P-Value : 0.0771          
+##                                           
+##             Sensitivity : 0.9286          
+##             Specificity : 0.9898          
+##          Pos Pred Value : 0.9891          
+##          Neg Pred Value : 0.9327          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4643          
+##    Detection Prevalence : 0.4694          
+##       Balanced Accuracy : 0.9592          
+##                                           
+##        'Positive' Class : 1               
+## 
+```
 
 ## 模型评估 {#sec:five6}
+
+
+```r
+# 建立一个数据框，将两个模型预测的结果和真实值放进去。并展示不同预测值
+pred_results <- data.frame(knn = pred_knn, rf = pred_rf, 
+                           class = test_data$Class)
+index3 <- which(pred_results$knn != pred_rf)
+pred_results[index3, ]
+```
+
+```
+##     knn rf class
+## 25    1  0     0
+## 159   1  0     1
+## 160   0  1     1
+## 168   1  0     1
+## 182   0  1     1
+```
+

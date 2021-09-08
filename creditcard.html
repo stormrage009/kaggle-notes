@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 信用卡欺诈识别 | Kaggle数据项目实战</title>
   <meta name="description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 信用卡欺诈识别 | Kaggle数据项目实战" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="LEE" />
 
 
-<meta name="date" content="2021-09-02" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,9 +32,10 @@
   
   
 <link rel="prev" href="HR-comma-sep.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="scoreClass.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -160,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#世界最畅销游戏"><i class="fa fa-check"></i><b>1.4.1</b> 世界最畅销游戏</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#媒体打分与玩家打分的关系系"><i class="fa fa-check"></i><b>1.5</b> 媒体打分与玩家打分的关系系</a></li>
+<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#媒体打分与玩家打分的关系"><i class="fa fa-check"></i><b>1.5</b> 媒体打分与玩家打分的关系</a></li>
 <li class="chapter" data-level="1.6" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#玩家与媒体分别最喜欢哪个发行商"><i class="fa fa-check"></i><b>1.6</b> 玩家与媒体分别最喜欢哪个发行商</a>
 <ul>
 <li class="chapter" data-level="1.6.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#玩家"><i class="fa fa-check"></i><b>1.6.1</b> 玩家</a></li>
@@ -234,13 +234,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="creditcard.html"><a href="creditcard.html#不同时间平均诈骗金额-条形图"><i class="fa fa-check"></i><b>4.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="creditcard.html"><a href="creditcard.html#sec:five4"><i class="fa fa-check"></i><b>4.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
-<li class="chapter" data-level="4.5" data-path="creditcard.html"><a href="creditcard.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> 模型预测</a>
+<li class="chapter" data-level="4.5" data-path="creditcard.html"><a href="creditcard.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> kNN建模</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="creditcard.html"><a href="creditcard.html#sec:five51"><i class="fa fa-check"></i><b>4.5.1</b> 交叉验证</a></li>
-<li class="chapter" data-level="4.5.2" data-path="creditcard.html"><a href="creditcard.html#sec:five52"><i class="fa fa-check"></i><b>4.5.2</b> 随机森林建模</a></li>
-<li class="chapter" data-level="4.5.3" data-path="creditcard.html"><a href="creditcard.html#sec:five53"><i class="fa fa-check"></i><b>4.5.3</b> knn建模</a></li>
+<li class="chapter" data-level="4.5.1" data-path="creditcard.html"><a href="creditcard.html#原理"><i class="fa fa-check"></i><b>4.5.1</b> 原理</a></li>
+<li class="chapter" data-level="4.5.2" data-path="creditcard.html"><a href="creditcard.html#模型建立"><i class="fa fa-check"></i><b>4.5.2</b> 模型建立</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="creditcard.html"><a href="creditcard.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoreClass.html"><a href="scoreClass.html"><i class="fa fa-check"></i><b>5</b> Student performance level classification</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="scoreClass.html"><a href="scoreClass.html#sec:data-intro-edu"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="5.2" data-path="scoreClass.html"><a href="scoreClass.html#sec:descriptive-analysis"><i class="fa fa-check"></i><b>5.2</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="scoreClass.html"><a href="scoreClass.html#封装绘图函数"><i class="fa fa-check"></i><b>5.2.1</b> 封装绘图函数</a></li>
+<li class="chapter" data-level="5.2.2" data-path="scoreClass.html"><a href="scoreClass.html#不同教育程度的学生选择课程主题"><i class="fa fa-check"></i><b>5.2.2</b> 不同教育程度的学生选择课程主题</a></li>
+<li class="chapter" data-level="5.2.3" data-path="scoreClass.html"><a href="scoreClass.html#不同课程主题监护人情况"><i class="fa fa-check"></i><b>5.2.3</b> 不同课程主题监护人情况</a></li>
+<li class="chapter" data-level="5.2.4" data-path="scoreClass.html"><a href="scoreClass.html#不同课程学生学习成绩"><i class="fa fa-check"></i><b>5.2.4</b> 不同课程学生学习成绩</a></li>
+<li class="chapter" data-level="5.2.5" data-path="scoreClass.html"><a href="scoreClass.html#不同教室学生成绩水平"><i class="fa fa-check"></i><b>5.2.5</b> 不同教室学生成绩水平</a></li>
+<li class="chapter" data-level="5.2.6" data-path="scoreClass.html"><a href="scoreClass.html#不同学期不同成绩水平与监护人的关系"><i class="fa fa-check"></i><b>5.2.6</b> 不同学期、不同成绩水平与监护人的关系</a></li>
+<li class="chapter" data-level="5.2.7" data-path="scoreClass.html"><a href="scoreClass.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><i class="fa fa-check"></i><b>5.2.7</b> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</a></li>
+<li class="chapter" data-level="5.2.8" data-path="scoreClass.html"><a href="scoreClass.html#性别逃课次数与学生成绩水平的关系"><i class="fa fa-check"></i><b>5.2.8</b> 性别、逃课次数与学生成绩水平的关系</a></li>
+<li class="chapter" data-level="5.2.9" data-path="scoreClass.html"><a href="scoreClass.html#举手次数和参加讨论次数与成绩水平关系"><i class="fa fa-check"></i><b>5.2.9</b> 举手次数和参加讨论次数与成绩水平关系</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="scoreClass.html"><a href="scoreClass.html#模型建立-1"><i class="fa fa-check"></i><b>5.3</b> 模型建立</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="scoreClass.html"><a href="scoreClass.html#回归树模型建立"><i class="fa fa-check"></i><b>5.3.1</b> 回归树模型建立</a></li>
+<li class="chapter" data-level="5.3.2" data-path="scoreClass.html"><a href="scoreClass.html#随机数模型"><i class="fa fa-check"></i><b>5.3.2</b> 随机数模型</a></li>
+<li class="chapter" data-level="5.3.3" data-path="scoreClass.html"><a href="scoreClass.html#svm建模-支持向量机需要再研究"><i class="fa fa-check"></i><b>5.3.3</b> SVM建模-支持向量机(需要再研究)</a></li>
+<li class="chapter" data-level="5.3.4" data-path="scoreClass.html"><a href="scoreClass.html#模型融合"><i class="fa fa-check"></i><b>5.3.4</b> 模型融合</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -269,9 +291,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="sec:five2" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> 数据预处理</h2>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="creditcard.html#cb80-1" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/creditcard.csv&quot;</span>)</span>
-<span id="cb80-2"><a href="creditcard.html#cb80-2" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(card)</span>
-<span id="cb80-3"><a href="creditcard.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(card) <span class="co"># 查看数据基本结构和数据类型</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="creditcard.html#cb110-1" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/creditcard.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 284807 Columns: 31</code></pre>
+<pre><code>## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## dbl (31): Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14,...</code></pre>
+<pre><code>## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="creditcard.html#cb114-1" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(card)</span>
+<span id="cb114-2"><a href="creditcard.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(card) <span class="co"># 查看数据基本结构和数据类型</span></span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    284807 obs. of  31 variables:
 ##  $ Time  : num  0 0 1 1 2 2 4 7 7 9 ...
 ##  $ V1    : num  -1.36 1.192 -1.358 -0.966 -1.158 ...
@@ -304,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ V28   : num  -0.0211 0.0147 -0.0598 0.0615 0.2152 ...
 ##  $ Amount: num  149.62 2.69 378.66 123.5 69.99 ...
 ##  $ Class : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="creditcard.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(card) <span class="co"># 查看数据的主要描述性统计量</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="creditcard.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(card) <span class="co"># 查看数据的主要描述性统计量</span></span></code></pre></div>
 <pre><code>##       Time              V1                  V2                  V3          
 ##  Min.   :     0   Min.   :-56.40751   Min.   :-72.71573   Min.   :-48.3256  
 ##  1st Qu.: 54202   1st Qu.: -0.92037   1st Qu.: -0.59855   1st Qu.: -0.8904  
@@ -368,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Mean   :  0.00000   Mean   :   88.35   Mean   :0.001728  
 ##  3rd Qu.:  0.07828   3rd Qu.:   77.17   3rd Qu.:0.000000  
 ##  Max.   : 33.84781   Max.   :25691.16   Max.   :1.000000</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="creditcard.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(card<span class="sc">$</span>Class)),<span class="dv">4</span>)<span class="co"># 查看数据类别比例</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="creditcard.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(card<span class="sc">$</span>Class)),<span class="dv">4</span>)<span class="co"># 查看数据类别比例</span></span></code></pre></div>
 <pre><code>## 
 ##      0      1 
 ## 0.9983 0.0017</code></pre>
@@ -381,66 +410,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>过抽样：指针对样本数占比很小的类别，重新塑造一些数据，使其与另一类数据接近。</p></li>
 </ol>
 <p>对数据进行一些基本转化。</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="creditcard.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Time列转换为小时</span></span>
-<span id="cb86-2"><a href="creditcard.html#cb86-2" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> card <span class="sc">%&gt;%</span> </span>
-<span id="cb86-3"><a href="creditcard.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Time_Hour =</span> <span class="fu">round</span>(card[, <span class="dv">1</span>]<span class="sc">/</span><span class="dv">3600</span>, <span class="dv">0</span>))</span>
-<span id="cb86-4"><a href="creditcard.html#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-5"><a href="creditcard.html#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Class列转化为因子型</span></span>
-<span id="cb86-6"><a href="creditcard.html#cb86-6" aria-hidden="true" tabindex="-1"></a>card<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(card<span class="sc">$</span>Class)</span>
-<span id="cb86-7"><a href="creditcard.html#cb86-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-8"><a href="creditcard.html#cb86-8" aria-hidden="true" tabindex="-1"></a>card_1 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;1&quot;</span>, ] <span class="co"># 欺诈样本</span></span>
-<span id="cb86-9"><a href="creditcard.html#cb86-9" aria-hidden="true" tabindex="-1"></a>card_0 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;0&quot;</span>, ] <span class="co"># 非欺诈样本</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="creditcard.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Time列转换为小时</span></span>
+<span id="cb120-2"><a href="creditcard.html#cb120-2" aria-hidden="true" tabindex="-1"></a>card <span class="ot">&lt;-</span> card <span class="sc">%&gt;%</span> </span>
+<span id="cb120-3"><a href="creditcard.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Time_Hour =</span> <span class="fu">round</span>(card[, <span class="dv">1</span>]<span class="sc">/</span><span class="dv">3600</span>, <span class="dv">0</span>))</span>
+<span id="cb120-4"><a href="creditcard.html#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="creditcard.html#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Class列转化为因子型</span></span>
+<span id="cb120-6"><a href="creditcard.html#cb120-6" aria-hidden="true" tabindex="-1"></a>card<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(card<span class="sc">$</span>Class)</span>
+<span id="cb120-7"><a href="creditcard.html#cb120-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-8"><a href="creditcard.html#cb120-8" aria-hidden="true" tabindex="-1"></a>card_1 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;1&quot;</span>, ] <span class="co"># 欺诈样本</span></span>
+<span id="cb120-9"><a href="creditcard.html#cb120-9" aria-hidden="true" tabindex="-1"></a>card_0 <span class="ot">&lt;-</span> card[card<span class="sc">$</span>Class <span class="sc">==</span> <span class="st">&quot;0&quot;</span>, ] <span class="co"># 非欺诈样本</span></span></code></pre></div>
 <p>随机抽取与诈骗样本个数相同的非欺诈样本数据，并与元欺诈样本合并为新的数据。此处使用的欠抽样的方法。</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="creditcard.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb87-2"><a href="creditcard.html#cb87-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(card_0), <span class="at">size =</span> <span class="fu">nrow</span>(card_1))</span>
-<span id="cb87-3"><a href="creditcard.html#cb87-3" aria-hidden="true" tabindex="-1"></a>card_0_new <span class="ot">&lt;-</span> card_0[index, ]</span>
-<span id="cb87-4"><a href="creditcard.html#cb87-4" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> <span class="fu">rbind</span>(card_0_new, card_1)</span>
-<span id="cb87-5"><a href="creditcard.html#cb87-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-6"><a href="creditcard.html#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 剔除Time列，用Time_Hour列代替。everything()选择所有的变量</span></span>
-<span id="cb87-7"><a href="creditcard.html#cb87-7" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> card_end[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> </span>
-<span id="cb87-8"><a href="creditcard.html#cb87-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Time_Hour, <span class="fu">everything</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="creditcard.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb121-2"><a href="creditcard.html#cb121-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(card_0), <span class="at">size =</span> <span class="fu">nrow</span>(card_1))</span>
+<span id="cb121-3"><a href="creditcard.html#cb121-3" aria-hidden="true" tabindex="-1"></a>card_0_new <span class="ot">&lt;-</span> card_0[index, ]</span>
+<span id="cb121-4"><a href="creditcard.html#cb121-4" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> <span class="fu">rbind</span>(card_0_new, card_1)</span>
+<span id="cb121-5"><a href="creditcard.html#cb121-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-6"><a href="creditcard.html#cb121-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 剔除Time列，用Time_Hour列代替。everything()选择所有的变量</span></span>
+<span id="cb121-7"><a href="creditcard.html#cb121-7" aria-hidden="true" tabindex="-1"></a>card_end <span class="ot">&lt;-</span> card_end[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb121-8"><a href="creditcard.html#cb121-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Time_Hour, <span class="fu">everything</span>())</span></code></pre></div>
 <p>按照类别进行分层抽样，建立训练集和测试集。</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="creditcard.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb88-2"><a href="creditcard.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照新数据的目标变量进行8：2</span></span>
-<span id="cb88-3"><a href="creditcard.html#cb88-3" aria-hidden="true" tabindex="-1"></a>index2 <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(card_end<span class="sc">$</span>Class,</span>
-<span id="cb88-4"><a href="creditcard.html#cb88-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
-<span id="cb88-5"><a href="creditcard.html#cb88-5" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> card_end[index2, ] <span class="co"># 创建训练集</span></span>
-<span id="cb88-6"><a href="creditcard.html#cb88-6" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> card_end[<span class="sc">-</span>index2, ] <span class="co"># 创建测试集</span></span>
-<span id="cb88-7"><a href="creditcard.html#cb88-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-8"><a href="creditcard.html#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 验证抽样结果，统计三个数据集中正反样本比例是否一致</span></span>
-<span id="cb88-9"><a href="creditcard.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(card_end<span class="sc">$</span>Class)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="creditcard.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb122-2"><a href="creditcard.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照新数据的目标变量进行8：2</span></span>
+<span id="cb122-3"><a href="creditcard.html#cb122-3" aria-hidden="true" tabindex="-1"></a>index2 <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(card_end<span class="sc">$</span>Class,</span>
+<span id="cb122-4"><a href="creditcard.html#cb122-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb122-5"><a href="creditcard.html#cb122-5" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> card_end[index2, ] <span class="co"># 创建训练集</span></span>
+<span id="cb122-6"><a href="creditcard.html#cb122-6" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> card_end[<span class="sc">-</span>index2, ] <span class="co"># 创建测试集</span></span>
+<span id="cb122-7"><a href="creditcard.html#cb122-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-8"><a href="creditcard.html#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 验证抽样结果，统计三个数据集中正反样本比例是否一致</span></span>
+<span id="cb122-9"><a href="creditcard.html#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(card_end<span class="sc">$</span>Class)</span></code></pre></div>
 <pre><code>## 
 ##   0   1 
 ## 492 492</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="creditcard.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train_data<span class="sc">$</span>Clas)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="creditcard.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train_data<span class="sc">$</span>Clas)</span></code></pre></div>
 <pre><code>## 
 ##   0   1 
 ## 394 394</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="creditcard.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test_data<span class="sc">$</span>Class)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="creditcard.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test_data<span class="sc">$</span>Class)</span></code></pre></div>
 <pre><code>## 
 ##  0  1 
 ## 98 98</code></pre>
 </div>
 <div id="sec:five23" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> 标准化</h3>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="creditcard.html#cb94-1" aria-hidden="true" tabindex="-1"></a>standard <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(card_end, <span class="at">method =</span> <span class="st">&quot;range&quot;</span>) </span>
-<span id="cb94-2"><a href="creditcard.html#cb94-2" aria-hidden="true" tabindex="-1"></a>card_s <span class="ot">&lt;-</span> <span class="fu">predict</span>(standard, card_end)</span>
-<span id="cb94-3"><a href="creditcard.html#cb94-3" aria-hidden="true" tabindex="-1"></a>train_data2 <span class="ot">&lt;-</span> card_s[index2, ]</span>
-<span id="cb94-4"><a href="creditcard.html#cb94-4" aria-hidden="true" tabindex="-1"></a>test_data2 <span class="ot">&lt;-</span> card_s[index2, ]</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="creditcard.html#cb128-1" aria-hidden="true" tabindex="-1"></a>standard <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(card_end, <span class="at">method =</span> <span class="st">&quot;range&quot;</span>) </span>
+<span id="cb128-2"><a href="creditcard.html#cb128-2" aria-hidden="true" tabindex="-1"></a>card_s <span class="ot">&lt;-</span> <span class="fu">predict</span>(standard, card_end)</span>
+<span id="cb128-3"><a href="creditcard.html#cb128-3" aria-hidden="true" tabindex="-1"></a>train_data2 <span class="ot">&lt;-</span> card_s[index2, ]</span>
+<span id="cb128-4"><a href="creditcard.html#cb128-4" aria-hidden="true" tabindex="-1"></a>test_data2 <span class="ot">&lt;-</span> card_s[<span class="sc">-</span>index2, ]</span></code></pre></div>
 </div>
 </div>
 <div id="sec:five3" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> 描述性分析</h2>
 <div id="不同时间诈骗次数-条形图" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> 不同时间诈骗次数-条形图</h3>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="creditcard.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), </span>
-<span id="cb95-2"><a href="creditcard.html#cb95-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour)))<span class="sc">+</span></span>
-<span id="cb95-3"><a href="creditcard.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb95-4"><a href="creditcard.html#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb95-5"><a href="creditcard.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb95-6"><a href="creditcard.html#cb95-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb95-7"><a href="creditcard.html#cb95-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>,</span>
-<span id="cb95-8"><a href="creditcard.html#cb95-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="creditcard.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), </span>
+<span id="cb129-2"><a href="creditcard.html#cb129-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour)))<span class="sc">+</span></span>
+<span id="cb129-3"><a href="creditcard.html#cb129-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-4"><a href="creditcard.html#cb129-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb129-5"><a href="creditcard.html#cb129-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-6"><a href="creditcard.html#cb129-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb129-7"><a href="creditcard.html#cb129-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb129-8"><a href="creditcard.html#cb129-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-times"></span>
 <img src="4-creditcard_files/figure-html/card-times-1.png" alt="不同时间诈骗次数" width="672" />
 <p class="caption">
@@ -460,19 +489,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="不同时间诈骗金额-箱线图" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> 不同时间诈骗金额-箱线图</h3>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="creditcard.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour),</span>
-<span id="cb96-2"><a href="creditcard.html#cb96-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> Amount, </span>
-<span id="cb96-3"><a href="creditcard.html#cb96-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
-<span id="cb96-4"><a href="creditcard.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb96-5"><a href="creditcard.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span><span class="dv">250</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb96-6"><a href="creditcard.html#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">500</span>, <span class="at">label =</span> <span class="st">&quot;Amount = 250&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb96-7"><a href="creditcard.html#cb96-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">450</span>, <span class="at">xend =</span> <span class="dv">5</span>, <span class="at">yend =</span> <span class="dv">250</span>, <span class="at">angle =</span> <span class="dv">25</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb96-8"><a href="creditcard.html#cb96-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb96-9"><a href="creditcard.html#cb96-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb96-10"><a href="creditcard.html#cb96-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount&quot;</span>) <span class="sc">+</span></span>
-<span id="cb96-11"><a href="creditcard.html#cb96-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, </span>
-<span id="cb96-12"><a href="creditcard.html#cb96-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
-<span id="cb96-13"><a href="creditcard.html#cb96-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="creditcard.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour),</span>
+<span id="cb130-2"><a href="creditcard.html#cb130-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> Amount, </span>
+<span id="cb130-3"><a href="creditcard.html#cb130-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
+<span id="cb130-4"><a href="creditcard.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb130-5"><a href="creditcard.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span><span class="dv">250</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb130-6"><a href="creditcard.html#cb130-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">500</span>, <span class="at">label =</span> <span class="st">&quot;Amount = 250&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-7"><a href="creditcard.html#cb130-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">450</span>, <span class="at">xend =</span> <span class="dv">5</span>, <span class="at">yend =</span> <span class="dv">250</span>, <span class="at">angle =</span> <span class="dv">25</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb130-8"><a href="creditcard.html#cb130-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb130-9"><a href="creditcard.html#cb130-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb130-10"><a href="creditcard.html#cb130-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-11"><a href="creditcard.html#cb130-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb130-12"><a href="creditcard.html#cb130-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="cb130-13"><a href="creditcard.html#cb130-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-amount"></span>
 <img src="4-creditcard_files/figure-html/card-amount-1.png" alt="不同时间诈骗金额" width="672" />
 <p class="caption">
@@ -487,22 +516,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="不同时间平均诈骗金额-条形图" class="section level3" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> 不同时间平均诈骗金额-条形图</h3>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="creditcard.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 提取所需数据</span></span>
-<span id="cb97-2"><a href="creditcard.html#cb97-2" aria-hidden="true" tabindex="-1"></a>card_1_mean <span class="ot">&lt;-</span> card_1 <span class="sc">%&gt;%</span> </span>
-<span id="cb97-3"><a href="creditcard.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Time_Hour) <span class="sc">%&gt;%</span> </span>
-<span id="cb97-4"><a href="creditcard.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MeanAmount =</span> <span class="fu">mean</span>(Amount))</span>
-<span id="cb97-5"><a href="creditcard.html#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-6"><a href="creditcard.html#cb97-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-7"><a href="creditcard.html#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1_mean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), <span class="at">y =</span> MeanAmount, <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
-<span id="cb97-8"><a href="creditcard.html#cb97-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb97-9"><a href="creditcard.html#cb97-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">200</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb97-10"><a href="creditcard.html#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">26</span>, <span class="at">y =</span> <span class="dv">240</span>, <span class="at">label =</span> <span class="st">&quot;Mean_Amount = 200&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb97-11"><a href="creditcard.html#cb97-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">23</span>, <span class="at">y =</span> <span class="dv">220</span>, <span class="at">xend =</span> <span class="dv">24</span>, <span class="at">yend =</span> <span class="dv">200</span>, </span>
-<span id="cb97-12"><a href="creditcard.html#cb97-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">curvature =</span> <span class="fl">0.3</span>, <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb97-13"><a href="creditcard.html#cb97-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb97-14"><a href="creditcard.html#cb97-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb97-15"><a href="creditcard.html#cb97-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb97-16"><a href="creditcard.html#cb97-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean_Amount&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="creditcard.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 提取所需数据</span></span>
+<span id="cb131-2"><a href="creditcard.html#cb131-2" aria-hidden="true" tabindex="-1"></a>card_1_mean <span class="ot">&lt;-</span> card_1 <span class="sc">%&gt;%</span> </span>
+<span id="cb131-3"><a href="creditcard.html#cb131-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Time_Hour) <span class="sc">%&gt;%</span> </span>
+<span id="cb131-4"><a href="creditcard.html#cb131-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MeanAmount =</span> <span class="fu">mean</span>(Amount))</span>
+<span id="cb131-5"><a href="creditcard.html#cb131-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-6"><a href="creditcard.html#cb131-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-7"><a href="creditcard.html#cb131-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(card_1_mean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time_Hour), <span class="at">y =</span> MeanAmount, <span class="at">fill =</span> <span class="fu">factor</span>(Time_Hour))) <span class="sc">+</span></span>
+<span id="cb131-8"><a href="creditcard.html#cb131-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-9"><a href="creditcard.html#cb131-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">200</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb131-10"><a href="creditcard.html#cb131-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">26</span>, <span class="at">y =</span> <span class="dv">240</span>, <span class="at">label =</span> <span class="st">&quot;Mean_Amount = 200&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-11"><a href="creditcard.html#cb131-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">x =</span> <span class="dv">23</span>, <span class="at">y =</span> <span class="dv">220</span>, <span class="at">xend =</span> <span class="dv">24</span>, <span class="at">yend =</span> <span class="dv">200</span>, </span>
+<span id="cb131-12"><a href="creditcard.html#cb131-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">curvature =</span> <span class="fl">0.3</span>, <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-13"><a href="creditcard.html#cb131-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb131-14"><a href="creditcard.html#cb131-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb131-15"><a href="creditcard.html#cb131-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb131-16"><a href="creditcard.html#cb131-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time_Hour&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean_Amount&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:card-mean"></span>
 <img src="4-creditcard_files/figure-html/card-mean-1.png" alt="不同时间平均诈骗金额-条形图" width="672" />
 <p class="caption">
@@ -584,9 +613,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>创建简单的调整的模型</li>
 </ol>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="creditcard.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb98-2"><a href="creditcard.html#cb98-2" aria-hidden="true" tabindex="-1"></a>m_C50 <span class="ot">&lt;-</span> <span class="fu">train</span>(Species<span class="sc">~</span>., <span class="at">data =</span> iris, <span class="at">method =</span> <span class="st">&quot;C5.0&quot;</span>)</span>
-<span id="cb98-3"><a href="creditcard.html#cb98-3" aria-hidden="true" tabindex="-1"></a>m_C50</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="creditcard.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb132-2"><a href="creditcard.html#cb132-2" aria-hidden="true" tabindex="-1"></a>m_C50 <span class="ot">&lt;-</span> <span class="fu">train</span>(Species<span class="sc">~</span>., <span class="at">data =</span> iris, <span class="at">method =</span> <span class="st">&quot;C5.0&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 6 for this object. Predictions generated using 6
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 9 for this object. Predictions generated using 9
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials
+
+## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 3 for this object. Predictions generated using 3
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 4 for this object. Predictions generated using 4
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 3 for this object. Predictions generated using 3
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 1 for this object. Predictions generated using 1
+## trials</code></pre>
+<pre><code>## Warning: &#39;trials&#39; should be &lt;= 8 for this object. Predictions generated using 8
+## trials</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="creditcard.html#cb157-1" aria-hidden="true" tabindex="-1"></a>m_C50</span></code></pre></div>
 <pre><code>## C5.0 
 ## 
 ## 150 samples
@@ -638,12 +763,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="creditcard.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb100-2"><a href="creditcard.html#cb100-2" aria-hidden="true" tabindex="-1"></a>model_rf <span class="ot">&lt;-</span> <span class="fu">train</span>(Class<span class="sc">~</span>., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
-<span id="cb100-3"><a href="creditcard.html#cb100-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb100-4"><a href="creditcard.html#cb100-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">number =</span> <span class="dv">5</span>,</span>
-<span id="cb100-5"><a href="creditcard.html#cb100-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">selectionFunction =</span> <span class="st">&quot;oneSE&quot;</span>))</span>
-<span id="cb100-6"><a href="creditcard.html#cb100-6" aria-hidden="true" tabindex="-1"></a>model_rf</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="creditcard.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb159-2"><a href="creditcard.html#cb159-2" aria-hidden="true" tabindex="-1"></a>model_rf <span class="ot">&lt;-</span> <span class="fu">train</span>(Class<span class="sc">~</span>., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
+<span id="cb159-3"><a href="creditcard.html#cb159-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb159-4"><a href="creditcard.html#cb159-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">number =</span> <span class="dv">5</span>,</span>
+<span id="cb159-5"><a href="creditcard.html#cb159-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">selectionFunction =</span> <span class="st">&quot;oneSE&quot;</span>))</span>
+<span id="cb159-6"><a href="creditcard.html#cb159-6" aria-hidden="true" tabindex="-1"></a>model_rf</span></code></pre></div>
 <pre><code>## Random Forest 
 ## 
 ## 788 samples
@@ -662,23 +787,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Accuracy was used to select the optimal model using  the one SE rule.
 ## The final value used for the model was mtry = 2.</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="creditcard.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行预测</span></span>
-<span id="cb102-2"><a href="creditcard.html#cb102-2" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rf, test_data[<span class="sc">-</span><span class="dv">31</span>]) </span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="creditcard.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行预测</span></span>
+<span id="cb161-2"><a href="creditcard.html#cb161-2" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rf, test_data[<span class="sc">-</span><span class="dv">31</span>]) </span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="creditcard.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立混淆矩阵</span></span>
+<span id="cb162-2"><a href="creditcard.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="at">data =</span> pred_rf, <span class="at">reference =</span> test_data<span class="sc">$</span>Class,</span>
+<span id="cb162-3"><a href="creditcard.html#cb162-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">positive =</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 98  7
+##          1  0 91
+##                                           
+##                Accuracy : 0.9643          
+##                  95% CI : (0.9278, 0.9855)
+##     No Information Rate : 0.5             
+##     P-Value [Acc &gt; NIR] : &lt; 2e-16         
+##                                           
+##                   Kappa : 0.9286          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.02334         
+##                                           
+##             Sensitivity : 0.9286          
+##             Specificity : 1.0000          
+##          Pos Pred Value : 1.0000          
+##          Neg Pred Value : 0.9333          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4643          
+##    Detection Prevalence : 0.4643          
+##       Balanced Accuracy : 0.9643          
+##                                           
+##        &#39;Positive&#39; Class : 1               
+## </code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="creditcard.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">varImp</span>(model_rf)) <span class="co"># 查看变量的重要性</span></span></code></pre></div>
+<p><img src="4-creditcard_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="sec:five5" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> 模型预测</h2>
-<div id="sec:five51" class="section level3" number="4.5.1">
-<h3><span class="header-section-number">4.5.1</span> 交叉验证</h3>
+<h2><span class="header-section-number">4.5</span> kNN建模</h2>
+<div id="原理" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> 原理</h3>
+<p>knn，即邻近分类器，就是把未标记的案例归类为与他们最相似的带有标记的案例所在的类。</p>
+<p>算法流程：</p>
+<ol style="list-style-type: decimal">
+<li><p>依次计算测试样本与哥哥训练样本间的距离（常用欧式距离）；</p></li>
+<li><p>将这些距离按照升序排列；</p></li>
+<li><p>选取距离最小的k（3~10）个训练样本点；</p></li>
+<li><p>确定这k个点中不同类别的占比；</p></li>
+<li><p>返回这k个点中占比最大的类别作为测试样本的预测分类。</p></li>
+</ol>
 </div>
-<div id="sec:five52" class="section level3" number="4.5.2">
-<h3><span class="header-section-number">4.5.2</span> 随机森林建模</h3>
-</div>
-<div id="sec:five53" class="section level3" number="4.5.3">
-<h3><span class="header-section-number">4.5.3</span> knn建模</h3>
+<div id="模型建立" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> 模型建立</h3>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="creditcard.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建空向量</span></span>
+<span id="cb165-2"><a href="creditcard.html#cb165-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb165-3"><a href="creditcard.html#cb165-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-4"><a href="creditcard.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb165-5"><a href="creditcard.html#cb165-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb165-6"><a href="creditcard.html#cb165-6" aria-hidden="true" tabindex="-1"></a>  pred_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_data2[<span class="sc">-</span><span class="dv">31</span>], test_data2[<span class="sc">-</span><span class="dv">31</span>],</span>
+<span id="cb165-7"><a href="creditcard.html#cb165-7" aria-hidden="true" tabindex="-1"></a>                  train_data2<span class="sc">$</span>Class, i)</span>
+<span id="cb165-8"><a href="creditcard.html#cb165-8" aria-hidden="true" tabindex="-1"></a>  Table <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_knn, test_data2<span class="sc">$</span>Class) <span class="co"># 得到混淆矩阵</span></span>
+<span id="cb165-9"><a href="creditcard.html#cb165-9" aria-hidden="true" tabindex="-1"></a>  accuracy <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(Table))<span class="sc">/</span><span class="fu">sum</span>(Table) <span class="co"># diag()提取对角线的值</span></span>
+<span id="cb165-10"><a href="creditcard.html#cb165-10" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">c</span>(results, accuracy)</span>
+<span id="cb165-11"><a href="creditcard.html#cb165-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb165-12"><a href="creditcard.html#cb165-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-13"><a href="creditcard.html#cb165-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(results), <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> results)) <span class="sc">+</span></span>
+<span id="cb165-14"><a href="creditcard.html#cb165-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb165-15"><a href="creditcard.html#cb165-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb165-16"><a href="creditcard.html#cb165-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb165-17"><a href="creditcard.html#cb165-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">xlab =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<p><img src="4-creditcard_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="creditcard.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb166-2"><a href="creditcard.html#cb166-2" aria-hidden="true" tabindex="-1"></a>pred_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(<span class="at">train =</span> train_data2[<span class="sc">-</span><span class="dv">31</span>], <span class="at">test =</span> test_data2[<span class="sc">-</span><span class="dv">31</span>],</span>
+<span id="cb166-3"><a href="creditcard.html#cb166-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">cl =</span> train_data2<span class="sc">$</span>Class, <span class="at">k =</span> <span class="dv">4</span>)</span>
+<span id="cb166-4"><a href="creditcard.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_knn,test_data2<span class="sc">$</span>Class, <span class="at">positive =</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 97  7
+##          1  1 91
+##                                           
+##                Accuracy : 0.9592          
+##                  95% CI : (0.9212, 0.9822)
+##     No Information Rate : 0.5             
+##     P-Value [Acc &gt; NIR] : &lt;2e-16          
+##                                           
+##                   Kappa : 0.9184          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.0771          
+##                                           
+##             Sensitivity : 0.9286          
+##             Specificity : 0.9898          
+##          Pos Pred Value : 0.9891          
+##          Neg Pred Value : 0.9327          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4643          
+##    Detection Prevalence : 0.4694          
+##       Balanced Accuracy : 0.9592          
+##                                           
+##        &#39;Positive&#39; Class : 1               
+## </code></pre>
 </div>
 </div>
 <div id="sec:five6" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> 模型评估</h2>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="creditcard.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立一个数据框，将两个模型预测的结果和真实值放进去。并展示不同预测值</span></span>
+<span id="cb168-2"><a href="creditcard.html#cb168-2" aria-hidden="true" tabindex="-1"></a>pred_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">knn =</span> pred_knn, <span class="at">rf =</span> pred_rf, </span>
+<span id="cb168-3"><a href="creditcard.html#cb168-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">class =</span> test_data<span class="sc">$</span>Class)</span>
+<span id="cb168-4"><a href="creditcard.html#cb168-4" aria-hidden="true" tabindex="-1"></a>index3 <span class="ot">&lt;-</span> <span class="fu">which</span>(pred_results<span class="sc">$</span>knn <span class="sc">!=</span> pred_rf)</span>
+<span id="cb168-5"><a href="creditcard.html#cb168-5" aria-hidden="true" tabindex="-1"></a>pred_results[index3, ]</span></code></pre></div>
+<pre><code>##     knn rf class
+## 25    1  0     0
+## 159   1  0     1
+## 160   0  1     1
+## 168   1  0     1
+## 182   0  1     1</code></pre>
 
 </div>
 </div>
@@ -688,11 +911,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="HR-comma-sep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scoreClass.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -733,7 +955,7 @@ gitbook.start({
 },
 "download": ["CBook.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

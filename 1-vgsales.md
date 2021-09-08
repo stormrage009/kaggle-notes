@@ -208,7 +208,6 @@ df <- df %>%
 df$Year <- factor(df$Year)
 ```
 
-
 ### 常规分析
 
 #### 哪一年的游戏总销量最高
@@ -456,7 +455,7 @@ ggplot(df_games_top5, aes(x = Year, y = Total_Shipped)) +
 
 <img src="1-vgsales_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
 
-## 媒体打分与玩家打分的关系系
+## 媒体打分与玩家打分的关系
 
 俗话说，“低分信媒体，高分信自己”。如果一款游戏媒体打分低，那肯定不行，但如果一个游戏媒体打高分，也不一定好玩（有可能是塞了钱）。
 

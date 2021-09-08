@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | Kaggle数据项目实战</title>
   <meta name="description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | Kaggle数据项目实战" />
   <meta property="og:type" content="book" />
@@ -24,17 +24,18 @@
 <meta name="author" content="LEE" />
 
 
-<meta name="date" content="2021-09-02" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="creditcard.html"/>
+<link rel="prev" href="scoreClass.html"/>
 
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -160,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#世界最畅销游戏"><i class="fa fa-check"></i><b>1.4.1</b> 世界最畅销游戏</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#媒体打分与玩家打分的关系系"><i class="fa fa-check"></i><b>1.5</b> 媒体打分与玩家打分的关系系</a></li>
+<li class="chapter" data-level="1.5" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#媒体打分与玩家打分的关系"><i class="fa fa-check"></i><b>1.5</b> 媒体打分与玩家打分的关系</a></li>
 <li class="chapter" data-level="1.6" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#玩家与媒体分别最喜欢哪个发行商"><i class="fa fa-check"></i><b>1.6</b> 玩家与媒体分别最喜欢哪个发行商</a>
 <ul>
 <li class="chapter" data-level="1.6.1" data-path="Video-Games-Sales.html"><a href="Video-Games-Sales.html#玩家"><i class="fa fa-check"></i><b>1.6.1</b> 玩家</a></li>
@@ -234,13 +234,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="creditcard.html"><a href="creditcard.html#不同时间平均诈骗金额-条形图"><i class="fa fa-check"></i><b>4.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="creditcard.html"><a href="creditcard.html#sec:five4"><i class="fa fa-check"></i><b>4.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
-<li class="chapter" data-level="4.5" data-path="creditcard.html"><a href="creditcard.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> 模型预测</a>
+<li class="chapter" data-level="4.5" data-path="creditcard.html"><a href="creditcard.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> kNN建模</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="creditcard.html"><a href="creditcard.html#sec:five51"><i class="fa fa-check"></i><b>4.5.1</b> 交叉验证</a></li>
-<li class="chapter" data-level="4.5.2" data-path="creditcard.html"><a href="creditcard.html#sec:five52"><i class="fa fa-check"></i><b>4.5.2</b> 随机森林建模</a></li>
-<li class="chapter" data-level="4.5.3" data-path="creditcard.html"><a href="creditcard.html#sec:five53"><i class="fa fa-check"></i><b>4.5.3</b> knn建模</a></li>
+<li class="chapter" data-level="4.5.1" data-path="creditcard.html"><a href="creditcard.html#原理"><i class="fa fa-check"></i><b>4.5.1</b> 原理</a></li>
+<li class="chapter" data-level="4.5.2" data-path="creditcard.html"><a href="creditcard.html#模型建立"><i class="fa fa-check"></i><b>4.5.2</b> 模型建立</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="creditcard.html"><a href="creditcard.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoreClass.html"><a href="scoreClass.html"><i class="fa fa-check"></i><b>5</b> Student performance level classification</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="scoreClass.html"><a href="scoreClass.html#sec:data-intro-edu"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="5.2" data-path="scoreClass.html"><a href="scoreClass.html#sec:descriptive-analysis"><i class="fa fa-check"></i><b>5.2</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="scoreClass.html"><a href="scoreClass.html#封装绘图函数"><i class="fa fa-check"></i><b>5.2.1</b> 封装绘图函数</a></li>
+<li class="chapter" data-level="5.2.2" data-path="scoreClass.html"><a href="scoreClass.html#不同教育程度的学生选择课程主题"><i class="fa fa-check"></i><b>5.2.2</b> 不同教育程度的学生选择课程主题</a></li>
+<li class="chapter" data-level="5.2.3" data-path="scoreClass.html"><a href="scoreClass.html#不同课程主题监护人情况"><i class="fa fa-check"></i><b>5.2.3</b> 不同课程主题监护人情况</a></li>
+<li class="chapter" data-level="5.2.4" data-path="scoreClass.html"><a href="scoreClass.html#不同课程学生学习成绩"><i class="fa fa-check"></i><b>5.2.4</b> 不同课程学生学习成绩</a></li>
+<li class="chapter" data-level="5.2.5" data-path="scoreClass.html"><a href="scoreClass.html#不同教室学生成绩水平"><i class="fa fa-check"></i><b>5.2.5</b> 不同教室学生成绩水平</a></li>
+<li class="chapter" data-level="5.2.6" data-path="scoreClass.html"><a href="scoreClass.html#不同学期不同成绩水平与监护人的关系"><i class="fa fa-check"></i><b>5.2.6</b> 不同学期、不同成绩水平与监护人的关系</a></li>
+<li class="chapter" data-level="5.2.7" data-path="scoreClass.html"><a href="scoreClass.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><i class="fa fa-check"></i><b>5.2.7</b> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</a></li>
+<li class="chapter" data-level="5.2.8" data-path="scoreClass.html"><a href="scoreClass.html#性别逃课次数与学生成绩水平的关系"><i class="fa fa-check"></i><b>5.2.8</b> 性别、逃课次数与学生成绩水平的关系</a></li>
+<li class="chapter" data-level="5.2.9" data-path="scoreClass.html"><a href="scoreClass.html#举手次数和参加讨论次数与成绩水平关系"><i class="fa fa-check"></i><b>5.2.9</b> 举手次数和参加讨论次数与成绩水平关系</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="scoreClass.html"><a href="scoreClass.html#模型建立-1"><i class="fa fa-check"></i><b>5.3</b> 模型建立</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="scoreClass.html"><a href="scoreClass.html#回归树模型建立"><i class="fa fa-check"></i><b>5.3.1</b> 回归树模型建立</a></li>
+<li class="chapter" data-level="5.3.2" data-path="scoreClass.html"><a href="scoreClass.html#随机数模型"><i class="fa fa-check"></i><b>5.3.2</b> 随机数模型</a></li>
+<li class="chapter" data-level="5.3.3" data-path="scoreClass.html"><a href="scoreClass.html#svm建模-支持向量机需要再研究"><i class="fa fa-check"></i><b>5.3.3</b> SVM建模-支持向量机(需要再研究)</a></li>
+<li class="chapter" data-level="5.3.4" data-path="scoreClass.html"><a href="scoreClass.html#模型融合"><i class="fa fa-check"></i><b>5.3.4</b> 模型融合</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -275,12 +297,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="creditcard.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scoreClass.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -321,7 +342,7 @@ gitbook.start({
 },
 "download": ["CBook.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

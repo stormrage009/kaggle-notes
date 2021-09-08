@@ -17,23 +17,70 @@ output:
 
 ```r
 edudata <- read_csv("data/xAPI-Edu-Data.csv")
-head(edudata)
 ```
 
 ```
-## # A tibble: 6 x 17
-##   gender NationalITy PlaceofBirth StageID    GradeID SectionID Topic Semester
-##   <chr>  <chr>       <chr>        <chr>      <chr>   <chr>     <chr> <chr>   
-## 1 M      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## 2 M      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## 3 M      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## 4 M      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## 5 M      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## 6 F      KW          KuwaIT       lowerlevel G-04    A         IT    F       
-## # ... with 9 more variables: Relation <chr>, raisedhands <dbl>,
-## #   VisITedResources <dbl>, AnnouncementsView <dbl>, Discussion <dbl>,
-## #   ParentAnsweringSurvey <chr>, ParentschoolSatisfaction <chr>,
-## #   StudentAbsenceDays <chr>, Class <chr>
+## Rows: 480 Columns: 17
+```
+
+```
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (13): gender, NationalITy, PlaceofBirth, StageID, GradeID, SectionID, To...
+## dbl  (4): raisedhands, VisITedResources, AnnouncementsView, Discussion
+```
+
+```
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+```r
+edudata$Class <- factor(edudata$Class, levels = c("H", "M", "L"))
+str(edudata)
+```
+
+```
+## spec_tbl_df [480 x 17] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ gender                  : chr [1:480] "M" "M" "M" "M" ...
+##  $ NationalITy             : chr [1:480] "KW" "KW" "KW" "KW" ...
+##  $ PlaceofBirth            : chr [1:480] "KuwaIT" "KuwaIT" "KuwaIT" "KuwaIT" ...
+##  $ StageID                 : chr [1:480] "lowerlevel" "lowerlevel" "lowerlevel" "lowerlevel" ...
+##  $ GradeID                 : chr [1:480] "G-04" "G-04" "G-04" "G-04" ...
+##  $ SectionID               : chr [1:480] "A" "A" "A" "A" ...
+##  $ Topic                   : chr [1:480] "IT" "IT" "IT" "IT" ...
+##  $ Semester                : chr [1:480] "F" "F" "F" "F" ...
+##  $ Relation                : chr [1:480] "Father" "Father" "Father" "Father" ...
+##  $ raisedhands             : num [1:480] 15 20 10 30 40 42 35 50 12 70 ...
+##  $ VisITedResources        : num [1:480] 16 20 7 25 50 30 12 10 21 80 ...
+##  $ AnnouncementsView       : num [1:480] 2 3 0 5 12 13 0 15 16 25 ...
+##  $ Discussion              : num [1:480] 20 25 30 35 50 70 17 22 50 70 ...
+##  $ ParentAnsweringSurvey   : chr [1:480] "Yes" "Yes" "No" "No" ...
+##  $ ParentschoolSatisfaction: chr [1:480] "Good" "Good" "Bad" "Bad" ...
+##  $ StudentAbsenceDays      : chr [1:480] "Under-7" "Under-7" "Above-7" "Above-7" ...
+##  $ Class                   : Factor w/ 3 levels "H","M","L": 2 2 3 3 2 2 3 2 2 2 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   gender = col_character(),
+##   ..   NationalITy = col_character(),
+##   ..   PlaceofBirth = col_character(),
+##   ..   StageID = col_character(),
+##   ..   GradeID = col_character(),
+##   ..   SectionID = col_character(),
+##   ..   Topic = col_character(),
+##   ..   Semester = col_character(),
+##   ..   Relation = col_character(),
+##   ..   raisedhands = col_double(),
+##   ..   VisITedResources = col_double(),
+##   ..   AnnouncementsView = col_double(),
+##   ..   Discussion = col_double(),
+##   ..   ParentAnsweringSurvey = col_character(),
+##   ..   ParentschoolSatisfaction = col_character(),
+##   ..   StudentAbsenceDays = col_character(),
+##   ..   Class = col_character()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
 ```
 
 
@@ -279,7 +326,7 @@ fun_bar3 <- function(data, xlab, ylab, fillc, xname, yname){
 
 
 ```r
-edudata$Class <- factor(edudata$Class, c("H", "M", "L"), ordered = TRUE)
+# edudata$Class <- factor(edudata$Class, c("H", "M", "L"), ordered = TRUE)
 p21 <- fun_bar3(data = edudata, xlab = Class, ylab = raisedhands, 
                 fillc = Class, "成绩水平", "平均举手次数" )
 
@@ -300,8 +347,6 @@ p21|p22
 
 ### 回归树模型建立
 
-#### 分层抽样
-
 
 ```r
 set.seed(1234)
@@ -313,8 +358,8 @@ test <- edudata[-index, ]
 # 建立回归树模型
 rpart_model <- rpart(Class ~., data = train)
 # type = "class"指定预测结果是具体的某个类别
-prep_rp <- predict(rpart_model, test[-17], type = "class")
-confusionMatrix(prep_rp, test$Class)
+pred_rp <- predict(rpart_model, test[-17], type = "class")
+confusionMatrix(pred_rp, test$Class)
 ```
 
 ```
@@ -356,4 +401,177 @@ prp(rpart_model)
 
 <img src="5-Student-performance-level_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
+### 随机数模型
 
+
+```r
+set.seed(1234)
+# importance = T:稍后对变量进行重要性的可视化
+rf_model <- randomForest(Class~., data = train, importance = T)
+pred_rf <- predict(rf_model, test[-17], type = "class")
+confusionMatrix(pred_rf, test$Class) # 混淆矩阵判断模型准确率
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  H  M  L
+##          H 20  5  0
+##          M  8 36  4
+##          L  0  1 21
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.8105          
+##                  95% CI : (0.7172, 0.8837)
+##     No Information Rate : 0.4421          
+##     P-Value [Acc > NIR] : 1.886e-13       
+##                                           
+##                   Kappa : 0.7031          
+##                                           
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: H Class: M Class: L
+## Sensitivity            0.7143   0.8571   0.8400
+## Specificity            0.9254   0.7736   0.9857
+## Pos Pred Value         0.8000   0.7500   0.9545
+## Neg Pred Value         0.8857   0.8723   0.9452
+## Prevalence             0.2947   0.4421   0.2632
+## Detection Rate         0.2105   0.3789   0.2211
+## Detection Prevalence   0.2632   0.5053   0.2316
+## Balanced Accuracy      0.8198   0.8154   0.9129
+```
+
+```r
+varImpPlot(rf_model) # 可视化变量重要性函数
+```
+
+<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+
+阅读上图：
+
+- 圆点越靠近右侧越重要。
+
+- 我们重点观察排名前五的变量。通过左右两图的对比发现，两图中前四个变量相同（交叉），可以判定这四个变量是数据中最重要的变量。
+
+### SVM建模-支持向量机(需要再研究)
+
+
+```r
+set.seed(1234)
+library(kernlab) # Kernel-Based Machine Learning Lab
+svm_model <- ksvm(Class~., data = train, kernel = "rbfdot")
+# type = "response":指定预测结果是具体的某个列别
+pred_svm <- predict(svm_model, train[-17], type = "response")
+confusionMatrix(pred_svm, train$Class)
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   H   M   L
+##          H  88   8   0
+##          M  26 152  10
+##          L   0   9  92
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.8623          
+##                  95% CI : (0.8238, 0.8952)
+##     No Information Rate : 0.439           
+##     P-Value [Acc > NIR] : < 2.2e-16       
+##                                           
+##                   Kappa : 0.7857          
+##                                           
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: H Class: M Class: L
+## Sensitivity            0.7719   0.8994   0.9020
+## Specificity            0.9705   0.8333   0.9682
+## Pos Pred Value         0.9167   0.8085   0.9109
+## Neg Pred Value         0.9100   0.9137   0.9648
+## Prevalence             0.2961   0.4390   0.2649
+## Detection Rate         0.2286   0.3948   0.2390
+## Detection Prevalence   0.2494   0.4883   0.2623
+## Balanced Accuracy      0.8712   0.8664   0.9351
+```
+
+### 模型融合
+
+将各个模型的结果做一个融合（合并至一个数据框）。
+
+
+```r
+result <- data.frame(rpart = pred_rp,
+                     randomForest = pred_rf,
+                     # svm = pred_svm,
+                     actual_class = test$Class, 
+                     final_pred = rep("-", nrow(test)))
+head(result)
+```
+
+```
+##   rpart randomForest actual_class final_pred
+## 1     M            M            M          -
+## 2     L            L            L          -
+## 3     L            L            L          -
+## 4     M            M            M          -
+## 5     L            L            L          -
+## 6     M            M            M          -
+```
+
+
+```r
+# 封装求众数函数
+fun_pred <- function(x){
+  names(which.max(table(x)))
+}
+
+result$final_pred <- factor(apply(result[1:2], 1, fun_pred))
+confusionMatrix(result$actual_class, result$final_pred)
+```
+
+```
+## Warning in confusionMatrix.default(result$actual_class, result$final_pred):
+## Levels are not in the same order for reference and data. Refactoring data to
+## match.
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  H  L  M
+##          H 21  1  6
+##          L  0 23  2
+##          M  8 10 24
+## 
+## Overall Statistics
+##                                          
+##                Accuracy : 0.7158         
+##                  95% CI : (0.614, 0.8036)
+##     No Information Rate : 0.3579         
+##     P-Value [Acc > NIR] : 1.408e-12      
+##                                          
+##                   Kappa : 0.5738         
+##                                          
+##  Mcnemar's Test P-Value : 0.08508        
+## 
+## Statistics by Class:
+## 
+##                      Class: H Class: L Class: M
+## Sensitivity            0.7241   0.6765   0.7500
+## Specificity            0.8939   0.9672   0.7143
+## Pos Pred Value         0.7500   0.9200   0.5714
+## Neg Pred Value         0.8806   0.8429   0.8491
+## Prevalence             0.3053   0.3579   0.3368
+## Detection Rate         0.2211   0.2421   0.2526
+## Detection Prevalence   0.2947   0.2632   0.4421
+## Balanced Accuracy      0.8090   0.8218   0.7321
+```
