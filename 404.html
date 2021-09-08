@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Page not found | Kaggle数据项目实战</title>
   <meta name="description" content="这是用R的bookdown功能制作的kaggle数据项目实战集。" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Page not found | Kaggle数据项目实战" />
   <meta property="og:type" content="book" />
@@ -35,6 +35,7 @@
 
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -209,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#提取数据"><i class="fa fa-check"></i><b>3.2.1</b> 提取数据</a></li>
 <li class="chapter" data-level="3.2.2" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#确定交叉验证方法"><i class="fa fa-check"></i><b>3.2.2</b> 确定交叉验证方法</a></li>
-<li class="chapter" data-level="3.2.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#分层抽样-分层抽样"><i class="fa fa-check"></i><b>3.2.3</b> 分层抽样</a></li>
+<li class="chapter" data-level="3.2.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#分层抽样-分层抽样"><i class="fa fa-check"></i><b>3.2.3</b> 分层抽样 [^分层抽样]</a></li>
 <li class="chapter" data-level="3.2.4" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#实际建模"><i class="fa fa-check"></i><b>3.2.4</b> 实际建模</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="HR-comma-sep.html"><a href="HR-comma-sep.html#sec:three-model2"><i class="fa fa-check"></i><b>3.3</b> 建模预测2-朴素贝叶斯</a></li>
@@ -241,6 +241,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.3" data-path="creditcard.html"><a href="creditcard.html#sec:five53"><i class="fa fa-check"></i><b>4.5.3</b> knn建模</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="creditcard.html"><a href="creditcard.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoreClass.html"><a href="scoreClass.html"><i class="fa fa-check"></i><b>5</b> Student performance level classification</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="scoreClass.html"><a href="scoreClass.html#sec:data-intro-edu"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
+<li class="chapter" data-level="5.2" data-path="scoreClass.html"><a href="scoreClass.html#sec:descriptive-analysis"><i class="fa fa-check"></i><b>5.2</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="scoreClass.html"><a href="scoreClass.html#封装绘图函数"><i class="fa fa-check"></i><b>5.2.1</b> 封装绘图函数</a></li>
+<li class="chapter" data-level="5.2.2" data-path="scoreClass.html"><a href="scoreClass.html#不同教育程度的学生选择课程主题"><i class="fa fa-check"></i><b>5.2.2</b> 不同教育程度的学生选择课程主题</a></li>
+<li class="chapter" data-level="5.2.3" data-path="scoreClass.html"><a href="scoreClass.html#不同课程主题监护人情况"><i class="fa fa-check"></i><b>5.2.3</b> 不同课程主题监护人情况</a></li>
+<li class="chapter" data-level="5.2.4" data-path="scoreClass.html"><a href="scoreClass.html#不同课程学生学习成绩"><i class="fa fa-check"></i><b>5.2.4</b> 不同课程学生学习成绩</a></li>
+<li class="chapter" data-level="5.2.5" data-path="scoreClass.html"><a href="scoreClass.html#不同教室学生成绩水平"><i class="fa fa-check"></i><b>5.2.5</b> 不同教室学生成绩水平</a></li>
+<li class="chapter" data-level="5.2.6" data-path="scoreClass.html"><a href="scoreClass.html#不同学期不同成绩水平与监护人的关系"><i class="fa fa-check"></i><b>5.2.6</b> 不同学期、不同成绩水平与监护人的关系</a></li>
+<li class="chapter" data-level="5.2.7" data-path="scoreClass.html"><a href="scoreClass.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><i class="fa fa-check"></i><b>5.2.7</b> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</a></li>
+<li class="chapter" data-level="5.2.8" data-path="scoreClass.html"><a href="scoreClass.html#性别逃课次数与学生成绩水平的关系"><i class="fa fa-check"></i><b>5.2.8</b> 性别、逃课次数与学生成绩水平的关系</a></li>
+<li class="chapter" data-level="5.2.9" data-path="scoreClass.html"><a href="scoreClass.html#举手次数和参加讨论次数与成绩水平关系"><i class="fa fa-check"></i><b>5.2.9</b> 举手次数和参加讨论次数与成绩水平关系</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="scoreClass.html"><a href="scoreClass.html#模型建立"><i class="fa fa-check"></i><b>5.3</b> 模型建立</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="scoreClass.html"><a href="scoreClass.html#回归树模型建立"><i class="fa fa-check"></i><b>5.3.1</b> 回归树模型建立</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -276,7 +296,6 @@ the table of contents to find the page you are looking for.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -317,7 +336,7 @@ gitbook.start({
 },
 "download": ["CBook.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
@@ -327,20 +346,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
