@@ -24,7 +24,7 @@
 <meta name="author" content="LEE" />
 
 
-<meta name="date" content="2021-09-08" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,13 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/SVG"],
@@ -241,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="creditcard.html"><a href="creditcard.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="scoreClass.html"><a href="scoreClass.html"><i class="fa fa-check"></i><b>5</b> Student performance level classification</a>
+<li class="chapter" data-level="5" data-path="scoreClass.html"><a href="scoreClass.html"><i class="fa fa-check"></i><b>5</b> 学生成绩水平分类</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="scoreClass.html"><a href="scoreClass.html#sec:data-intro-edu"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
 <li class="chapter" data-level="5.2" data-path="scoreClass.html"><a href="scoreClass.html#sec:descriptive-analysis"><i class="fa fa-check"></i><b>5.2</b> 描述性分析</a>
@@ -263,6 +270,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.3" data-path="scoreClass.html"><a href="scoreClass.html#svm建模-支持向量机需要再研究"><i class="fa fa-check"></i><b>5.3.3</b> SVM建模-支持向量机(需要再研究)</a></li>
 <li class="chapter" data-level="5.3.4" data-path="scoreClass.html"><a href="scoreClass.html#模型融合"><i class="fa fa-check"></i><b>5.3.4</b> 模型融合</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="massiveGunshot.html"><a href="massiveGunshot.html"><i class="fa fa-check"></i><b>6</b> 美国大规模枪击案</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="massiveGunshot.html"><a href="massiveGunshot.html#变量说明"><i class="fa fa-check"></i><b>6.1</b> 变量说明</a></li>
+<li class="chapter" data-level="6.2" data-path="massiveGunshot.html"><a href="massiveGunshot.html#描述性分析-1"><i class="fa fa-check"></i><b>6.2</b> 描述性分析</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="massiveGunshot.html"><a href="massiveGunshot.html#枪击案中伤亡人数"><i class="fa fa-check"></i><b>6.2.1</b> 枪击案中伤亡人数</a></li>
+<li class="chapter" data-level="6.2.2" data-path="massiveGunshot.html"><a href="massiveGunshot.html#绘制枪击案频率伤亡总人数和平均伤亡人数月为单位"><i class="fa fa-check"></i><b>6.2.2</b> 绘制枪击案频率、伤亡总人数和平均伤亡人数（月为单位）</a></li>
+<li class="chapter" data-level="6.2.3" data-path="massiveGunshot.html"><a href="massiveGunshot.html#枪手与种族之间的关系"><i class="fa fa-check"></i><b>6.2.3</b> 枪手与种族之间的关系</a></li>
+<li class="chapter" data-level="6.2.4" data-path="massiveGunshot.html"><a href="massiveGunshot.html#杀手性别和精神状况"><i class="fa fa-check"></i><b>6.2.4</b> 杀手性别和精神状况</a></li>
+<li class="chapter" data-level="6.2.5" data-path="massiveGunshot.html"><a href="massiveGunshot.html#伤亡水平和不同伤亡水平伤亡人数"><i class="fa fa-check"></i><b>6.2.5</b> 伤亡水平和不同伤亡水平伤亡人数</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="massiveGunshot.html"><a href="massiveGunshot.html#枪击发生地的可视化地图"><i class="fa fa-check"></i><b>6.3</b> 枪击发生地的可视化（地图）</a></li>
+<li class="chapter" data-level="6.4" data-path="massiveGunshot.html"><a href="massiveGunshot.html#常用图形外观调节"><i class="fa fa-check"></i><b>6.4</b> 常用图形外观调节</a></li>
+<li class="chapter" data-level="6.5" data-path="massiveGunshot.html"><a href="massiveGunshot.html#常用数据重塑"><i class="fa fa-check"></i><b>6.5</b> 常用数据重塑</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>

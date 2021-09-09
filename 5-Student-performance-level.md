@@ -4,7 +4,7 @@ output:
   pdf_document: default
 ---
 
-# Student performance level classification {#scoreClass}
+# 学生成绩水平分类 {#scoreClass}
 
 
 
@@ -38,12 +38,13 @@ edudata <- read_csv("data/xAPI-Edu-Data.csv")
 
 ```r
 edudata$Class <- factor(edudata$Class, levels = c("H", "M", "L"))
+edudata$gender <- factor(edudata$gender, levels = c("M", "F"))
 str(edudata)
 ```
 
 ```
 ## spec_tbl_df [480 x 17] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ gender                  : chr [1:480] "M" "M" "M" "M" ...
+##  $ gender                  : Factor w/ 2 levels "M","F": 1 1 1 1 1 2 1 1 2 2 ...
 ##  $ NationalITy             : chr [1:480] "KW" "KW" "KW" "KW" ...
 ##  $ PlaceofBirth            : chr [1:480] "KuwaIT" "KuwaIT" "KuwaIT" "KuwaIT" ...
 ##  $ StageID                 : chr [1:480] "lowerlevel" "lowerlevel" "lowerlevel" "lowerlevel" ...
@@ -463,43 +464,43 @@ varImpPlot(rf_model) # 可视化变量重要性函数
 ```r
 set.seed(1234)
 library(kernlab) # Kernel-Based Machine Learning Lab
-svm_model <- ksvm(Class~., data = train, kernel = "rbfdot")
+svm_model <- ksvm(Class~., data = test, kernel = "rbfdot")
 # type = "response":指定预测结果是具体的某个列别
-pred_svm <- predict(svm_model, train[-17], type = "response")
-confusionMatrix(pred_svm, train$Class)
+pred_svm <- predict(svm_model, test[-17], type = "response")
+confusionMatrix(pred_svm, test$Class)
 ```
 
 ```
 ## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   H   M   L
-##          H  88   8   0
-##          M  26 152  10
-##          L   0   9  92
+## Prediction  H  M  L
+##          H 23  4  0
+##          M  5 36  1
+##          L  0  2 24
 ## 
 ## Overall Statistics
-##                                           
-##                Accuracy : 0.8623          
-##                  95% CI : (0.8238, 0.8952)
-##     No Information Rate : 0.439           
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.7857          
-##                                           
-##  Mcnemar's Test P-Value : NA              
+##                                          
+##                Accuracy : 0.8737         
+##                  95% CI : (0.7897, 0.933)
+##     No Information Rate : 0.4421         
+##     P-Value [Acc > NIR] : < 2.2e-16      
+##                                          
+##                   Kappa : 0.8053         
+##                                          
+##  Mcnemar's Test P-Value : NA             
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: H Class: M Class: L
-## Sensitivity            0.7719   0.8994   0.9020
-## Specificity            0.9705   0.8333   0.9682
-## Pos Pred Value         0.9167   0.8085   0.9109
-## Neg Pred Value         0.9100   0.9137   0.9648
-## Prevalence             0.2961   0.4390   0.2649
-## Detection Rate         0.2286   0.3948   0.2390
-## Detection Prevalence   0.2494   0.4883   0.2623
-## Balanced Accuracy      0.8712   0.8664   0.9351
+## Sensitivity            0.8214   0.8571   0.9600
+## Specificity            0.9403   0.8868   0.9714
+## Pos Pred Value         0.8519   0.8571   0.9231
+## Neg Pred Value         0.9265   0.8868   0.9855
+## Prevalence             0.2947   0.4421   0.2632
+## Detection Rate         0.2421   0.3789   0.2526
+## Detection Prevalence   0.2842   0.4421   0.2737
+## Balanced Accuracy      0.8809   0.8720   0.9657
 ```
 
 ### 模型融合
@@ -510,20 +511,20 @@ confusionMatrix(pred_svm, train$Class)
 ```r
 result <- data.frame(rpart = pred_rp,
                      randomForest = pred_rf,
-                     # svm = pred_svm,
+                     svm = pred_svm,
                      actual_class = test$Class, 
                      final_pred = rep("-", nrow(test)))
 head(result)
 ```
 
 ```
-##   rpart randomForest actual_class final_pred
-## 1     M            M            M          -
-## 2     L            L            L          -
-## 3     L            L            L          -
-## 4     M            M            M          -
-## 5     L            L            L          -
-## 6     M            M            M          -
+##   rpart randomForest svm actual_class final_pred
+## 1     M            M   M            M          -
+## 2     L            L   L            L          -
+## 3     L            L   L            L          -
+## 4     M            M   L            M          -
+## 5     L            L   L            L          -
+## 6     M            M   M            M          -
 ```
 
 
@@ -574,4 +575,18 @@ confusionMatrix(result$actual_class, result$final_pred)
 ## Detection Rate         0.2211   0.2421   0.2526
 ## Detection Prevalence   0.2947   0.2632   0.4421
 ## Balanced Accuracy      0.8090   0.8218   0.7321
+```
+
+```r
+head(result)
+```
+
+```
+##   rpart randomForest svm actual_class final_pred
+## 1     M            M   M            M          M
+## 2     L            L   L            L          L
+## 3     L            L   L            L          L
+## 4     M            M   L            M          M
+## 5     L            L   L            L          L
+## 6     M            M   M            M          M
 ```

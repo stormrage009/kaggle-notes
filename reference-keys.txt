@@ -25,6 +25,10 @@ fig:semester
 fig:surey-class
 fig:gender-absence
 fig:raisedhands-discuss
+fig:freq
+fig:race
+fig:gender-mental
+fig:casualties-level
 Video-Games-Sales
 game-sales-intro
 缺失值处理
@@ -104,3 +108,14 @@ sec:descriptive-analysis
 随机数模型
 svm建模-支持向量机需要再研究
 模型融合
+massiveGunshot
+变量说明
+描述性分析-1
+枪击案中伤亡人数
+绘制枪击案频率伤亡总人数和平均伤亡人数月为单位
+枪手与种族之间的关系
+杀手性别和精神状况
+伤亡水平和不同伤亡水平伤亡人数
+枪击发生地的可视化地图
+常用图形外观调节
+常用数据重塑
