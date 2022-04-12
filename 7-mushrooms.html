@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 7 章 毒蘑菇分析 | Kaggle数据项目实战</title>
+  <meta name="description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 7 章 毒蘑菇分析 | Kaggle数据项目实战" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
+  <meta name="github-repo" content="XiangyunHuang/ElegantBookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 7 章 毒蘑菇分析 | Kaggle数据项目实战" />
+  
+  <meta name="twitter:description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
+  
+
+<meta name="author" content="黄湘云 &amp; 叶 飞" />
+
+
+<meta name="date" content="2022-04-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="6-mass-shoot.html"/>
+<link rel="next" href="8-World-Universities-Rankings.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        Macros: {
+          bm: ["{\\boldsymbol #1}",1],
+        },
+        extensions: ["cancel.js"]
+      }
+    });
+</script>
+
+<!-- add line break after theorem title -->
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    for (let s of document.querySelectorAll("span.theorem, span.lemma, span.proposition, span.corollary")) {
+      s.insertAdjacentHTML('afterend', '<br style="line-height:2px;"/>');
+    }
+  });
+</script>
+
+<!-- check if --themcolor in style.css matches one of elegantbook theme colors. If so, generates the color palette  -->
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    const cssroot = document.querySelector(':root');
+    let theme_color = getComputedStyle(document.documentElement).getPropertyValue('--themecolor').trim();
+  
+    // blue is the default option
+
+    switch (theme_color) {
+      case 'green': 
+        cssroot.style.setProperty('--structurecolor', 'rgb(0,120,2)');
+        cssroot.style.setProperty('--main', 'rgb(70,70,70)');
+        cssroot.style.setProperty('--mainbg', 'rgba(0,166,82,0.05)');
+        cssroot.style.setProperty('--second', 'rgb(115,45,2)');
+        cssroot.style.setProperty('--secondbg', 'rgba(115,45,2,0.05)');
+        cssroot.style.setProperty('--third', 'rgb(0,80,80)');
+        cssroot.style.setProperty('--thirdbg', 'rgba(0,80,80,0.05)');
+      break;
+      case 'cyan':
+        cssroot.style.setProperty('--structurecolor', 'rgb(31,186,190)');
+        cssroot.style.setProperty('--main', 'rgb(59,180,5)');
+        cssroot.style.setProperty('--mainbg', 'rgba(59,180,5,0.05)');
+        cssroot.style.setProperty('--second', 'rgb(175,153,8)');
+        cssroot.style.setProperty('--secondbg', 'rgba(175,153,8,0.05)');
+        cssroot.style.setProperty('--third', 'rgb(244,105,102)');
+        cssroot.style.setProperty('--thirdbg', 'rgba(244,105,102,0.05)');
+      break;
+      case 'gray':
+        cssroot.style.setProperty('--structurecolor', 'rgb(150,150,150)');
+        cssroot.style.setProperty('--main', 'rgb(150,150,150)');
+        cssroot.style.setProperty('--mainbg', 'rgba(150,150,150,0.05)');
+        cssroot.style.setProperty('--second', 'rgb(150,150,150)');
+        cssroot.style.setProperty('--secondbg', 'rgba(150,150,150,0.05)');
+        cssroot.style.setProperty('--third', 'rgb(150,150,150)');
+        cssroot.style.setProperty('--thirdbg', 'rgba(150,150,150,0.05)');
+      break;
+      case 'black':
+        cssroot.style.setProperty('--structurecolor', 'rgb(0,0,0)');
+        cssroot.style.setProperty('--main', 'rgb(0,0,0)');
+        cssroot.style.setProperty('--mainbg', 'rgba(0,0,0,0.05)');
+        cssroot.style.setProperty('--second', 'rgb(0,0,0)');
+        cssroot.style.setProperty('--secondbg', 'rgba(0,0,0,0.05)');
+        cssroot.style.setProperty('--third', 'rgb(0,0,0)');
+        cssroot.style.setProperty('--thirdbg', 'rgba(0,0,0,0.05)');
+      break;
+    default:
+        cssroot.style.setProperty('--structurecolor', 'rgb(60,113,183)');
+        cssroot.style.setProperty('--main', 'rgb(0,166,82)');
+        cssroot.style.setProperty('--mainbg', 'rgba(0,166,82,0.05)');
+        cssroot.style.setProperty('--second', 'rgb(255,134,24)');
+        cssroot.style.setProperty('--secondbg', 'rgba(255,134,24,0.05)');
+        cssroot.style.setProperty('--third', 'rgb(0,174,247)');
+        cssroot.style.setProperty('--thirdbg', 'rgba(0,174,247,0.05)');
+    }
+  });
+  </script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Elegant Bookdown Template</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#简介" id="toc-简介">简介<span></span></a>
+<ul>
+<li><a href="index.html#theorem-block" id="toc-theorem-block"><span class="toc-section-number">0.1</span> 已有 Block<span></span></a></li>
+<li><a href="index.html#math-formular" id="toc-math-formular"><span class="toc-section-number">0.2</span> 数学公式<span></span></a></li>
+<li><a href="index.html#custom-block" id="toc-custom-block"><span class="toc-section-number">0.3</span> 自定义 block<span></span></a></li>
+</ul></li>
+<li><a href="1-vgsales.html#Video-Games-Sales" id="toc-Video-Games-Sales"><span class="toc-section-number">1</span> Video Games Sales<span></span></a>
+<ul>
+<li><a href="1-vgsales.html#game-sales-intro" id="toc-game-sales-intro"><span class="toc-section-number">1.1</span> 准备<span></span></a></li>
+<li><a href="1-vgsales.html#缺失值处理" id="toc-缺失值处理"><span class="toc-section-number">1.2</span> 缺失值处理<span></span></a></li>
+<li><a href="1-vgsales.html#描述性分析" id="toc-描述性分析"><span class="toc-section-number">1.3</span> 描述性分析<span></span></a>
+<ul>
+<li><a href="1-vgsales.html#常规分析" id="toc-常规分析"><span class="toc-section-number">1.3.1</span> 常规分析<span></span></a></li>
+</ul></li>
+<li><a href="1-vgsales.html#探索性分析" id="toc-探索性分析"><span class="toc-section-number">1.4</span> 探索性分析<span></span></a>
+<ul>
+<li><a href="1-vgsales.html#世界最畅销游戏" id="toc-世界最畅销游戏"><span class="toc-section-number">1.4.1</span> 世界最畅销游戏<span></span></a></li>
+</ul></li>
+<li><a href="1-vgsales.html#媒体打分与玩家打分的关系" id="toc-媒体打分与玩家打分的关系"><span class="toc-section-number">1.5</span> 媒体打分与玩家打分的关系<span></span></a></li>
+<li><a href="1-vgsales.html#玩家与媒体分别最喜欢哪个发行商" id="toc-玩家与媒体分别最喜欢哪个发行商"><span class="toc-section-number">1.6</span> 玩家与媒体分别最喜欢哪个发行商<span></span></a>
+<ul>
+<li><a href="1-vgsales.html#玩家" id="toc-玩家"><span class="toc-section-number">1.6.1</span> 玩家<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="2-Olympic-history.html#Olympic-history" id="toc-Olympic-history"><span class="toc-section-number">2</span> Olympic history<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#olympic-intro" id="toc-olympic-intro"><span class="toc-section-number">2.1</span> 介绍<span></span></a></li>
+<li><a href="2-Olympic-history.html#运动员国家和时间" id="toc-运动员国家和时间"><span class="toc-section-number">2.2</span> 运动员、国家和时间<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#随着时间的推移运动员国家和赛事的数量是否发生了变化" id="toc-随着时间的推移运动员国家和赛事的数量是否发生了变化"><span class="toc-section-number">2.2.1</span> 随着时间的推移，运动员、国家和赛事的数量是否发生了变化？<span></span></a></li>
+</ul></li>
+<li><a href="2-Olympic-history.html#sec:art-com" id="toc-sec:art-com"><span class="toc-section-number">2.3</span> 艺术竞赛（The Art Competitions）<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#运动员时间参赛项目" id="toc-运动员时间参赛项目"><span class="toc-section-number">2.3.1</span> 运动员、时间、参赛项目<span></span></a></li>
+<li><a href="2-Olympic-history.html#获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多" id="toc-获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多"><span class="toc-section-number">2.3.2</span> 获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多<span></span></a></li>
+</ul></li>
+<li><a href="2-Olympic-history.html#奥林匹克中的女将们" id="toc-奥林匹克中的女将们"><span class="toc-section-number">2.4</span> 奥林匹克中的女将们<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#男女运动员数量比较" id="toc-男女运动员数量比较"><span class="toc-section-number">2.4.1</span> 男女运动员数量比较<span></span></a></li>
+<li><a href="2-Olympic-history.html#各国参赛男女运动员间数量关系" id="toc-各国参赛男女运动员间数量关系"><span class="toc-section-number">2.4.2</span> 各国参赛男女运动员间数量关系<span></span></a></li>
+</ul></li>
+<li><a href="2-Olympic-history.html#奖牌榜medal-count" id="toc-奖牌榜medal-count"><span class="toc-section-number">2.5</span> 奖牌榜（Medal Count）<span></span></a></li>
+<li><a href="2-Olympic-history.html#地理信息地图" id="toc-地理信息地图"><span class="toc-section-number">2.6</span> 地理信息地图<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#年奥运会情况" id="toc-年奥运会情况"><span class="toc-section-number">2.6.1</span> 1928年奥运会情况<span></span></a></li>
+<li><a href="2-Olympic-history.html#年奥运会情况-1" id="toc-年奥运会情况-1"><span class="toc-section-number">2.6.2</span> 1972年奥运会情况<span></span></a></li>
+<li><a href="2-Olympic-history.html#年奥运会情况-2" id="toc-年奥运会情况-2"><span class="toc-section-number">2.6.3</span> 2016年奥运会情况<span></span></a></li>
+</ul></li>
+<li><a href="2-Olympic-history.html#参赛运动员身高体重" id="toc-参赛运动员身高体重"><span class="toc-section-number">2.7</span> 参赛运动员身高体重<span></span></a>
+<ul>
+<li><a href="2-Olympic-history.html#数据完整性及可用性检测" id="toc-数据完整性及可用性检测"><span class="toc-section-number">2.7.1</span> 数据完整性及可用性检测<span></span></a></li>
+<li><a href="2-Olympic-history.html#身高体重" id="toc-身高体重"><span class="toc-section-number">2.7.2</span> 身高体重<span></span></a></li>
+<li><a href="2-Olympic-history.html#change-in-weight-vs-change-in-height-over-times-across-mens-sports" id="toc-change-in-weight-vs-change-in-height-over-times-across-mens-sports"><span class="toc-section-number">2.7.3</span> change in Weight VS change in Height over times across men’s sports<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="3-HR-comma-sep.html#HR-comma-sep" id="toc-HR-comma-sep"><span class="toc-section-number">3</span> 员工离职分析<span></span></a>
+<ul>
+<li><a href="3-HR-comma-sep.html#sec:first2" id="toc-sec:first2"><span class="toc-section-number">3.1</span> 描述性分析<span></span></a>
+<ul>
+<li><a href="3-HR-comma-sep.html#sec:first21" id="toc-sec:first21"><span class="toc-section-number">3.1.1</span> 数据概览<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#sec:first22" id="toc-sec:first22"><span class="toc-section-number">3.1.2</span> 员工离职情况与员工满意度、月均工作时间、绩效评估和在职年限的关系<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#sec:first23" id="toc-sec:first23"><span class="toc-section-number">3.1.3</span> 员工离职情况与项目参与个数、五年内升职情况和薪资的关系<span></span></a></li>
+</ul></li>
+<li><a href="3-HR-comma-sep.html#sec:three-model1" id="toc-sec:three-model1"><span class="toc-section-number">3.2</span> 建模预测1-回归树+混淆矩阵<span></span></a>
+<ul>
+<li><a href="3-HR-comma-sep.html#提取数据" id="toc-提取数据"><span class="toc-section-number">3.2.1</span> 提取数据<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#确定交叉验证方法" id="toc-确定交叉验证方法"><span class="toc-section-number">3.2.2</span> 确定交叉验证方法<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#分层抽样-分层抽样" id="toc-分层抽样-分层抽样"><span class="toc-section-number">3.2.3</span> 分层抽样 <span></span></a></li>
+<li><a href="3-HR-comma-sep.html#实际建模" id="toc-实际建模"><span class="toc-section-number">3.2.4</span> 实际建模<span></span></a></li>
+</ul></li>
+<li><a href="3-HR-comma-sep.html#sec:three-model2" id="toc-sec:three-model2"><span class="toc-section-number">3.3</span> 建模预测2-朴素贝叶斯<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#sec:three-model-use" id="toc-sec:three-model-use"><span class="toc-section-number">3.4</span> 模型评估及应用<span></span></a>
+<ul>
+<li><a href="3-HR-comma-sep.html#roc曲线绘制" id="toc-roc曲线绘制"><span class="toc-section-number">3.4.1</span> <code>ROC</code>曲线绘制<span></span></a></li>
+</ul></li>
+<li><a href="3-HR-comma-sep.html#模型应用" id="toc-模型应用"><span class="toc-section-number">3.5</span> 模型应用<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#mlr3建模" id="toc-mlr3建模"><span class="toc-section-number">3.6</span> mlr3建模<span></span></a>
+<ul>
+<li><a href="3-HR-comma-sep.html#回归树模型" id="toc-回归树模型"><span class="toc-section-number">3.6.1</span> 回归树模型<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#朴素贝叶斯模型" id="toc-朴素贝叶斯模型"><span class="toc-section-number">3.6.2</span> 朴素贝叶斯模型<span></span></a></li>
+<li><a href="3-HR-comma-sep.html#利用mlr3进行roc曲线绘制" id="toc-利用mlr3进行roc曲线绘制"><span class="toc-section-number">3.6.3</span> 利用mlr3进行ROC曲线绘制<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="4-creditcard.html#creditcard" id="toc-creditcard"><span class="toc-section-number">4</span> 信用卡欺诈识别<span></span></a>
+<ul>
+<li><a href="4-creditcard.html#sec:five1" id="toc-sec:five1"><span class="toc-section-number">4.1</span> 数据变量说明<span></span></a></li>
+<li><a href="4-creditcard.html#sec:five2" id="toc-sec:five2"><span class="toc-section-number">4.2</span> 数据预处理<span></span></a>
+<ul>
+<li><a href="4-creditcard.html#sec:five22" id="toc-sec:five22"><span class="toc-section-number">4.2.1</span> 分层抽样<span></span></a></li>
+<li><a href="4-creditcard.html#sec:five23" id="toc-sec:five23"><span class="toc-section-number">4.2.2</span> 标准化<span></span></a></li>
+</ul></li>
+<li><a href="4-creditcard.html#sec:five3" id="toc-sec:five3"><span class="toc-section-number">4.3</span> 描述性分析<span></span></a>
+<ul>
+<li><a href="4-creditcard.html#不同时间诈骗次数-条形图" id="toc-不同时间诈骗次数-条形图"><span class="toc-section-number">4.3.1</span> 不同时间诈骗次数-条形图<span></span></a></li>
+<li><a href="4-creditcard.html#不同时间诈骗金额-箱线图" id="toc-不同时间诈骗金额-箱线图"><span class="toc-section-number">4.3.2</span> 不同时间诈骗金额-箱线图<span></span></a></li>
+<li><a href="4-creditcard.html#不同时间平均诈骗金额-条形图" id="toc-不同时间平均诈骗金额-条形图"><span class="toc-section-number">4.3.3</span> 不同时间平均诈骗金额-条形图<span></span></a></li>
+</ul></li>
+<li><a href="4-creditcard.html#sec:five4" id="toc-sec:five4"><span class="toc-section-number">4.4</span> 自动参数调整调参-使用<code>caret</code>包<span></span></a></li>
+<li><a href="4-creditcard.html#sec:five5" id="toc-sec:five5"><span class="toc-section-number">4.5</span> kNN建模<span></span></a>
+<ul>
+<li><a href="4-creditcard.html#原理" id="toc-原理"><span class="toc-section-number">4.5.1</span> 原理<span></span></a></li>
+<li><a href="4-creditcard.html#模型建立" id="toc-模型建立"><span class="toc-section-number">4.5.2</span> 模型建立<span></span></a></li>
+</ul></li>
+<li><a href="4-creditcard.html#sec:five6" id="toc-sec:five6"><span class="toc-section-number">4.6</span> 模型评估<span></span></a></li>
+</ul></li>
+<li><a href="5-Student-performance-level.html#scoreClass" id="toc-scoreClass"><span class="toc-section-number">5</span> 学生成绩水平分类<span></span></a>
+<ul>
+<li><a href="5-Student-performance-level.html#sec:data-intro-edu" id="toc-sec:data-intro-edu"><span class="toc-section-number">5.1</span> 数据变量说明<span></span></a></li>
+<li><a href="5-Student-performance-level.html#sec:descriptive-analysis" id="toc-sec:descriptive-analysis"><span class="toc-section-number">5.2</span> 描述性分析<span></span></a>
+<ul>
+<li><a href="5-Student-performance-level.html#封装绘图函数" id="toc-封装绘图函数"><span class="toc-section-number">5.2.1</span> 封装绘图函数<span></span></a></li>
+<li><a href="5-Student-performance-level.html#不同教育程度的学生选择课程主题" id="toc-不同教育程度的学生选择课程主题"><span class="toc-section-number">5.2.2</span> 不同教育程度的学生选择课程主题<span></span></a></li>
+<li><a href="5-Student-performance-level.html#不同课程主题监护人情况" id="toc-不同课程主题监护人情况"><span class="toc-section-number">5.2.3</span> 不同课程主题监护人情况<span></span></a></li>
+<li><a href="5-Student-performance-level.html#不同课程学生学习成绩" id="toc-不同课程学生学习成绩"><span class="toc-section-number">5.2.4</span> 不同课程学生学习成绩<span></span></a></li>
+<li><a href="5-Student-performance-level.html#不同教室学生成绩水平" id="toc-不同教室学生成绩水平"><span class="toc-section-number">5.2.5</span> 不同教室学生成绩水平<span></span></a></li>
+<li><a href="5-Student-performance-level.html#不同学期不同成绩水平与监护人的关系" id="toc-不同学期不同成绩水平与监护人的关系"><span class="toc-section-number">5.2.6</span> 不同学期、不同成绩水平与监护人的关系<span></span></a></li>
+<li><a href="5-Student-performance-level.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" id="toc-家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><span class="toc-section-number">5.2.7</span> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系<span></span></a></li>
+<li><a href="5-Student-performance-level.html#性别逃课次数与学生成绩水平的关系" id="toc-性别逃课次数与学生成绩水平的关系"><span class="toc-section-number">5.2.8</span> 性别、逃课次数与学生成绩水平的关系<span></span></a></li>
+<li><a href="5-Student-performance-level.html#举手次数和参加讨论次数与成绩水平关系" id="toc-举手次数和参加讨论次数与成绩水平关系"><span class="toc-section-number">5.2.9</span> 举手次数和参加讨论次数与成绩水平关系<span></span></a></li>
+</ul></li>
+<li><a href="5-Student-performance-level.html#模型建立-1" id="toc-模型建立-1"><span class="toc-section-number">5.3</span> 模型建立<span></span></a>
+<ul>
+<li><a href="5-Student-performance-level.html#回归树模型建立" id="toc-回归树模型建立"><span class="toc-section-number">5.3.1</span> 回归树模型建立<span></span></a></li>
+<li><a href="5-Student-performance-level.html#随机数模型" id="toc-随机数模型"><span class="toc-section-number">5.3.2</span> 随机数模型<span></span></a></li>
+<li><a href="5-Student-performance-level.html#svm建模-支持向量机需要再研究" id="toc-svm建模-支持向量机需要再研究"><span class="toc-section-number">5.3.3</span> SVM建模-支持向量机(需要再研究)<span></span></a></li>
+<li><a href="5-Student-performance-level.html#模型融合" id="toc-模型融合"><span class="toc-section-number">5.3.4</span> 模型融合<span></span></a></li>
+</ul></li>
+<li><a href="5-Student-performance-level.html#mlr3模型建立" id="toc-mlr3模型建立"><span class="toc-section-number">5.4</span> mlr3模型建立<span></span></a>
+<ul>
+<li><a href="5-Student-performance-level.html#回归树模型-1" id="toc-回归树模型-1"><span class="toc-section-number">5.4.1</span> 回归树模型<span></span></a></li>
+<li><a href="5-Student-performance-level.html#随机森林模型" id="toc-随机森林模型"><span class="toc-section-number">5.4.2</span> 随机森林模型<span></span></a></li>
+<li><a href="5-Student-performance-level.html#支持向量机模型" id="toc-支持向量机模型"><span class="toc-section-number">5.4.3</span> 支持向量机模型<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="6-mass-shoot.html#massiveGunshot" id="toc-massiveGunshot"><span class="toc-section-number">6</span> 美国大规模枪击案<span></span></a>
+<ul>
+<li><a href="6-mass-shoot.html#变量说明" id="toc-变量说明"><span class="toc-section-number">6.1</span> 变量说明<span></span></a></li>
+<li><a href="6-mass-shoot.html#描述性分析-1" id="toc-描述性分析-1"><span class="toc-section-number">6.2</span> 描述性分析<span></span></a>
+<ul>
+<li><a href="6-mass-shoot.html#枪击案中伤亡人数" id="toc-枪击案中伤亡人数"><span class="toc-section-number">6.2.1</span> 枪击案中伤亡人数<span></span></a></li>
+<li><a href="6-mass-shoot.html#绘制枪击案频率伤亡总人数和平均伤亡人数月为单位" id="toc-绘制枪击案频率伤亡总人数和平均伤亡人数月为单位"><span class="toc-section-number">6.2.2</span> 绘制枪击案频率、伤亡总人数和平均伤亡人数（月为单位）<span></span></a></li>
+<li><a href="6-mass-shoot.html#枪手与种族之间的关系" id="toc-枪手与种族之间的关系"><span class="toc-section-number">6.2.3</span> 枪手与种族之间的关系<span></span></a></li>
+<li><a href="6-mass-shoot.html#杀手性别和精神状况" id="toc-杀手性别和精神状况"><span class="toc-section-number">6.2.4</span> 杀手性别和精神状况<span></span></a></li>
+<li><a href="6-mass-shoot.html#伤亡水平和不同伤亡水平伤亡人数" id="toc-伤亡水平和不同伤亡水平伤亡人数"><span class="toc-section-number">6.2.5</span> 伤亡水平和不同伤亡水平伤亡人数<span></span></a></li>
+</ul></li>
+<li><a href="6-mass-shoot.html#枪击发生地的可视化地图" id="toc-枪击发生地的可视化地图"><span class="toc-section-number">6.3</span> 枪击发生地的可视化（地图）<span></span></a></li>
+<li><a href="6-mass-shoot.html#枪击案发生地点是否露天" id="toc-枪击案发生地点是否露天"><span class="toc-section-number">6.4</span> 枪击案发生地点（是否露天）<span></span></a></li>
+<li><a href="6-mass-shoot.html#不同枪击案起因" id="toc-不同枪击案起因"><span class="toc-section-number">6.5</span> 不同枪击案起因<span></span></a></li>
+</ul></li>
+<li><a href="7-mushrooms.html#mushrooms" id="toc-mushrooms"><span class="toc-section-number">7</span> 毒蘑菇分析<span></span></a>
+<ul>
+<li><a href="7-mushrooms.html#变量说明-1" id="toc-变量说明-1"><span class="toc-section-number">7.1</span> 变量说明<span></span></a></li>
+<li><a href="7-mushrooms.html#数据预处理-统计每列因子水品个数" id="toc-数据预处理-统计每列因子水品个数"><span class="toc-section-number">7.2</span> 数据预处理-统计每列因子水品个数<span></span></a></li>
+<li><a href="7-mushrooms.html#统计建模" id="toc-统计建模"><span class="toc-section-number">7.3</span> 统计建模<span></span></a>
+<ul>
+<li><a href="7-mushrooms.html#随机森林模型-mlr3" id="toc-随机森林模型-mlr3"><span class="toc-section-number">7.3.1</span> 随机森林模型-mlr3<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="8-World-Universities-Rankings.html#World-Universities-Rankings" id="toc-World-Universities-Rankings"><span class="toc-section-number">8</span> 世界大学排名评估<span></span></a>
+<ul>
+<li><a href="8-World-Universities-Rankings.html#数据" id="toc-数据"><span class="toc-section-number">8.1</span> 数据<span></span></a>
+<ul>
+<li><a href="8-World-Universities-Rankings.html#录入" id="toc-录入"><span class="toc-section-number">8.1.1</span> 录入<span></span></a></li>
+<li><a href="8-World-Universities-Rankings.html#数据概览" id="toc-数据概览"><span class="toc-section-number">8.1.2</span> 数据概览<span></span></a></li>
+</ul></li>
+<li><a href="8-World-Universities-Rankings.html#世界大学排名中心-center-for-world-university-rankings-cwur" id="toc-世界大学排名中心-center-for-world-university-rankings-cwur"><span class="toc-section-number">8.2</span> 世界大学排名中心-Center for World University Rankings (CWUR)<span></span></a>
+<ul>
+<li><a href="8-World-Universities-Rankings.html#最好的大学" id="toc-最好的大学"><span class="toc-section-number">8.2.1</span> 最好的大学<span></span></a></li>
+<li><a href="8-World-Universities-Rankings.html#国家排名" id="toc-国家排名"><span class="toc-section-number">8.2.2</span> 国家排名<span></span></a></li>
+</ul></li>
+<li><a href="8-World-Universities-Rankings.html#shanghai-academic-rankings-for-world-universities-arwu" id="toc-shanghai-academic-rankings-for-world-universities-arwu"><span class="toc-section-number">8.3</span> Shanghai Academic Rankings for World Universities (ARWU)<span></span></a></li>
+</ul></li>
+<li><a href="24-references.html#References.unnumbered" id="toc-References.unnumbered"><span class="toc-section-number">9</span> 参考文献<span></span></a></li>
+<li><a href="#appendix" id="toc-appendix">(APPENDIX) 附录<span></span></a></li>
+<li><a href="23-appendix.html#附录" id="toc-附录"><span class="toc-section-number">10</span> 附录<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Kaggle数据项目实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mushrooms" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">第 7 章</span> 毒蘑菇分析<a href="7-mushrooms.html#mushrooms" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="变量说明-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> 变量说明<a href="7-mushrooms.html#变量说明-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="7-mushrooms.html#cb212-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/mushrooms-data.jpg&quot;</span>, <span class="at">dpi =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="images/mushrooms-data.jpg" /><!-- --></p>
+<p>class为因变量。</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="7-mushrooms.html#cb213-1" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="st">&quot;data/mushrooms.csv&quot;</span></span>
+<span id="cb213-2"><a href="7-mushrooms.html#cb213-2" aria-hidden="true" tabindex="-1"></a>mushrooms <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(files,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb213-3"><a href="7-mushrooms.html#cb213-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), factor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb213-4"><a href="7-mushrooms.html#cb213-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb213-5"><a href="7-mushrooms.html#cb213-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mushrooms) <span class="co"># 查看数据基本结构</span></span></code></pre></div>
+<pre><code>## tibble [8,124 x 23] (S3: tbl_df/tbl/data.frame)
+##  $ class                   : Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 ..
+##  $ cap-shape               : Factor w/ 6 levels &quot;b&quot;,&quot;c&quot;,&quot;f&quot;,&quot;k&quot;,..:..
+##  $ cap-surface             : Factor w/ 4 levels &quot;f&quot;,&quot;g&quot;,&quot;s&quot;,&quot;y&quot;: 3 ..
+##  $ cap-color               : Factor w/ 10 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,....
+##  $ bruises                 : Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 2..
+##  $ odor                    : Factor w/ 9 levels &quot;a&quot;,&quot;c&quot;,&quot;f&quot;,&quot;l&quot;,..:..
+##  $ gill-attachment         : Factor w/ 2 levels &quot;a&quot;,&quot;f&quot;: 2 2 2 2 2 ..
+##  $ gill-spacing            : Factor w/ 2 levels &quot;c&quot;,&quot;w&quot;: 1 1 1 1 2 ..
+##  $ gill-size               : Factor w/ 2 levels &quot;b&quot;,&quot;n&quot;: 2 1 1 2 1 ..
+##  $ gill-color              : Factor w/ 12 levels &quot;b&quot;,&quot;e&quot;,&quot;g&quot;,&quot;h&quot;,....
+##  $ stalk-shape             : Factor w/ 2 levels &quot;e&quot;,&quot;t&quot;: 1 1 1 1 2 ..
+##  $ stalk-root              : Factor w/ 5 levels &quot;?&quot;,&quot;b&quot;,&quot;c&quot;,&quot;e&quot;,..:..
+##  $ stalk-surface-above-ring: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 ..
+##  $ stalk-surface-below-ring: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 ..
+##  $ stalk-color-above-ring  : Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..:..
+##  $ stalk-color-below-ring  : Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..:..
+##  $ veil-type               : Factor w/ 1 level &quot;p&quot;: 1 1 1 1 1 1 1 1..
+##  $ veil-color              : Factor w/ 4 levels &quot;n&quot;,&quot;o&quot;,&quot;w&quot;,&quot;y&quot;: 3 ..
+##  $ ring-number             : Factor w/ 3 levels &quot;n&quot;,&quot;o&quot;,&quot;t&quot;: 2 2 2 ..
+##  $ ring-type               : Factor w/ 5 levels &quot;e&quot;,&quot;f&quot;,&quot;l&quot;,&quot;n&quot;,..:..
+##  $ spore-print-color       : Factor w/ 9 levels &quot;b&quot;,&quot;h&quot;,&quot;k&quot;,&quot;n&quot;,..:..
+##  $ population              : Factor w/ 6 levels &quot;a&quot;,&quot;c&quot;,&quot;n&quot;,&quot;s&quot;,..:..
+##  $ habitat                 : Factor w/ 7 levels &quot;d&quot;,&quot;g&quot;,&quot;l&quot;,&quot;m&quot;,..:..</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="7-mushrooms.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mushrooms<span class="sc">$</span>class) <span class="co"># 统计样本种类个数</span></span></code></pre></div>
+<pre><code>## 
+##    e    p 
+## 4208 3916</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="7-mushrooms.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(mushrooms<span class="sc">$</span>class)) <span class="co"># 统计样本种类占比</span></span></code></pre></div>
+<pre><code>## 
+##         e         p 
+## 0.5179714 0.4820286</code></pre>
+</div>
+<div id="数据预处理-统计每列因子水品个数" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> 数据预处理-统计每列因子水品个数<a href="7-mushrooms.html#数据预处理-统计每列因子水品个数" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="7-mushrooms.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># levels()统计因子水平</span></span>
+<span id="cb219-2"><a href="7-mushrooms.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="co"># length()计算因子水平个数</span></span>
+<span id="cb219-3"><a href="7-mushrooms.html#cb219-3" aria-hidden="true" tabindex="-1"></a>mushrooms_factor <span class="ot">&lt;-</span> mushrooms <span class="sc">%&gt;%</span> </span>
+<span id="cb219-4"><a href="7-mushrooms.html#cb219-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), factor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb219-5"><a href="7-mushrooms.html#cb219-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb219-6"><a href="7-mushrooms.html#cb219-6" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb219-7"><a href="7-mushrooms.html#cb219-7" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(mushrooms_factor, <span class="cf">function</span>(x){</span>
+<span id="cb219-8"><a href="7-mushrooms.html#cb219-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">levels</span>(x))</span>
+<span id="cb219-9"><a href="7-mushrooms.html#cb219-9" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> </span>
+<span id="cb219-10"><a href="7-mushrooms.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb219-11"><a href="7-mushrooms.html#cb219-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb219-12"><a href="7-mushrooms.html#cb219-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Factors&quot;</span>,</span>
+<span id="cb219-13"><a href="7-mushrooms.html#cb219-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;Total_Class&quot;</span>)</span>
+<span id="cb219-14"><a href="7-mushrooms.html#cb219-14" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div>
+<pre><code>## # A tibble: 23 x 2
+##    Factors         Total_Class
+##    &lt;chr&gt;                 &lt;int&gt;
+##  1 class                     2
+##  2 cap_shape                 6
+##  3 cap_surface               4
+##  4 cap_color                10
+##  5 bruises                   2
+##  6 odor                      9
+##  7 gill_attachment           2
+##  8 gill_spacing              2
+##  9 gill_size                 2
+## 10 gill_color               12
+## # ... with 13 more rows</code></pre>
+</div>
+<div id="统计建模" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> 统计建模<a href="7-mushrooms.html#统计建模" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="随机森林模型-mlr3" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> 随机森林模型-mlr3<a href="7-mushrooms.html#随机森林模型-mlr3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="7-mushrooms.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立任务</span></span>
+<span id="cb221-2"><a href="7-mushrooms.html#cb221-2" aria-hidden="true" tabindex="-1"></a>task_rf <span class="ot">&lt;-</span> TaskClassif<span class="sc">$</span><span class="fu">new</span>(<span class="at">id =</span> <span class="st">&quot;task_rf&quot;</span>, <span class="at">backend =</span> mushrooms_factor, <span class="at">target =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb221-3"><a href="7-mushrooms.html#cb221-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-4"><a href="7-mushrooms.html#cb221-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择学习器</span></span>
+<span id="cb221-5"><a href="7-mushrooms.html#cb221-5" aria-hidden="true" tabindex="-1"></a>learner_rf <span class="ot">&lt;-</span> <span class="fu">lrn</span>(<span class="st">&quot;classif.ranger&quot;</span>)</span>
+<span id="cb221-6"><a href="7-mushrooms.html#cb221-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-7"><a href="7-mushrooms.html#cb221-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 设定测试集和训练集</span></span>
+<span id="cb221-8"><a href="7-mushrooms.html#cb221-8" aria-hidden="true" tabindex="-1"></a>train_set <span class="ot">&lt;-</span> <span class="fu">sample</span>(task_rf<span class="sc">$</span>nrow, <span class="fl">0.7</span> <span class="sc">*</span> task_rf<span class="sc">$</span>nrow)</span>
+<span id="cb221-9"><a href="7-mushrooms.html#cb221-9" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(task_rf<span class="sc">$</span>nrow), train_set)</span>
+<span id="cb221-10"><a href="7-mushrooms.html#cb221-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-11"><a href="7-mushrooms.html#cb221-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用之前设定好的测试集和训练集进行模型训练和预测</span></span>
+<span id="cb221-12"><a href="7-mushrooms.html#cb221-12" aria-hidden="true" tabindex="-1"></a>learner_rf<span class="sc">$</span><span class="fu">train</span>(task_rf, <span class="at">row_ids =</span> train_set)</span>
+<span id="cb221-13"><a href="7-mushrooms.html#cb221-13" aria-hidden="true" tabindex="-1"></a>learner_rf<span class="sc">$</span>model</span></code></pre></div>
+<pre><code>## Ranger result
+## 
+## Call:
+##  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == &quot;prob&quot;, case.weights = task$weights$weight,      num.threads = 1L) 
+## 
+## Type:                             Classification 
+## Number of trees:                  500 
+## Sample size:                      5686 
+## Number of independent variables:  22 
+## Mtry:                             4 
+## Target node size:                 1 
+## Variable importance mode:         none 
+## Splitrule:                        gini 
+## OOB prediction error:             0.00 %</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="7-mushrooms.html#cb223-1" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> learner_rf<span class="sc">$</span><span class="fu">predict</span>(task_rf, <span class="at">row_ids =</span> test_set)</span>
+<span id="cb223-2"><a href="7-mushrooms.html#cb223-2" aria-hidden="true" tabindex="-1"></a>pred_rf</span></code></pre></div>
+<pre><code>## &lt;PredictionClassif&gt; for 2438 observations:
+##     row_ids truth response
+##           3     e        e
+##           6     e        e
+##           7     e        e
+## ---                       
+##        8117     p        p
+##        8122     e        e
+##        8124     e        e</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="7-mushrooms.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 精度预测</span></span>
+<span id="cb225-2"><a href="7-mushrooms.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 建立混淆矩阵</span></span>
+<span id="cb225-3"><a href="7-mushrooms.html#cb225-3" aria-hidden="true" tabindex="-1"></a>pred_rf<span class="sc">$</span>confusion</span></code></pre></div>
+<pre><code>##         truth
+## response    e    p
+##        e 1249    0
+##        p    0 1189</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="7-mushrooms.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 设定精度预测方法</span></span>
+<span id="cb227-2"><a href="7-mushrooms.html#cb227-2" aria-hidden="true" tabindex="-1"></a>measure <span class="ot">&lt;-</span> <span class="fu">msr</span>(<span class="st">&quot;classif.acc&quot;</span>)</span>
+<span id="cb227-3"><a href="7-mushrooms.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 预测精度</span></span>
+<span id="cb227-4"><a href="7-mushrooms.html#cb227-4" aria-hidden="true" tabindex="-1"></a>pred_rf<span class="sc">$</span><span class="fu">score</span>(measure)</span></code></pre></div>
+<pre><code>## classif.acc 
+##           1</code></pre>
+<ul>
+<li><p>可以看到，本例中模型的精确度达到了100%。</p></li>
+<li><p>这是由于本例的数据集是一个经典的、已经经过多次改进的数据集，且数据量较少，导致数据集非常标准。</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="6-mass-shoot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="8-World-Universities-Rankings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/XiangyunHuang/masr/edit/master/7-mushrooms.rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/XiangyunHuang/masr/blob/master/7-mushrooms.rmd",
+"text": "查看"
+},
+"download": ["elegantbookdown.pdf", "elegantbookdown.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
