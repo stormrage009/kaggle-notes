@@ -21,26 +21,33 @@ summary(hr)
 ```
 
 ```
-##  satisfaction_level last_evaluation  number_project  average_montly_hours
-##  Min.   :0.0900     Min.   :0.3600   Min.   :2.000   Min.   : 96.0       
-##  1st Qu.:0.4400     1st Qu.:0.5600   1st Qu.:3.000   1st Qu.:156.0       
-##  Median :0.6400     Median :0.7200   Median :4.000   Median :200.0       
-##  Mean   :0.6128     Mean   :0.7161   Mean   :3.803   Mean   :201.1       
-##  3rd Qu.:0.8200     3rd Qu.:0.8700   3rd Qu.:5.000   3rd Qu.:245.0       
-##  Max.   :1.0000     Max.   :1.0000   Max.   :7.000   Max.   :310.0       
-##  time_spend_company Work_accident         left        promotion_last_5years
-##  Min.   : 2.000     Min.   :0.0000   Min.   :0.0000   Min.   :0.00000      
-##  1st Qu.: 3.000     1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000      
-##  Median : 3.000     Median :0.0000   Median :0.0000   Median :0.00000      
-##  Mean   : 3.498     Mean   :0.1446   Mean   :0.2381   Mean   :0.02127      
-##  3rd Qu.: 4.000     3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:0.00000      
-##  Max.   :10.000     Max.   :1.0000   Max.   :1.0000   Max.   :1.00000      
-##     sales              salary         
-##  Length:14999       Length:14999      
-##  Class :character   Class :character  
-##  Mode  :character   Mode  :character  
-##                                       
-##                                       
+##  satisfaction_level last_evaluation  number_project 
+##  Min.   :0.0900     Min.   :0.3600   Min.   :2.000  
+##  1st Qu.:0.4400     1st Qu.:0.5600   1st Qu.:3.000  
+##  Median :0.6400     Median :0.7200   Median :4.000  
+##  Mean   :0.6128     Mean   :0.7161   Mean   :3.803  
+##  3rd Qu.:0.8200     3rd Qu.:0.8700   3rd Qu.:5.000  
+##  Max.   :1.0000     Max.   :1.0000   Max.   :7.000  
+##  average_montly_hours time_spend_company Work_accident   
+##  Min.   : 96.0        Min.   : 2.000     Min.   :0.0000  
+##  1st Qu.:156.0        1st Qu.: 3.000     1st Qu.:0.0000  
+##  Median :200.0        Median : 3.000     Median :0.0000  
+##  Mean   :201.1        Mean   : 3.498     Mean   :0.1446  
+##  3rd Qu.:245.0        3rd Qu.: 4.000     3rd Qu.:0.0000  
+##  Max.   :310.0        Max.   :10.000     Max.   :1.0000  
+##       left        promotion_last_5years    sales          
+##  Min.   :0.0000   Min.   :0.00000       Length:14999      
+##  1st Qu.:0.0000   1st Qu.:0.00000       Class :character  
+##  Median :0.0000   Median :0.00000       Mode  :character  
+##  Mean   :0.2381   Mean   :0.02127                         
+##  3rd Qu.:0.0000   3rd Qu.:0.00000                         
+##  Max.   :1.0000   Max.   :1.00000                         
+##     salary         
+##  Length:14999      
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
 ## 
 ```
 观察各个变量的主要描述统计量，可知：
@@ -182,10 +189,6 @@ hr_model <- hr %>%
            number_project>=5)
 ```
 
-```
-## Warning in Ops.factor(number_project, 5): '>=' not meaningful for factors
-```
-
 ### 确定交叉验证方法
 
 
@@ -276,44 +279,6 @@ conPart
 nbModel <- train(left~., data = trainData,
                  trControl = train_control,
                  method = "nb")
-```
-
-```
-## Warning: model fit failed for Fold1: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-##   Zero variances for at least one class in variables: number_project7
-```
-
-```
-## Warning: model fit failed for Fold2: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-##   Zero variances for at least one class in variables: number_project7
-```
-
-```
-## Warning: model fit failed for Fold3: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-##   Zero variances for at least one class in variables: number_project7
-```
-
-```
-## Warning: model fit failed for Fold4: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-##   Zero variances for at least one class in variables: number_project7
-```
-
-```
-## Warning: model fit failed for Fold5: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-##   Zero variances for at least one class in variables: number_project7
-```
-
-```
-## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
-## There were missing values in resampled performance measures.
-```
-
-```
-## Warning in train.default(x, y, weights = w, ...): missing values found in
-## aggregated results
-```
-
-```r
 predNb <- predict(nbModel, testData[-7])
 conNb <- table(predNb, testData$left)
 conNb
@@ -370,17 +335,7 @@ predNb <- as.numeric(predNb)
 ```r
 # 获取后续绘图使用的信息
 rocPart <- roc(testData$left, predRpart)
-```
 
-```
-## Setting levels: control = 0, case = 1
-```
-
-```
-## Setting direction: controls < cases
-```
-
-```r
 # 计算两个关键值
 # 假正例率
 specificityRp <- rocPart$specificities
@@ -392,17 +347,7 @@ sensitivityRp <- rocPart$sensitivities
 ```r
 # 获取后续绘图使用的信息
 rocNb <- roc(testData$left, predNb)
-```
 
-```
-## Setting levels: control = 0, case = 1
-```
-
-```
-## Setting direction: controls < cases
-```
-
-```r
 # 计算两个关键值
 # 假正例率
 specificityNb <- rocNb$specificities
@@ -440,7 +385,7 @@ pNb <- ggplot(data = NULL, aes(
 pRpart|pNb
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="3-HR-comma-sep_files/figure-html/ROC-1.png" alt="回归树模型和朴素贝叶斯模型`ROC`曲线" width="672" />
 <p class="caption">(\#fig:ROC)回归树模型和朴素贝叶斯模型`ROC`曲线</p>
 </div>
@@ -469,14 +414,397 @@ pRpart|pNb
 # datatable(dataEnd)
 ```
 
+## mlr3建模
+
+### 回归树模型
+
+
+```r
+library(mlr3verse)
+```
+
+1. 建立任务
+
+
+```r
+hr <- read.csv("data/HR_comma_sep.csv")
+hr$left <- factor(hr$left)
+hr$salary <- factor(hr$salary)
+hr$sales <- factor(hr$sales)
+hr_model <- hr_model <- hr %>% 
+  filter(last_evaluation >= 0.70 |
+           time_spend_company>=4 |
+           number_project>=5)
+task_hr <- 
+  TaskClassif$new(id = "left", backend = hr_model,
+                  target = "left")
+task_hr
+```
+
+```
+## <TaskClassif:left> (10394 x 10)
+## * Target: left
+## * Properties: twoclass
+## * Features (9):
+##   - int (5): Work_accident, average_montly_hours,
+##     number_project, promotion_last_5years, time_spend_company
+##   - dbl (2): last_evaluation, satisfaction_level
+##   - fct (2): salary, sales
+```
+
+2. 定义学习器
+
+
+```r
+learner_rpart <- lrn("classif.rpart", 
+                     predict_type = "prob")
+```
+
+3. 基础训练+预测
+
+
+```r
+set.seed(1234)
+# 划分训练集和测试集
+train_set <- sample(task_hr$nrow, 0.7 * task_hr$nrow)
+test_set <- setdiff(seq_len(task_hr$nrow), train_set)
+
+# 训练模型
+learner_rpart$train(task_hr, row_ids = train_set)
+
+# 数据预测
+prediction_rpart <- learner_rpart$predict(task_hr, 
+                                          row_ids = test_set)
+# 建立混淆矩阵
+prediction_rpart$confusion
+```
+
+```
+##         truth
+## response    0    1
+##        0 2483   85
+##        1   17  534
+```
+
+```r
+# 评估模型准确性
+measure_rpart <- msr("classif.acc") 
+prediction_rpart$score(measure_rpart)
+```
+
+```
+## classif.acc 
+##   0.9672972
+```
+
+4. 重采样
+
+
+```r
+# 自动重采样
+## 定义重采样方法:5折交叉
+resampling_rpart <- rsmp("cv", folds = 5L)
+## 应用重采样方法
+rr_rpart <- resample(task_hr, learner_rpart, resampling_rpart)
+```
+
+```
+## INFO  [11:09:28.378] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 1/5) 
+## INFO  [11:09:28.467] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 3/5) 
+## INFO  [11:09:28.519] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 5/5) 
+## INFO  [11:09:28.564] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 2/5) 
+## INFO  [11:09:28.619] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 4/5)
+```
+
+```r
+## 每次重采样建模评分
+rr_rpart$score(measure_rpart)
+```
+
+```
+##                 task task_id                   learner    learner_id
+## 1: <TaskClassif[50]>    left <LearnerClassifRpart[38]> classif.rpart
+## 2: <TaskClassif[50]>    left <LearnerClassifRpart[38]> classif.rpart
+## 3: <TaskClassif[50]>    left <LearnerClassifRpart[38]> classif.rpart
+## 4: <TaskClassif[50]>    left <LearnerClassifRpart[38]> classif.rpart
+## 5: <TaskClassif[50]>    left <LearnerClassifRpart[38]> classif.rpart
+##            resampling resampling_id iteration
+## 1: <ResamplingCV[20]>            cv         1
+## 2: <ResamplingCV[20]>            cv         2
+## 3: <ResamplingCV[20]>            cv         3
+## 4: <ResamplingCV[20]>            cv         4
+## 5: <ResamplingCV[20]>            cv         5
+##                 prediction classif.acc
+## 1: <PredictionClassif[20]>   0.9639250
+## 2: <PredictionClassif[20]>   0.9735450
+## 3: <PredictionClassif[20]>   0.9610390
+## 4: <PredictionClassif[20]>   0.9672920
+## 5: <PredictionClassif[20]>   0.9682387
+```
+
+```r
+## 将重采样的模型进行聚合并评分
+rr_rpart$aggregate(measure_rpart)
+```
+
+```
+## classif.acc 
+##   0.9668079
+```
+
+得到的回归树模型最终的拟合准确率为96.75%，拟合效果不错
+
+### 朴素贝叶斯模型
+
+1. 建立任务
+
+
+```r
+hr <- read.csv("data/HR_comma_sep.csv")
+hr$left <- factor(hr$left)
+hr$salary <- factor(hr$salary)
+hr$sales <- factor(hr$sales)
+hr_model <- hr_model <- hr %>% 
+  filter(last_evaluation >= 0.70 |
+         time_spend_company>=4 |
+         number_project>=5)
+task_hr_nb <- 
+  TaskClassif$new(id = "left", backend = hr_model,
+                  target = "left")
+task_hr_nb
+```
+
+```
+## <TaskClassif:left> (10394 x 10)
+## * Target: left
+## * Properties: twoclass
+## * Features (9):
+##   - int (5): Work_accident, average_montly_hours,
+##     number_project, promotion_last_5years, time_spend_company
+##   - dbl (2): last_evaluation, satisfaction_level
+##   - fct (2): salary, sales
+```
+
+2. 选择学习器
+
+
+```r
+learner_nb <- lrn("classif.naive_bayes",
+                  predict_type = "prob")
+```
+
+3. 划分训练集和测试集
+
+
+```r
+set.seed(1234)
+train_set <- sample(task_hr_nb$nrow, task_hr_nb$nrow * 0.7)
+test_set <- setdiff(seq_len(task_hr_nb$nrow), train_set)
+```
+
+4. 模型训练和预测
+
+
+```r
+# 模型训练
+learner_nb$train(task_hr_nb, row_ids = train_set)
+learner_nb$model # 查看训练好的模型
+```
+
+```
+## 
+## Naive Bayes Classifier for Discrete Predictors
+## 
+## Call:
+## naiveBayes.default(x = x, y = y)
+## 
+## A-priori probabilities:
+## y
+##         0         1 
+## 0.8074227 0.1925773 
+## 
+## Conditional probabilities:
+##    Work_accident
+## y        [,1]      [,2]
+##   0 0.1813075 0.3853055
+##   1 0.0442541 0.2057326
+## 
+##    average_montly_hours
+## y       [,1]     [,2]
+##   0 201.0504 45.49460
+##   1 254.7744 34.45457
+## 
+##    last_evaluation
+## y        [,1]      [,2]
+##   0 0.7657457 0.1552908
+##   1 0.8763241 0.1013923
+## 
+##    number_project
+## y       [,1]     [,2]
+##   0 3.959993 1.023111
+##   1 5.244825 1.156665
+## 
+##    promotion_last_5years
+## y          [,1]       [,2]
+##   0 0.028770855 0.16717611
+##   1 0.002141328 0.04624142
+## 
+##    salary
+## y         high        low     medium
+##   0 0.10316650 0.44722506 0.44960844
+##   1 0.01641685 0.60314061 0.38044254
+## 
+##    sales
+## y   accounting         hr         IT management  marketing
+##   0 0.04902962 0.04324140 0.08614232 0.04971059 0.05498808
+##   1 0.05424697 0.04782298 0.07994290 0.02997859 0.04710921
+##    sales
+## y   product_mng      RandD      sales    support  technical
+##   0  0.06179775 0.05720123 0.27221655 0.15253660 0.17313585
+##   1  0.05353319 0.03783012 0.26766595 0.15488936 0.22698073
+## 
+##    satisfaction_level
+## y        [,1]      [,2]
+##   0 0.6622302 0.2274002
+##   1 0.4660742 0.3465198
+## 
+##    time_spend_company
+## y       [,1]      [,2]
+##   0 3.654069 1.6892539
+##   1 4.559600 0.7978871
+```
+
+```r
+# 模型预测
+prediction_nb <- learner_nb$predict(task_hr_nb, row_ids = test_set)
+prediction_nb # 查看预测结果
+```
+
+```
+## <PredictionClassif> for 3119 observations:
+##     row_ids truth response       prob.0    prob.1
+##           2     1        1 0.0002953563 0.9997046
+##           3     1        1 0.1080414241 0.8919586
+##           4     1        1 0.0031520108 0.9968480
+## ---                                              
+##       10388     1        1 0.0423579034 0.9576421
+##       10390     1        0 0.5807408182 0.4192592
+##       10392     1        1 0.0014815943 0.9985184
+```
+
+5. 模型评估
+
+
+```r
+prediction_nb$confusion
+```
+
+```
+##         truth
+## response    0    1
+##        0 2243  100
+##        1  257  519
+```
+
+```r
+measure_nb <- msr("classif.acc")
+prediction_nb$score(measure_nb) # 预测精度
+```
+
+```
+## classif.acc 
+##   0.8855402
+```
+
+6. 重采样
+
+
+```r
+resampling_nb <- rsmp("cv", folds = 5L)
+rr_nb <- resample(task_hr_nb, learner_nb, resampling_nb)
+```
+
+```
+## INFO  [11:09:29.750] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 1/5) 
+## INFO  [11:09:30.124] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 3/5) 
+## INFO  [11:09:30.532] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 5/5) 
+## INFO  [11:09:30.901] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 2/5) 
+## INFO  [11:09:31.285] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 4/5)
+```
+
+```r
+rr_nb$score(measure_nb)
+```
+
+```
+##                 task task_id                        learner
+## 1: <TaskClassif[50]>    left <LearnerClassifNaiveBayes[36]>
+## 2: <TaskClassif[50]>    left <LearnerClassifNaiveBayes[36]>
+## 3: <TaskClassif[50]>    left <LearnerClassifNaiveBayes[36]>
+## 4: <TaskClassif[50]>    left <LearnerClassifNaiveBayes[36]>
+## 5: <TaskClassif[50]>    left <LearnerClassifNaiveBayes[36]>
+##             learner_id         resampling resampling_id iteration
+## 1: classif.naive_bayes <ResamplingCV[20]>            cv         1
+## 2: classif.naive_bayes <ResamplingCV[20]>            cv         2
+## 3: classif.naive_bayes <ResamplingCV[20]>            cv         3
+## 4: classif.naive_bayes <ResamplingCV[20]>            cv         4
+## 5: classif.naive_bayes <ResamplingCV[20]>            cv         5
+##                 prediction classif.acc
+## 1: <PredictionClassif[20]>   0.8840789
+## 2: <PredictionClassif[20]>   0.8951419
+## 3: <PredictionClassif[20]>   0.8946609
+## 4: <PredictionClassif[20]>   0.8869649
+## 5: <PredictionClassif[20]>   0.8695861
+```
+
+```r
+rr_nb$aggregate(measure_nb)
+```
+
+```
+## classif.acc 
+##   0.8860865
+```
+
+通过两种模型的评估，我们发现回归树模型的拟合度比朴素贝叶斯更好，与传统方法得出的结论一致。
+
+### 利用mlr3进行ROC曲线绘制
+
+
+```r
+library(mlr3viz)
+roc_nb <- autoplot(prediction_nb, type = "roc")
+roc_rpart <- autoplot(prediction_rpart, type = "roc")
+roc_rpart|roc_nb
+```
+
+<img src="3-HR-comma-sep_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+### 模型应用
+
+使用回归树模型预测分类概率，绘制表格交互表
+
+
+```r
+autoplot(prediction_rpart)
+```
+
+<img src="3-HR-comma-sep_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 
 
+```r
+# type = "prob"表示结果显示为概率
+predEnd <- predict(rpartmodel, testData[-7],
+                   type = "prob")
 
+# 合并预测结果及概率
+dataEnd <- cbind(round(predEnd, 3), predRpart)
 
+# 重命名预测结果表列名。
+names(dataEnd) <- c("pred.0", "pred.1", "pred")
 
-
-
-
-
+# head(dataEnd)
+# 生成交互式表格
+# datatable(dataEnd)
+```
 

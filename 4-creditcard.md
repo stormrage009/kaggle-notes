@@ -19,25 +19,6 @@ output:
 
 ```r
 card <- read_csv("data/creditcard.csv")
-```
-
-```
-## Rows: 284807 Columns: 31
-```
-
-```
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## dbl (31): Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14,...
-```
-
-```
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-```r
 card <- as.data.frame(card)
 str(card) # 查看数据基本结构和数据类型
 ```
@@ -82,69 +63,83 @@ summary(card) # 查看数据的主要描述性统计量
 ```
 
 ```
-##       Time              V1                  V2                  V3          
-##  Min.   :     0   Min.   :-56.40751   Min.   :-72.71573   Min.   :-48.3256  
-##  1st Qu.: 54202   1st Qu.: -0.92037   1st Qu.: -0.59855   1st Qu.: -0.8904  
-##  Median : 84692   Median :  0.01811   Median :  0.06549   Median :  0.1799  
-##  Mean   : 94814   Mean   :  0.00000   Mean   :  0.00000   Mean   :  0.0000  
-##  3rd Qu.:139321   3rd Qu.:  1.31564   3rd Qu.:  0.80372   3rd Qu.:  1.0272  
-##  Max.   :172792   Max.   :  2.45493   Max.   : 22.05773   Max.   :  9.3826  
-##        V4                 V5                   V6                 V7          
-##  Min.   :-5.68317   Min.   :-113.74331   Min.   :-26.1605   Min.   :-43.5572  
-##  1st Qu.:-0.84864   1st Qu.:  -0.69160   1st Qu.: -0.7683   1st Qu.: -0.5541  
-##  Median :-0.01985   Median :  -0.05434   Median : -0.2742   Median :  0.0401  
-##  Mean   : 0.00000   Mean   :   0.00000   Mean   :  0.0000   Mean   :  0.0000  
-##  3rd Qu.: 0.74334   3rd Qu.:   0.61193   3rd Qu.:  0.3986   3rd Qu.:  0.5704  
-##  Max.   :16.87534   Max.   :  34.80167   Max.   : 73.3016   Max.   :120.5895  
-##        V8                  V9                 V10                 V11          
-##  Min.   :-73.21672   Min.   :-13.43407   Min.   :-24.58826   Min.   :-4.79747  
-##  1st Qu.: -0.20863   1st Qu.: -0.64310   1st Qu.: -0.53543   1st Qu.:-0.76249  
-##  Median :  0.02236   Median : -0.05143   Median : -0.09292   Median :-0.03276  
-##  Mean   :  0.00000   Mean   :  0.00000   Mean   :  0.00000   Mean   : 0.00000  
-##  3rd Qu.:  0.32735   3rd Qu.:  0.59714   3rd Qu.:  0.45392   3rd Qu.: 0.73959  
-##  Max.   : 20.00721   Max.   : 15.59500   Max.   : 23.74514   Max.   :12.01891  
-##       V12                V13                V14                V15          
-##  Min.   :-18.6837   Min.   :-5.79188   Min.   :-19.2143   Min.   :-4.49894  
-##  1st Qu.: -0.4056   1st Qu.:-0.64854   1st Qu.: -0.4256   1st Qu.:-0.58288  
-##  Median :  0.1400   Median :-0.01357   Median :  0.0506   Median : 0.04807  
-##  Mean   :  0.0000   Mean   : 0.00000   Mean   :  0.0000   Mean   : 0.00000  
-##  3rd Qu.:  0.6182   3rd Qu.: 0.66251   3rd Qu.:  0.4931   3rd Qu.: 0.64882  
-##  Max.   :  7.8484   Max.   : 7.12688   Max.   : 10.5268   Max.   : 8.87774  
-##       V16                 V17                 V18           
-##  Min.   :-14.12985   Min.   :-25.16280   Min.   :-9.498746  
-##  1st Qu.: -0.46804   1st Qu.: -0.48375   1st Qu.:-0.498850  
-##  Median :  0.06641   Median : -0.06568   Median :-0.003636  
-##  Mean   :  0.00000   Mean   :  0.00000   Mean   : 0.000000  
-##  3rd Qu.:  0.52330   3rd Qu.:  0.39968   3rd Qu.: 0.500807  
-##  Max.   : 17.31511   Max.   :  9.25353   Max.   : 5.041069  
-##       V19                 V20                 V21           
-##  Min.   :-7.213527   Min.   :-54.49772   Min.   :-34.83038  
-##  1st Qu.:-0.456299   1st Qu.: -0.21172   1st Qu.: -0.22839  
-##  Median : 0.003735   Median : -0.06248   Median : -0.02945  
-##  Mean   : 0.000000   Mean   :  0.00000   Mean   :  0.00000  
-##  3rd Qu.: 0.458949   3rd Qu.:  0.13304   3rd Qu.:  0.18638  
-##  Max.   : 5.591971   Max.   : 39.42090   Max.   : 27.20284  
-##       V22                  V23                 V24          
-##  Min.   :-10.933144   Min.   :-44.80774   Min.   :-2.83663  
-##  1st Qu.: -0.542350   1st Qu.: -0.16185   1st Qu.:-0.35459  
-##  Median :  0.006782   Median : -0.01119   Median : 0.04098  
-##  Mean   :  0.000000   Mean   :  0.00000   Mean   : 0.00000  
-##  3rd Qu.:  0.528554   3rd Qu.:  0.14764   3rd Qu.: 0.43953  
-##  Max.   : 10.503090   Max.   : 22.52841   Max.   : 4.58455  
-##       V25                 V26                V27            
-##  Min.   :-10.29540   Min.   :-2.60455   Min.   :-22.565679  
-##  1st Qu.: -0.31715   1st Qu.:-0.32698   1st Qu.: -0.070840  
-##  Median :  0.01659   Median :-0.05214   Median :  0.001342  
-##  Mean   :  0.00000   Mean   : 0.00000   Mean   :  0.000000  
-##  3rd Qu.:  0.35072   3rd Qu.: 0.24095   3rd Qu.:  0.091045  
-##  Max.   :  7.51959   Max.   : 3.51735   Max.   : 31.612198  
-##       V28                Amount             Class         
-##  Min.   :-15.43008   Min.   :    0.00   Min.   :0.000000  
-##  1st Qu.: -0.05296   1st Qu.:    5.60   1st Qu.:0.000000  
-##  Median :  0.01124   Median :   22.00   Median :0.000000  
-##  Mean   :  0.00000   Mean   :   88.35   Mean   :0.001728  
-##  3rd Qu.:  0.07828   3rd Qu.:   77.17   3rd Qu.:0.000000  
-##  Max.   : 33.84781   Max.   :25691.16   Max.   :1.000000
+##       Time              V1                  V2           
+##  Min.   :     0   Min.   :-56.40751   Min.   :-72.71573  
+##  1st Qu.: 54202   1st Qu.: -0.92037   1st Qu.: -0.59855  
+##  Median : 84692   Median :  0.01811   Median :  0.06549  
+##  Mean   : 94814   Mean   :  0.00000   Mean   :  0.00000  
+##  3rd Qu.:139321   3rd Qu.:  1.31564   3rd Qu.:  0.80372  
+##  Max.   :172792   Max.   :  2.45493   Max.   : 22.05773  
+##        V3                 V4                 V5            
+##  Min.   :-48.3256   Min.   :-5.68317   Min.   :-113.74331  
+##  1st Qu.: -0.8904   1st Qu.:-0.84864   1st Qu.:  -0.69160  
+##  Median :  0.1799   Median :-0.01985   Median :  -0.05434  
+##  Mean   :  0.0000   Mean   : 0.00000   Mean   :   0.00000  
+##  3rd Qu.:  1.0272   3rd Qu.: 0.74334   3rd Qu.:   0.61193  
+##  Max.   :  9.3826   Max.   :16.87534   Max.   :  34.80167  
+##        V6                 V7                 V8           
+##  Min.   :-26.1605   Min.   :-43.5572   Min.   :-73.21672  
+##  1st Qu.: -0.7683   1st Qu.: -0.5541   1st Qu.: -0.20863  
+##  Median : -0.2742   Median :  0.0401   Median :  0.02236  
+##  Mean   :  0.0000   Mean   :  0.0000   Mean   :  0.00000  
+##  3rd Qu.:  0.3986   3rd Qu.:  0.5704   3rd Qu.:  0.32735  
+##  Max.   : 73.3016   Max.   :120.5895   Max.   : 20.00721  
+##        V9                 V10                 V11          
+##  Min.   :-13.43407   Min.   :-24.58826   Min.   :-4.79747  
+##  1st Qu.: -0.64310   1st Qu.: -0.53543   1st Qu.:-0.76249  
+##  Median : -0.05143   Median : -0.09292   Median :-0.03276  
+##  Mean   :  0.00000   Mean   :  0.00000   Mean   : 0.00000  
+##  3rd Qu.:  0.59714   3rd Qu.:  0.45392   3rd Qu.: 0.73959  
+##  Max.   : 15.59500   Max.   : 23.74514   Max.   :12.01891  
+##       V12                V13                V14          
+##  Min.   :-18.6837   Min.   :-5.79188   Min.   :-19.2143  
+##  1st Qu.: -0.4056   1st Qu.:-0.64854   1st Qu.: -0.4256  
+##  Median :  0.1400   Median :-0.01357   Median :  0.0506  
+##  Mean   :  0.0000   Mean   : 0.00000   Mean   :  0.0000  
+##  3rd Qu.:  0.6182   3rd Qu.: 0.66251   3rd Qu.:  0.4931  
+##  Max.   :  7.8484   Max.   : 7.12688   Max.   : 10.5268  
+##       V15                V16                 V17           
+##  Min.   :-4.49894   Min.   :-14.12985   Min.   :-25.16280  
+##  1st Qu.:-0.58288   1st Qu.: -0.46804   1st Qu.: -0.48375  
+##  Median : 0.04807   Median :  0.06641   Median : -0.06568  
+##  Mean   : 0.00000   Mean   :  0.00000   Mean   :  0.00000  
+##  3rd Qu.: 0.64882   3rd Qu.:  0.52330   3rd Qu.:  0.39968  
+##  Max.   : 8.87774   Max.   : 17.31511   Max.   :  9.25353  
+##       V18                 V19                 V20           
+##  Min.   :-9.498746   Min.   :-7.213527   Min.   :-54.49772  
+##  1st Qu.:-0.498850   1st Qu.:-0.456299   1st Qu.: -0.21172  
+##  Median :-0.003636   Median : 0.003735   Median : -0.06248  
+##  Mean   : 0.000000   Mean   : 0.000000   Mean   :  0.00000  
+##  3rd Qu.: 0.500807   3rd Qu.: 0.458949   3rd Qu.:  0.13304  
+##  Max.   : 5.041069   Max.   : 5.591971   Max.   : 39.42090  
+##       V21                 V22                  V23           
+##  Min.   :-34.83038   Min.   :-10.933144   Min.   :-44.80774  
+##  1st Qu.: -0.22839   1st Qu.: -0.542350   1st Qu.: -0.16185  
+##  Median : -0.02945   Median :  0.006782   Median : -0.01119  
+##  Mean   :  0.00000   Mean   :  0.000000   Mean   :  0.00000  
+##  3rd Qu.:  0.18638   3rd Qu.:  0.528554   3rd Qu.:  0.14764  
+##  Max.   : 27.20284   Max.   : 10.503090   Max.   : 22.52841  
+##       V24                V25                 V26          
+##  Min.   :-2.83663   Min.   :-10.29540   Min.   :-2.60455  
+##  1st Qu.:-0.35459   1st Qu.: -0.31715   1st Qu.:-0.32698  
+##  Median : 0.04098   Median :  0.01659   Median :-0.05214  
+##  Mean   : 0.00000   Mean   :  0.00000   Mean   : 0.00000  
+##  3rd Qu.: 0.43953   3rd Qu.:  0.35072   3rd Qu.: 0.24095  
+##  Max.   : 4.58455   Max.   :  7.51959   Max.   : 3.51735  
+##       V27                  V28                Amount        
+##  Min.   :-22.565679   Min.   :-15.43008   Min.   :    0.00  
+##  1st Qu.: -0.070840   1st Qu.: -0.05296   1st Qu.:    5.60  
+##  Median :  0.001342   Median :  0.01124   Median :   22.00  
+##  Mean   :  0.000000   Mean   :  0.00000   Mean   :   88.35  
+##  3rd Qu.:  0.091045   3rd Qu.:  0.07828   3rd Qu.:   77.17  
+##  Max.   : 31.612198   Max.   : 33.84781   Max.   :25691.16  
+##      Class         
+##  Min.   :0.000000  
+##  1st Qu.:0.000000  
+##  Median :0.000000  
+##  Mean   :0.001728  
+##  3rd Qu.:0.000000  
+##  Max.   :1.000000
 ```
 
 ```r
@@ -263,7 +258,7 @@ ggplot(card_1, aes(x = factor(Time_Hour),
                                    vjust = 0.5))
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="4-creditcard_files/figure-html/card-times-1.png" alt="不同时间诈骗次数" width="672" />
 <p class="caption">(\#fig:card-times)不同时间诈骗次数</p>
 </div>
@@ -296,7 +291,7 @@ ggplot(card_1, aes(x = factor(Time_Hour),
                                    vjust = 0.5))
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="4-creditcard_files/figure-html/card-amount-1.png" alt="不同时间诈骗金额" width="672" />
 <p class="caption">(\#fig:card-amount)不同时间诈骗金额</p>
 </div>
@@ -329,7 +324,7 @@ ggplot(card_1_mean, aes(x = factor(Time_Hour), y = MeanAmount, fill = factor(Tim
   labs(x = "Time_Hour", y = "Mean_Amount")
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="4-creditcard_files/figure-html/card-mean-1.png" alt="不同时间平均诈骗金额-条形图" width="672" />
 <p class="caption">(\#fig:card-mean)不同时间平均诈骗金额-条形图</p>
 </div>
@@ -374,177 +369,6 @@ e.g.，寻找最合适的k值来调整k近邻模型、调节隐藏层层数和�
 ```r
 set.seed(1234)
 m_C50 <- train(Species~., data = iris, method = "C5.0")
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 6 for this object. Predictions generated using 6
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-
-## Warning: 'trials' should be <= 9 for this object. Predictions generated using 9
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 4 for this object. Predictions generated using 4
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 3 for this object. Predictions generated using 3
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 1 for this object. Predictions generated using 1
-## trials
-```
-
-```
-## Warning: 'trials' should be <= 8 for this object. Predictions generated using 8
-## trials
-```
-
-```r
 m_C50
 ```
 
@@ -574,9 +398,10 @@ m_C50
 ##   tree    TRUE   10      0.9399845  0.9088007
 ##   tree    TRUE   20      0.9392443  0.9076915
 ## 
-## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were trials = 10, model = rules and
-##  winnow = TRUE.
+## Accuracy was used to select the optimal model using the
+##  largest value.
+## The final values used for the model were trials = 10, model =
+##  rules and winnow = TRUE.
 ```
 由上面的结果可以看出，基于`model`、`trials`和`winnow`三个参数，建立并测试了12个决策树（C5.0）模型，每个模型均给出了精度及Kappa统计量，最下方同时展示了最佳候选模型所对应的参数值。其中Kappa统计量用来衡量模型的稳定性：
 
@@ -624,7 +449,8 @@ model_rf
 ##   16    0.9314521  0.8628921
 ##   30    0.9276627  0.8553120
 ## 
-## Accuracy was used to select the optimal model using  the one SE rule.
+## Accuracy was used to select the optimal model using  the one
+##  SE rule.
 ## The final value used for the model was mtry = 2.
 ```
 
@@ -673,7 +499,7 @@ confusionMatrix(data = pred_rf, reference = test_data$Class,
 plot(varImp(model_rf)) # 查看变量的重要性
 ```
 
-<img src="4-creditcard_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="4-creditcard_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ## kNN建模 {#sec:five5}
 
@@ -716,7 +542,7 @@ ggplot(as.data.frame(results), aes(x = 3:10, y = results)) +
   labs(xlab = " ")
 ```
 
-<img src="4-creditcard_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+<img src="4-creditcard_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
 

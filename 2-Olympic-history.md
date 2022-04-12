@@ -1,4 +1,4 @@
----
+1---
 output:
   html_document: default
   pdf_document: default
@@ -18,7 +18,7 @@ output:
 
 
 ```r
-file<- "D:/Tools/Rwork/0.Study R/kaggle-project/data/olympics/athlete_events.csv"
+file<- "data/olympics/athlete_events.csv"
 data <- read_csv(file,
                  col_types = cols(
                    ID = col_character(),
@@ -44,15 +44,16 @@ head(data)
 
 ```
 ## # A tibble: 6 x 15
-##   ID    Name    Sex     Age Height Weight Team   NOC   Games   Year Season City 
-##   <chr> <chr>   <fct> <int>  <dbl>  <dbl> <chr>  <chr> <chr>  <int> <fct>  <chr>
-## 1 1     A Diji~ M        24    180     80 China  CHN   1992 ~  1992 Summer Barc~
-## 2 2     A Lamu~ M        23    170     60 China  CHN   2012 ~  2012 Summer Lond~
-## 3 3     Gunnar~ M        24     NA     NA Denma~ DEN   1920 ~  1920 Summer Antw~
-## 4 4     Edgar ~ M        34     NA     NA Denma~ DEN   1900 ~  1900 Summer Paris
-## 5 5     Christ~ F        21    185     82 Nethe~ NED   1988 ~  1988 Winter Calg~
-## 6 5     Christ~ F        21    185     82 Nethe~ NED   1988 ~  1988 Winter Calg~
-## # ... with 3 more variables: Sport <chr>, Event <chr>, Medal <fct>
+##   ID    Name        Sex     Age Height Weight Team  NOC   Games  Year
+##   <chr> <chr>       <fct> <int>  <dbl>  <dbl> <chr> <chr> <chr> <int>
+## 1 1     A Dijiang   M        24    180     80 China CHN   1992~  1992
+## 2 2     A Lamusi    M        23    170     60 China CHN   2012~  2012
+## 3 3     Gunnar Nie~ M        24     NA     NA Denm~ DEN   1920~  1920
+## 4 4     Edgar Lind~ M        34     NA     NA Denm~ DEN   1900~  1900
+## 5 5     Christine ~ F        21    185     82 Neth~ NED   1988~  1988
+## 6 5     Christine ~ F        21    185     82 Neth~ NED   1988~  1988
+## # ... with 5 more variables: Season <fct>, City <chr>, Sport <chr>,
+## #   Event <chr>, Medal <fct>
 ```
 
 ## 运动员、国家和时间
@@ -69,13 +70,6 @@ counts <- data %>%
     Nations = length(unique(NOC)),
     Events = length(unique(Event))
   )
-```
-
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
-```r
 counts
 ```
 
@@ -157,7 +151,7 @@ p3 <- ggplot(counts, aes(x = Year, y = Events, group = Season, color = Season)) 
 grid.arrange(p1, p2, p3, ncol = 1)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/countNO-1.png" alt="(ref:fig-countNO)" width="672" />
 <p class="caption">(\#fig:countNO)(ref:fig-countNO)</p>
 </div>
@@ -190,14 +184,14 @@ head(art)
 
 ```
 ## # A tibble: 6 x 9
-##   Name                  Sex     Age Team    NOC    Year City        Event  Medal
-##   <chr>                 <fct> <int> <chr>   <chr> <int> <chr>       <chr>  <fct>
-## 1 Win Valdemar Aaltonen M        54 Finland FIN    1948 London      Art C~ <NA> 
-## 2 Adolf Gaston Abel     M        45 Germany GER    1928 Amsterdam   Art C~ <NA> 
-## 3 Adolf Gaston Abel     M        45 Germany GER    1928 Amsterdam   Art C~ <NA> 
-## 4 Georges Achille-Fould F        55 France  FRA    1924 Paris       Art C~ <NA> 
-## 5 Dsir Antoine Acket    M        27 Belgium BEL    1932 Los Angeles Art C~ <NA> 
-## 6 Dsir Antoine Acket    M        27 Belgium BEL    1932 Los Angeles Art C~ <NA>
+##   Name                Sex     Age Team  NOC    Year City  Event Medal
+##   <chr>               <fct> <int> <chr> <chr> <int> <chr> <chr> <fct>
+## 1 Win Valdemar Aalto~ M        54 Finl~ FIN    1948 Lond~ Art ~ <NA> 
+## 2 Adolf Gaston Abel   M        45 Germ~ GER    1928 Amst~ Art ~ <NA> 
+## 3 Adolf Gaston Abel   M        45 Germ~ GER    1928 Amst~ Art ~ <NA> 
+## 4 Georges Achille-Fo~ F        55 Fran~ FRA    1924 Paris Art ~ <NA> 
+## 5 Dsir Antoine Acket  M        27 Belg~ BEL    1932 Los ~ Art ~ <NA> 
+## 6 Dsir Antoine Acket  M        27 Belg~ BEL    1932 Los ~ Art ~ <NA>
 ```
 
 ```r
@@ -280,7 +274,7 @@ p6 <- ggplot(counts_art, aes(x = Year, y = Artisit)) +
 grid.arrange(p4, p5, p6, ncol = 1)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/art-competition-1.png" alt="(ref:fig-art-competition)" width="672" />
 <p class="caption">(\#fig:art-competition)(ref:fig-art-competition)</p>
 </div>
@@ -297,13 +291,7 @@ medal_counts_arts <- art %>%
   filter(!is.na(Medal)) %>% 
   group_by(Team, Medal) %>% 
   summarize(Count = length(Medal))
-```
 
-```
-## `summarise()` has grouped output by 'Team'. You can override using the `.groups` argument.
-```
-
-```r
 # 根据奖牌数量对国家进行排序
 levs_art <- medal_counts_arts %>% 
   group_by(Team) %>% 
@@ -324,7 +312,7 @@ ggplot(medal_counts_arts, aes(x = Team, y = Count, fill = Medal)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/medal-arts-1.png" alt="(ref:fig-medal-arts)" width="672" />
 <p class="caption">(\#fig:medal-arts)(ref:fig-medal-arts)</p>
 </div>
@@ -373,13 +361,6 @@ data$Year <- as.integer(data$Year)
 counts_sex <- data %>% 
   group_by(Year, Sex) %>% 
   summarize(Athletes = length(unique(ID)))
-```
-
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
-```r
 counts_sex$Year <- as.integer(counts_sex$Year)
 ```
 
@@ -397,7 +378,7 @@ ggplot(counts_sex, aes(x = Year, y = Athletes, group = Sex, color = Sex)) +
         axis.text.x = element_text(angle = 90, face = "bold", vjust = 0.5)) 
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/counts-sex-1.png" alt="(ref:fig-counts-sex)" width="672" />
 <p class="caption">(\#fig:counts-sex)(ref:fig-counts-sex)</p>
 </div>
@@ -434,13 +415,6 @@ counts_NOC <- data %>%
   summarize(Count = length(unique(ID))) %>% 
   spread(Sex, Count) %>% # 按照Sex为key，Count为value的规则进行pivot_wider()操作。
   mutate(Total = sum(M, F, na.rm = T)) # 计算运动员总数
-```
-
-```
-## `summarise()` has grouped output by 'Year', 'NOC'. You can override using the `.groups` argument.
-```
-
-```r
 names(counts_NOC)[3: 4] <- c("Male", "Female")
 
 # 将缺失值变为0
@@ -477,11 +451,7 @@ ggplot(counts_NOC, aes(x = Male, y = Female, group = Year, color = Year)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-```
-## `geom_smooth()` using formula 'y ~ x'
-```
-
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/5-years-regression-1.png" alt="(ref:fig-5-years)" width="672" />
 <p class="caption">(\#fig:5-years-regression)(ref:fig-5-years)</p>
 </div>
@@ -499,13 +469,7 @@ medalCount <- data %>%
   filter(Sport != "Art Competitions") %>% 
   group_by(Team, Medal) %>% 
   summarize(Count = length(Medal))
-```
-
-```
-## `summarise()` has grouped output by 'Team'. You can override using the `.groups` argument.
-```
-
-```r
+  
 medalCountLevs <- medalCount %>% 
   group_by(Team) %>% 
   summarize(Total = sum(Count)) %>% 
@@ -526,7 +490,7 @@ ggplot(medalCount, aes(x = Team, y = Count, fill = Medal)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/medal-1.png" alt="(ref:fig-medal)" width="672" />
 <p class="caption">(\#fig:medal)(ref:fig-medal)</p>
 </div>
@@ -542,10 +506,6 @@ medalChina <- data %>%
   summarize(Count = length(Medal))
 ```
 
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
 ```r
 ggplot(medalChina, aes(x = reorder(Year, -Count), y = Count, fill = Medal)) +
   geom_col() +
@@ -555,7 +515,7 @@ ggplot(medalChina, aes(x = reorder(Year, -Count), y = Count, fill = Medal)) +
   theme_bw()
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/china-medal-1.png" alt="历届奥运会中国奖牌数量变化" width="672" />
 <p class="caption">(\#fig:china-medal)历届奥运会中国奖牌数量变化</p>
 </div>
@@ -571,24 +531,12 @@ ggplot(medalChina, aes(x = reorder(Year, -Count), y = Count, fill = Medal)) +
 
 ```r
 # 读取NOC数据
-noc <- read_csv("D:/Tools/Rwork/0.Study R/kaggle-project/data/olympics/noc_regions.csv",
+noc <- read_csv("data/olympics/noc_regions.csv",
                 col_types = cols(
                   NOC = col_character(),
                   region = col_character()
                 ))
-```
 
-```
-## New names:
-## * Australia -> Australia...18
-## * Australia -> Australia...28
-## * `Czech Republic` -> `Czech Republic...56`
-## * Canada -> Canada...76
-## * China -> China...86
-## * ...
-```
-
-```r
 # 增加regions数据，去除缺失值
 dataRegions <- data %>% 
   left_join(noc, by = "NOC") %>% 
@@ -638,7 +586,7 @@ ggplot(world, aes(x = long, y = lat, group = group)) +
   scale_fill_gradient(low = "white", high = "red")
 ```
 
-<img src="2-Olympic-history_files/figure-html/1928-Arc-1.png" width="672" style="display: block; margin: auto;" />
+<img src="2-Olympic-history_files/figure-html/1928-Arc-1.png" width="672" />
 
 ### 1972年奥运会情况
 
@@ -655,7 +603,7 @@ ggplot(world, aes(x = long, y = lat, group = group)) +
   scale_fill_gradient2(low = "white", high = "red")
 ```
 
-<img src="2-Olympic-history_files/figure-html/1972-Arc-1.png" width="672" style="display: block; margin: auto;" />
+<img src="2-Olympic-history_files/figure-html/1972-Arc-1.png" width="672" />
 
 ### 2016年奥运会情况
 
@@ -672,7 +620,7 @@ ggplot(world, aes(x = long, y = lat, group = group)) +
   scale_fill_gradient2(low = "white", high = "red")
 ```
 
-<img src="2-Olympic-history_files/figure-html/2016-Arc-1.png" width="672" style="display: block; margin: auto;" />
+<img src="2-Olympic-history_files/figure-html/2016-Arc-1.png" width="672" />
 
 ## 参赛运动员身高体重
 
@@ -696,11 +644,7 @@ data %>% group_by(Year, Sex) %>%
   scale_x_continuous(breaks = seq(1896, 2016, 4))
 ```
 
-```
-## `summarise()` has grouped output by 'Year'. You can override using the `.groups` argument.
-```
-
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/data-completeness-1.png" alt="Height/Weight data completeness from each Olympics" width="672" />
 <p class="caption">(\#fig:data-completeness)Height/Weight data completeness from each Olympics</p>
 </div>
@@ -729,7 +673,7 @@ pWeight <- ggplot(data, aes(x = as.factor(Year), y = Weight, fill = Sex)) +
 grid.arrange(pHeight, pWeight,ncol = 1)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="2-Olympic-history_files/figure-html/WH-overtime-1.png" alt="Athlete height &amp; weight over time" width="672" />
 <p class="caption">(\#fig:WH-overtime)Athlete height & weight over time</p>
 </div>

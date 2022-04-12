@@ -12,40 +12,20 @@ output:
 
 
 ```r
-file <- "D:/Tools/Rwork/0.Study R/kaggle-project/data/vgsales.csv"
+file <- "data/vgsales.csv"
 df <- read_csv(file)
-```
-
-```
-## Rows: 19600 Columns: 9
-```
-
-```
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## chr (4): Name, Platform, Publisher, Developer
-## dbl (5): Rank, Critic_Score, User_Score, Total_Shipped, Year
-```
-
-```
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-```r
 str(df)
 ```
 
 ```
 ## spec_tbl_df [19,600 x 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Rank         : num [1:19600] 1 2 3 4 5 6 7 8 9 10 ...
-##  $ Name         : chr [1:19600] "Wii Sports" "Super Mario Bros." "Counter-Strike: Global Offensive" "Mario Kart Wii" ...
+##  $ Name         : chr [1:19600] "Wii Sports" "Super Mario Bros." ""..
 ##  $ Platform     : chr [1:19600] "Wii" "NES" "PC" "Wii" ...
-##  $ Publisher    : chr [1:19600] "Nintendo" "Nintendo" "Valve" "Nintendo" ...
-##  $ Developer    : chr [1:19600] "Nintendo EAD" "Nintendo EAD" "Valve Corporation" "Nintendo EAD" ...
+##  $ Publisher    : chr [1:19600] "Nintendo" "Nintendo" "Valve" "Nin"..
+##  $ Developer    : chr [1:19600] "Nintendo EAD" "Nintendo EAD" "Val"..
 ##  $ Critic_Score : num [1:19600] 7.7 10 8 8.2 8.6 10 8 9.4 9.1 8.6 ...
-##  $ User_Score   : num [1:19600] 8 8.2 7.5 9.1 4.7 7.8 8.8 8.8 8.1 9.2 ...
+##  $ User_Score   : num [1:19600] 8 8.2 7.5 9.1 4.7 7.8 8.8 8.8 8.1 9..
 ##  $ Total_Shipped: num [1:19600] 82.9 40.2 40 37.3 36.6 ...
 ##  $ Year         : num [1:19600] 2006 1985 2012 2008 2017 ...
 ##  - attr(*, "spec")=
@@ -69,12 +49,12 @@ head(df, 3)
 
 ```
 ## # A tibble: 3 x 9
-##    Rank Name  Platform Publisher Developer Critic_Score User_Score Total_Shipped
-##   <dbl> <chr> <chr>    <chr>     <chr>            <dbl>      <dbl>         <dbl>
-## 1     1 Wii ~ Wii      Nintendo  Nintendo~          7.7        8            82.9
-## 2     2 Supe~ NES      Nintendo  Nintendo~         10          8.2          40.2
-## 3     3 Coun~ PC       Valve     Valve Co~          8          7.5          40  
-## # ... with 1 more variable: Year <dbl>
+##    Rank Name     Platform Publisher Developer Critic_Score User_Score
+##   <dbl> <chr>    <chr>    <chr>     <chr>            <dbl>      <dbl>
+## 1     1 Wii Spo~ Wii      Nintendo  Nintendo~          7.7        8  
+## 2     2 Super M~ NES      Nintendo  Nintendo~         10          8.2
+## 3     3 Counter~ PC       Valve     Valve Co~          8          7.5
+## # ... with 2 more variables: Total_Shipped <dbl>, Year <dbl>
 ```
 
 数据共包括11列，包含了从1977年~2020年中的游戏销量数据，具体变量说明如下表所示：
@@ -141,30 +121,30 @@ summary(df)
 ```
 
 ```
-##       Rank           Name             Platform          Publisher        
-##  Min.   :    1   Length:19600       Length:19600       Length:19600      
-##  1st Qu.: 4899   Class :character   Class :character   Class :character  
-##  Median : 9798   Mode  :character   Mode  :character   Mode  :character  
-##  Mean   : 9799                                                           
-##  3rd Qu.:14698                                                           
-##  Max.   :19598                                                           
-##                                                                          
-##   Developer          Critic_Score      User_Score     Total_Shipped    
-##  Length:19600       Min.   : 0.800   Min.   : 1.000   Min.   : 0.0100  
-##  Class :character   1st Qu.: 6.100   1st Qu.: 6.300   1st Qu.: 0.0500  
-##  Mode  :character   Median : 7.300   Median : 7.200   Median : 0.1600  
-##                     Mean   : 7.035   Mean   : 6.995   Mean   : 0.5511  
-##                     3rd Qu.: 8.200   3rd Qu.: 8.000   3rd Qu.: 0.4600  
-##                     Max.   :10.000   Max.   :10.000   Max.   :82.9000  
-##                     NA's   :9631     NA's   :17377                     
-##       Year     
-##  Min.   :1977  
-##  1st Qu.:2004  
-##  Median :2008  
-##  Mean   :2008  
-##  3rd Qu.:2012  
-##  Max.   :2020  
-## 
+##       Rank           Name             Platform        
+##  Min.   :    1   Length:19600       Length:19600      
+##  1st Qu.: 4899   Class :character   Class :character  
+##  Median : 9798   Mode  :character   Mode  :character  
+##  Mean   : 9799                                        
+##  3rd Qu.:14698                                        
+##  Max.   :19598                                        
+##                                                       
+##   Publisher          Developer          Critic_Score   
+##  Length:19600       Length:19600       Min.   : 0.800  
+##  Class :character   Class :character   1st Qu.: 6.100  
+##  Mode  :character   Mode  :character   Median : 7.300  
+##                                        Mean   : 7.035  
+##                                        3rd Qu.: 8.200  
+##                                        Max.   :10.000  
+##                                        NA's   :9631    
+##    User_Score     Total_Shipped          Year     
+##  Min.   : 1.000   Min.   : 0.0100   Min.   :1977  
+##  1st Qu.: 6.300   1st Qu.: 0.0500   1st Qu.:2004  
+##  Median : 7.200   Median : 0.1600   Median :2008  
+##  Mean   : 6.995   Mean   : 0.5511   Mean   :2008  
+##  3rd Qu.: 8.000   3rd Qu.: 0.4600   3rd Qu.:2012  
+##  Max.   :10.000   Max.   :82.9000   Max.   :2020  
+##  NA's   :17377
 ```
 
 ```r
@@ -254,7 +234,10 @@ p2 <- ggplot(df_shipped, aes(x = Year, y = count, group = 1)) +
 p1/p2
 ```
 
-<img src="1-vgsales_files/figure-html/shipped-1.png" width="672" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="1-vgsales_files/figure-html/shipped-1.png" alt="游戏销量情况" width="672" />
+<p class="caption">(\#fig:shipped)游戏销量情况</p>
+</div>
 由图\@ref(fig:shipped)可以看出：  
 - 销量排名前十的年份均在21世纪，且2009年销量最高。2009年之后，游戏销量逐渐下滑，在2011年左右趋于平稳。
 
@@ -359,7 +342,7 @@ p6 <- ggplot(df_publisher, aes(x = reorder(Publisher, amount), y = amount,
 p5|p6
 ```
 
-<img src="1-vgsales_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+<img src="1-vgsales_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 - 任天堂作为开发商和发行商均独占鳌头。
 - Game Freak依靠王牌IP精灵宝可梦占据开发商销量第三名。
 - 大家耳熟能详的游戏开发商和发行商均有上榜。
@@ -453,7 +436,7 @@ ggplot(df_games_top5, aes(x = Year, y = Total_Shipped)) +
         axis.text.y = element_text(face = "bold"))
 ```
 
-<img src="1-vgsales_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+<img src="1-vgsales_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ## 媒体打分与玩家打分的关系
 
@@ -475,11 +458,7 @@ ggplot(df_score, aes(x = User_Score, y = Critic_Score)) +
   geom_smooth(method = lm)
 ```
 
-```
-## `geom_smooth()` using formula 'y ~ x'
-```
-
-<img src="1-vgsales_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="1-vgsales_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 可以看到两个打分的相关系数为0.16，且p值小于0.05，表明两者呈现显著的正相关。看来游戏媒体和玩家对游戏的口味还是一样的，某种程度上说，高分也可以信媒体。
 

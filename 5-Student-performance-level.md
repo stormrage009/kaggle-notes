@@ -17,26 +17,6 @@ output:
 
 ```r
 edudata <- read_csv("data/xAPI-Edu-Data.csv")
-```
-
-```
-## Rows: 480 Columns: 17
-```
-
-```
-## -- Column specification --------------------------------------------------------
-## Delimiter: ","
-## chr (13): gender, NationalITy, PlaceofBirth, StageID, GradeID, SectionID, To...
-## dbl  (4): raisedhands, VisITedResources, AnnouncementsView, Discussion
-```
-
-```
-## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-```r
 edudata$Class <- factor(edudata$Class, levels = c("H", "M", "L"))
 edudata$gender <- factor(edudata$gender, levels = c("M", "F"))
 str(edudata)
@@ -44,23 +24,23 @@ str(edudata)
 
 ```
 ## spec_tbl_df [480 x 17] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ gender                  : Factor w/ 2 levels "M","F": 1 1 1 1 1 2 1 1 2 2 ...
+##  $ gender                  : Factor w/ 2 levels "M","F": 1 1 1 1 1 ..
 ##  $ NationalITy             : chr [1:480] "KW" "KW" "KW" "KW" ...
-##  $ PlaceofBirth            : chr [1:480] "KuwaIT" "KuwaIT" "KuwaIT" "KuwaIT" ...
-##  $ StageID                 : chr [1:480] "lowerlevel" "lowerlevel" "lowerlevel" "lowerlevel" ...
-##  $ GradeID                 : chr [1:480] "G-04" "G-04" "G-04" "G-04" ...
+##  $ PlaceofBirth            : chr [1:480] "KuwaIT" "KuwaIT" "KuwaIT"..
+##  $ StageID                 : chr [1:480] "lowerlevel" "lowerlevel""..
+##  $ GradeID                 : chr [1:480] "G-04" "G-04" "G-04" "G-0"..
 ##  $ SectionID               : chr [1:480] "A" "A" "A" "A" ...
 ##  $ Topic                   : chr [1:480] "IT" "IT" "IT" "IT" ...
 ##  $ Semester                : chr [1:480] "F" "F" "F" "F" ...
-##  $ Relation                : chr [1:480] "Father" "Father" "Father" "Father" ...
-##  $ raisedhands             : num [1:480] 15 20 10 30 40 42 35 50 12 70 ...
-##  $ VisITedResources        : num [1:480] 16 20 7 25 50 30 12 10 21 80 ...
+##  $ Relation                : chr [1:480] "Father" "Father" "Father"..
+##  $ raisedhands             : num [1:480] 15 20 10 30 40 42 35 50 12..
+##  $ VisITedResources        : num [1:480] 16 20 7 25 50 30 12 10 21 ..
 ##  $ AnnouncementsView       : num [1:480] 2 3 0 5 12 13 0 15 16 25 ...
-##  $ Discussion              : num [1:480] 20 25 30 35 50 70 17 22 50 70 ...
+##  $ Discussion              : num [1:480] 20 25 30 35 50 70 17 22 50..
 ##  $ ParentAnsweringSurvey   : chr [1:480] "Yes" "Yes" "No" "No" ...
-##  $ ParentschoolSatisfaction: chr [1:480] "Good" "Good" "Bad" "Bad" ...
-##  $ StudentAbsenceDays      : chr [1:480] "Under-7" "Under-7" "Above-7" "Above-7" ...
-##  $ Class                   : Factor w/ 3 levels "H","M","L": 2 2 3 3 2 2 3 2 2 2 ...
+##  $ ParentschoolSatisfaction: chr [1:480] "Good" "Good" "Bad" "Bad" ..
+##  $ StudentAbsenceDays      : chr [1:480] "Under-7" "Under-7" "Abov"..
+##  $ Class                   : Factor w/ 3 levels "H","M","L": 2 2 3 ..
 ##  - attr(*, "spec")=
 ##   .. cols(
 ##   ..   gender = col_character(),
@@ -117,7 +97,7 @@ p2 <- fun_bar(data = edudata, xlab = Topic, fillc = StageID,
 p1/p2
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/school-level-1.png" alt="不同教育程度的学生选择课程主题" width="672" />
 <p class="caption">(\#fig:school-level)不同教育程度的学生选择课程主题</p>
 </div>
@@ -142,7 +122,7 @@ p4 <- fun_bar(data = edudata, xlab = Topic, fillc = Relation,
 p3/p4
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/relation-1.png" alt="不同课程主题监护人情况" width="672" />
 <p class="caption">(\#fig:relation)不同课程主题监护人情况</p>
 </div>
@@ -166,7 +146,7 @@ p6 <- fun_bar(data = edudata, xlab = Topic, fillc = Class,
 p5/p6
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/class-1.png" alt="不同课程学生学习成绩" width="672" />
 <p class="caption">(\#fig:class)不同课程学生学习成绩</p>
 </div>
@@ -189,7 +169,7 @@ p8 <- fun_bar(data = edudata, xlab = SectionID, fillc = Class,
 p7/p8
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/score-section-1.png" alt="不同教室学生成绩水平" width="672" />
 <p class="caption">(\#fig:score-section)不同教室学生成绩水平</p>
 </div>
@@ -238,7 +218,7 @@ p12 <- fun_bar2(edudata, Class, Relation, pos = "fill",
 (p9|p10) / (p11|p12)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/semester-1.png" alt="不同学期、不同成绩水平与监护人的关系" width="672" />
 <p class="caption">(\#fig:semester)不同学期、不同成绩水平与监护人的关系</p>
 </div>
@@ -268,7 +248,7 @@ p16 <- fun_bar2(edudata, Class, ParentschoolSatisfaction,
 (p13|p14)/(p15|p16)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/surey-class-1.png" alt="家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系" width="672" />
 <p class="caption">(\#fig:surey-class)家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</p>
 </div>
@@ -298,7 +278,7 @@ p20 <- fun_bar2(edudata, StudentAbsenceDays, Class,
 (p17|p18)/(p19|p20)
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/gender-absence-1.png" alt="性别、逃课次数与学生成绩水平的关系" width="672" />
 <p class="caption">(\#fig:gender-absence)性别、逃课次数与学生成绩水平的关系</p>
 </div>
@@ -336,7 +316,7 @@ p22 <- fun_bar3(data = edudata, xlab = Class, ylab = Discussion,
 p21|p22
 ```
 
-<div class="figure" style="text-align: center">
+<div class="figure">
 <img src="5-Student-performance-level_files/figure-html/raisedhands-discuss-1.png" alt="举手次数和参加讨论次数与成绩水平关系" width="672" />
 <p class="caption">(\#fig:raisedhands-discuss)举手次数和参加讨论次数与成绩水平关系</p>
 </div>
@@ -400,7 +380,7 @@ confusionMatrix(pred_rp, test$Class)
 prp(rpart_model)
 ```
 
-<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 ### 随机数模型
 
@@ -418,9 +398,9 @@ confusionMatrix(pred_rf, test$Class) # 混淆矩阵判断模型准确率
 ## 
 ##           Reference
 ## Prediction  H  M  L
-##          H 20  5  0
+##          H 20  4  0
 ##          M  8 36  4
-##          L  0  1 21
+##          L  0  2 21
 ## 
 ## Overall Statistics
 ##                                           
@@ -429,7 +409,7 @@ confusionMatrix(pred_rf, test$Class) # 混淆矩阵判断模型准确率
 ##     No Information Rate : 0.4421          
 ##     P-Value [Acc > NIR] : 1.886e-13       
 ##                                           
-##                   Kappa : 0.7031          
+##                   Kappa : 0.7032          
 ##                                           
 ##  Mcnemar's Test P-Value : NA              
 ## 
@@ -437,20 +417,20 @@ confusionMatrix(pred_rf, test$Class) # 混淆矩阵判断模型准确率
 ## 
 ##                      Class: H Class: M Class: L
 ## Sensitivity            0.7143   0.8571   0.8400
-## Specificity            0.9254   0.7736   0.9857
-## Pos Pred Value         0.8000   0.7500   0.9545
-## Neg Pred Value         0.8857   0.8723   0.9452
+## Specificity            0.9403   0.7736   0.9714
+## Pos Pred Value         0.8333   0.7500   0.9130
+## Neg Pred Value         0.8873   0.8723   0.9444
 ## Prevalence             0.2947   0.4421   0.2632
 ## Detection Rate         0.2105   0.3789   0.2211
-## Detection Prevalence   0.2632   0.5053   0.2316
-## Balanced Accuracy      0.8198   0.8154   0.9129
+## Detection Prevalence   0.2526   0.5053   0.2421
+## Balanced Accuracy      0.8273   0.8154   0.9057
 ```
 
 ```r
 varImpPlot(rf_model) # 可视化变量重要性函数
 ```
 
-<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 阅读上图：
 
@@ -539,42 +519,36 @@ confusionMatrix(result$actual_class, result$final_pred)
 ```
 
 ```
-## Warning in confusionMatrix.default(result$actual_class, result$final_pred):
-## Levels are not in the same order for reference and data. Refactoring data to
-## match.
-```
-
-```
 ## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction  H  L  M
 ##          H 21  1  6
 ##          L  0 23  2
-##          M  8 10 24
+##          M  7 10 25
 ## 
 ## Overall Statistics
-##                                          
-##                Accuracy : 0.7158         
-##                  95% CI : (0.614, 0.8036)
-##     No Information Rate : 0.3579         
-##     P-Value [Acc > NIR] : 1.408e-12      
-##                                          
-##                   Kappa : 0.5738         
-##                                          
-##  Mcnemar's Test P-Value : 0.08508        
+##                                           
+##                Accuracy : 0.7263          
+##                  95% CI : (0.6252, 0.8128)
+##     No Information Rate : 0.3579          
+##     P-Value [Acc > NIR] : 3.029e-13       
+##                                           
+##                   Kappa : 0.5887          
+##                                           
+##  Mcnemar's Test P-Value : 0.09327         
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: H Class: L Class: M
-## Sensitivity            0.7241   0.6765   0.7500
-## Specificity            0.8939   0.9672   0.7143
-## Pos Pred Value         0.7500   0.9200   0.5714
-## Neg Pred Value         0.8806   0.8429   0.8491
-## Prevalence             0.3053   0.3579   0.3368
-## Detection Rate         0.2211   0.2421   0.2526
+## Sensitivity            0.7500   0.6765   0.7576
+## Specificity            0.8955   0.9672   0.7258
+## Pos Pred Value         0.7500   0.9200   0.5952
+## Neg Pred Value         0.8955   0.8429   0.8491
+## Prevalence             0.2947   0.3579   0.3474
+## Detection Rate         0.2211   0.2421   0.2632
 ## Detection Prevalence   0.2947   0.2632   0.4421
-## Balanced Accuracy      0.8090   0.8218   0.7321
+## Balanced Accuracy      0.8228   0.8218   0.7417
 ```
 
 ```r
@@ -590,3 +564,255 @@ head(result)
 ## 5     L            L   L            L          L
 ## 6     M            M   M            M          M
 ```
+
+## mlr3模型建立
+
+
+```r
+edudata <- read_csv("data/xAPI-Edu-Data.csv", show_col_types = FALSE,
+                    col_types = "fffffffffddddffff")
+spec(edudata)
+```
+
+```
+## cols(
+##   gender = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   NationalITy = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   PlaceofBirth = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   StageID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   GradeID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   SectionID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   Topic = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   Semester = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   Relation = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   raisedhands = col_double(),
+##   VisITedResources = col_double(),
+##   AnnouncementsView = col_double(),
+##   Discussion = col_double(),
+##   ParentAnsweringSurvey = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   ParentschoolSatisfaction = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   StudentAbsenceDays = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   Class = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE)
+## )
+```
+
+### 回归树模型
+
+
+```r
+library(mlr3verse)
+# 建立任务
+set.seed(1234)
+task_rp <- 
+  TaskClassif$new(id = "edu_rp", backend = edudata,
+                  target = "Class")
+task_rp
+```
+
+```
+## <TaskClassif:edu_rp> (480 x 17)
+## * Target: Class
+## * Properties: multiclass
+## * Features (16):
+##   - fct (12): GradeID, NationalITy, ParentAnsweringSurvey,
+##     ParentschoolSatisfaction, PlaceofBirth, Relation,
+##     SectionID, Semester, StageID, StudentAbsenceDays, Topic,
+##     gender
+##   - dbl (4): AnnouncementsView, Discussion, VisITedResources,
+##     raisedhands
+```
+
+```r
+# 选择学习器
+learner_rp <- lrn("classif.rpart")
+
+# 划分测试集和训练集
+train_set <- sample(task_rp$nrow, 0.8 * task_rp$nrow)
+test_set <- setdiff(seq_len(task_rp$nrow), train_set)
+
+# 模型训练
+learner_rp$train(task_rp, row_ids = train_set)
+learner_rp$model
+```
+
+```
+## n= 384 
+## 
+## node), split, n, loss, yval, (yprob)
+##       * denotes terminal node
+## 
+##   1) root 384 215 M (0.44010417 0.26562500 0.29427083)  
+##     2) StudentAbsenceDays=Above-7 157  64 L (0.38853503 0.59235669 0.01910828)  
+##       4) AnnouncementsView>=30.5 62  16 M (0.74193548 0.20967742 0.04838710) *
+##       5) AnnouncementsView< 30.5 95  15 L (0.15789474 0.84210526 0.00000000)  
+##        10) ParentAnsweringSurvey=Yes 25  10 L (0.40000000 0.60000000 0.00000000)  
+##          20) raisedhands>=15.5 11   3 M (0.72727273 0.27272727 0.00000000) *
+##          21) raisedhands< 15.5 14   2 L (0.14285714 0.85714286 0.00000000) *
+##        11) ParentAnsweringSurvey=No 70   5 L (0.07142857 0.92857143 0.00000000) *
+##     3) StudentAbsenceDays=Under-7 227 117 H (0.47577093 0.03964758 0.48458150)  
+##       6) Relation=Father 110  40 M (0.63636364 0.08181818 0.28181818)  
+##        12) VisITedResources< 88.5 82  21 M (0.74390244 0.09756098 0.15853659)  
+##          24) GradeID=G-07,G-08,G-09,G-12,G-10 47   5 M (0.89361702 0.08510638 0.02127660) *
+##          25) GradeID=G-04,G-06,G-11,G-02 35  16 M (0.54285714 0.11428571 0.34285714)  
+##            50) raisedhands< 37.5 22   7 M (0.68181818 0.18181818 0.13636364) *
+##            51) raisedhands>=37.5 13   4 H (0.30769231 0.00000000 0.69230769) *
+##        13) VisITedResources>=88.5 28  10 H (0.32142857 0.03571429 0.64285714)  
+##          26) Topic=IT,Arabic,Science,English,French,History 16   7 M (0.56250000 0.06250000 0.37500000) *
+##          27) Topic=Quran,Biology,Chemistry,Geology 12   0 H (0.00000000 0.00000000 1.00000000) *
+##       7) Relation=Mum 117  38 H (0.32478632 0.00000000 0.67521368)  
+##        14) PlaceofBirth=KuwaIT,USA,Jordan,Iran,Morocco,Palestine 93  37 H (0.39784946 0.00000000 0.60215054)  
+##          28) VisITedResources< 91.5 76  36 H (0.47368421 0.00000000 0.52631579)  
+##            56) Topic=IT,Arabic,Quran,Spanish,French,Chemistry,Geology 49  19 M (0.61224490 0.00000000 0.38775510)  
+##             112) gender=M 30   8 M (0.73333333 0.00000000 0.26666667) *
+##             113) gender=F 19   8 H (0.42105263 0.00000000 0.57894737) *
+##            57) Topic=Science,English,History,Biology 27   6 H (0.22222222 0.00000000 0.77777778) *
+##          29) VisITedResources>=91.5 17   1 H (0.05882353 0.00000000 0.94117647) *
+##        15) PlaceofBirth=lebanon,Egypt,venzuela,Tunis,Syria,Iraq 24   1 H (0.04166667 0.00000000 0.95833333) *
+```
+
+```r
+# 模型预测
+pred_rp <- learner_rp$predict(task_rp, row_ids = test_set)
+pred_rp
+```
+
+```
+## <PredictionClassif> for 96 observations:
+##     row_ids truth response
+##           1     M        M
+##           5     M        L
+##           7     L        L
+## ---                       
+##         469     L        L
+##         470     L        L
+##         478     M        M
+```
+
+```r
+# 精度
+pred_rp$confusion
+```
+
+```
+##         truth
+## response  M  L  H
+##        M 27  7 12
+##        L  3 18  0
+##        H 12  0 17
+```
+
+```r
+measure <- msr("classif.acc")
+pred_rp$score(measure) # 预测精度
+```
+
+```
+## classif.acc 
+##   0.6458333
+```
+
+
+```r
+prp(learner_rp$model) # 作图
+```
+
+<img src="5-Student-performance-level_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+### 随机森林模型
+
+
+```r
+# 建立任务
+task_rf <- TaskClassif$new(id = "task_rf", backend = edudata,
+                           target = "Class")
+
+# 选择学习器
+learner_rf <- lrn("classif.ranger")
+
+# 使用之前设定好的测试集和训练集进行模型训练和预测
+learner_rf$train(task_rf, row_ids = train_set)
+learner_rf$model
+```
+
+```
+## Ranger result
+## 
+## Call:
+##  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", case.weights = task$weights$weight,      num.threads = 1L) 
+## 
+## Type:                             Classification 
+## Number of trees:                  500 
+## Sample size:                      384 
+## Number of independent variables:  16 
+## Mtry:                             4 
+## Target node size:                 1 
+## Variable importance mode:         none 
+## Splitrule:                        gini 
+## OOB prediction error:             22.40 %
+```
+
+```r
+pred_rf <- learner_rf$predict(task_rf, row_ids = test_set)
+pred_rf
+```
+
+```
+## <PredictionClassif> for 96 observations:
+##     row_ids truth response
+##           1     M        M
+##           5     M        L
+##           7     L        L
+## ---                       
+##         469     L        L
+##         470     L        L
+##         478     M        M
+```
+
+```r
+# 精度预测
+## 建立混淆矩阵
+pred_rf$confusion
+```
+
+```
+##         truth
+## response  M  L  H
+##        M 33  3  7
+##        L  2 22  0
+##        H  7  0 22
+```
+
+```r
+## 设定精度预测方法
+measure <- msr("classif.acc")
+## 预测精度
+pred_rf$score(measure)
+```
+
+```
+## classif.acc 
+##   0.8020833
+```
+
+### 支持向量机模型
+
+[完善内容]{.todo}
+
+1. edudata1 <- read_csv("data/xAPI-Edu-Data.csv",
+                     col_types = "")
+str(edudata1)
+
+2. 建立任务
+edudata1$Class <- factor(edudata1$Class)
+task_svm <- TaskClassif$new(id = "task_svm", edudata1,
+                            target = "Class")
+
+3. 选择学习器
+learner_svm <- lrn("classif.svm")
+
+4. 利用之前确定的训练集训练模型
+learner_svm$train(task_svm, row_ids = train_set)
+learner_svm$model
+
+
+
