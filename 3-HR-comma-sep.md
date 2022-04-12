@@ -509,11 +509,11 @@ rr_rpart <- resample(task_hr, learner_rpart, resampling_rpart)
 ```
 
 ```
-## INFO  [11:09:28.378] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 1/5) 
-## INFO  [11:09:28.467] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 3/5) 
-## INFO  [11:09:28.519] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 5/5) 
-## INFO  [11:09:28.564] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 2/5) 
-## INFO  [11:09:28.619] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 4/5)
+## INFO  [11:16:39.480] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 1/5) 
+## INFO  [11:16:39.591] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 3/5) 
+## INFO  [11:16:39.651] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 5/5) 
+## INFO  [11:16:39.701] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 2/5) 
+## INFO  [11:16:39.756] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 4/5)
 ```
 
 ```r
@@ -725,11 +725,11 @@ rr_nb <- resample(task_hr_nb, learner_nb, resampling_nb)
 ```
 
 ```
-## INFO  [11:09:29.750] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 1/5) 
-## INFO  [11:09:30.124] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 3/5) 
-## INFO  [11:09:30.532] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 5/5) 
-## INFO  [11:09:30.901] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 2/5) 
-## INFO  [11:09:31.285] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 4/5)
+## INFO  [11:16:41.346] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 1/5) 
+## INFO  [11:16:41.697] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 3/5) 
+## INFO  [11:16:42.052] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 5/5) 
+## INFO  [11:16:42.401] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 2/5) 
+## INFO  [11:16:42.730] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 4/5)
 ```
 
 ```r

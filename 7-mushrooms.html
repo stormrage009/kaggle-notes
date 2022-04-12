@@ -549,20 +549,20 @@ div.csl-indent {
 <span id="cb223-2"><a href="7-mushrooms.html#cb223-2" aria-hidden="true" tabindex="-1"></a>pred_rf</span></code></pre></div>
 <pre><code>## &lt;PredictionClassif&gt; for 2438 observations:
 ##     row_ids truth response
-##           5     e        e
-##           6     e        e
-##           9     p        p
+##           8     e        e
+##          11     e        e
+##          29     e        e
 ## ---                       
-##        8110     e        e
+##        8107     e        e
 ##        8114     p        p
-##        8124     e        e</code></pre>
+##        8123     p        p</code></pre>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="7-mushrooms.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 精度预测</span></span>
 <span id="cb225-2"><a href="7-mushrooms.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 建立混淆矩阵</span></span>
 <span id="cb225-3"><a href="7-mushrooms.html#cb225-3" aria-hidden="true" tabindex="-1"></a>pred_rf<span class="sc">$</span>confusion</span></code></pre></div>
 <pre><code>##         truth
 ## response    e    p
-##        e 1272    0
-##        p    0 1166</code></pre>
+##        e 1244    0
+##        p    0 1194</code></pre>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="7-mushrooms.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 设定精度预测方法</span></span>
 <span id="cb227-2"><a href="7-mushrooms.html#cb227-2" aria-hidden="true" tabindex="-1"></a>measure <span class="ot">&lt;-</span> <span class="fu">msr</span>(<span class="st">&quot;classif.acc&quot;</span>)</span>
 <span id="cb227-3"><a href="7-mushrooms.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 预测精度</span></span>

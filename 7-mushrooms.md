@@ -159,13 +159,13 @@ pred_rf
 ```
 ## <PredictionClassif> for 2438 observations:
 ##     row_ids truth response
-##           5     e        e
-##           6     e        e
-##           9     p        p
+##           8     e        e
+##          11     e        e
+##          29     e        e
 ## ---                       
-##        8110     e        e
+##        8107     e        e
 ##        8114     p        p
-##        8124     e        e
+##        8123     p        p
 ```
 
 ```r
@@ -177,8 +177,8 @@ pred_rf$confusion
 ```
 ##         truth
 ## response    e    p
-##        e 1272    0
-##        p    0 1166
+##        e 1244    0
+##        p    0 1194
 ```
 
 ```r

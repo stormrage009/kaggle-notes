@@ -838,11 +838,11 @@ div.csl-indent {
 <span id="cb86-3"><a href="3-HR-comma-sep.html#cb86-3" aria-hidden="true" tabindex="-1"></a>resampling_rpart <span class="ot">&lt;-</span> <span class="fu">rsmp</span>(<span class="st">&quot;cv&quot;</span>, <span class="at">folds =</span> 5L)</span>
 <span id="cb86-4"><a href="3-HR-comma-sep.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 应用重采样方法</span></span>
 <span id="cb86-5"><a href="3-HR-comma-sep.html#cb86-5" aria-hidden="true" tabindex="-1"></a>rr_rpart <span class="ot">&lt;-</span> <span class="fu">resample</span>(task_hr, learner_rpart, resampling_rpart)</span></code></pre></div>
-<pre><code>## INFO  [11:09:28.378] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 1/5) 
-## INFO  [11:09:28.467] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 3/5) 
-## INFO  [11:09:28.519] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 5/5) 
-## INFO  [11:09:28.564] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 2/5) 
-## INFO  [11:09:28.619] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 4/5)</code></pre>
+<pre><code>## INFO  [11:16:39.480] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 1/5) 
+## INFO  [11:16:39.591] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 3/5) 
+## INFO  [11:16:39.651] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 5/5) 
+## INFO  [11:16:39.701] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 2/5) 
+## INFO  [11:16:39.756] [mlr3] Applying learner &#39;classif.rpart&#39; on task &#39;left&#39; (iter 4/5)</code></pre>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="3-HR-comma-sep.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 每次重采样建模评分</span></span>
 <span id="cb88-2"><a href="3-HR-comma-sep.html#cb88-2" aria-hidden="true" tabindex="-1"></a>rr_rpart<span class="sc">$</span><span class="fu">score</span>(measure_rpart)</span></code></pre></div>
 <pre><code>##                 task task_id                   learner    learner_id
@@ -1000,11 +1000,11 @@ div.csl-indent {
 </ol>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="3-HR-comma-sep.html#cb104-1" aria-hidden="true" tabindex="-1"></a>resampling_nb <span class="ot">&lt;-</span> <span class="fu">rsmp</span>(<span class="st">&quot;cv&quot;</span>, <span class="at">folds =</span> 5L)</span>
 <span id="cb104-2"><a href="3-HR-comma-sep.html#cb104-2" aria-hidden="true" tabindex="-1"></a>rr_nb <span class="ot">&lt;-</span> <span class="fu">resample</span>(task_hr_nb, learner_nb, resampling_nb)</span></code></pre></div>
-<pre><code>## INFO  [11:09:29.750] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 1/5) 
-## INFO  [11:09:30.124] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 3/5) 
-## INFO  [11:09:30.532] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 5/5) 
-## INFO  [11:09:30.901] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 2/5) 
-## INFO  [11:09:31.285] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 4/5)</code></pre>
+<pre><code>## INFO  [11:16:41.346] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 1/5) 
+## INFO  [11:16:41.697] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 3/5) 
+## INFO  [11:16:42.052] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 5/5) 
+## INFO  [11:16:42.401] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 2/5) 
+## INFO  [11:16:42.730] [mlr3] Applying learner &#39;classif.naive_bayes&#39; on task &#39;left&#39; (iter 4/5)</code></pre>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="3-HR-comma-sep.html#cb106-1" aria-hidden="true" tabindex="-1"></a>rr_nb<span class="sc">$</span><span class="fu">score</span>(measure_nb)</span></code></pre></div>
 <pre><code>##                 task task_id                        learner
 ## 1: &lt;TaskClassif[50]&gt;    left &lt;LearnerClassifNaiveBayes[36]&gt;
