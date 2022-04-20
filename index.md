@@ -1,9 +1,8 @@
 --- 
 title: "Kaggle数据项目实战"
-subtitle: "优雅的 Bookdown 书籍模版"
 author: 
-  - 黄湘云 \& 叶 飞
-date: "2022-04-12"
+  - Lee
+date: "2022-04-20"
 site: bookdown::bookdown_site
 documentclass: elegantbook
 bibliography: 
