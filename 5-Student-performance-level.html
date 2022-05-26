@@ -1,150 +1,26 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>第 5 章 学生成绩水平分类 | Kaggle数据项目实战</title>
-  <meta name="description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.436">
 
-  <meta property="og:title" content="第 5 章 学生成绩水平分类 | Kaggle数据项目实战" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
-  <meta name="github-repo" content="XiangyunHuang/ElegantBookdown" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 5 章 学生成绩水平分类 | Kaggle数据项目实战" />
-  
-  <meta name="twitter:description" content="最初看到 elegantbook 做的书籍样式很漂亮，就想把它引入到 bookdown 中，遂定制了此模版。在此基础上，做了迁移和扩展的工作，融合了 LaTeX (精美)、Pandoc (简洁) 和 R (强大) 的特性。This is a bookdown template based on ElegantBook. The output format for this template is bookdown::gitbook and bookdown::pdf_book." />
-  
-
-<meta name="author" content="Lee" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<meta name="date" content="2022-04-20" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="4-creditcard.html"/>
-<link rel="next" href="6-mass-shoot.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      TeX: {
-        Macros: {
-          bm: ["{\\boldsymbol #1}",1],
-        },
-        extensions: ["cancel.js"]
-      }
-    });
-</script>
-
-<!-- add line break after theorem title -->
-<script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    for (let s of document.querySelectorAll("span.theorem, span.lemma, span.proposition, span.corollary")) {
-      s.insertAdjacentHTML('afterend', '<br style="line-height:2px;"/>');
-    }
-  });
-</script>
-
-<!-- check if --themcolor in style.css matches one of elegantbook theme colors. If so, generates the color palette  -->
-<script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    const cssroot = document.querySelector(':root');
-    let theme_color = getComputedStyle(document.documentElement).getPropertyValue('--themecolor').trim();
-  
-    // blue is the default option
-
-    switch (theme_color) {
-      case 'green': 
-        cssroot.style.setProperty('--structurecolor', 'rgb(0,120,2)');
-        cssroot.style.setProperty('--main', 'rgb(70,70,70)');
-        cssroot.style.setProperty('--mainbg', 'rgba(0,166,82,0.05)');
-        cssroot.style.setProperty('--second', 'rgb(115,45,2)');
-        cssroot.style.setProperty('--secondbg', 'rgba(115,45,2,0.05)');
-        cssroot.style.setProperty('--third', 'rgb(0,80,80)');
-        cssroot.style.setProperty('--thirdbg', 'rgba(0,80,80,0.05)');
-      break;
-      case 'cyan':
-        cssroot.style.setProperty('--structurecolor', 'rgb(31,186,190)');
-        cssroot.style.setProperty('--main', 'rgb(59,180,5)');
-        cssroot.style.setProperty('--mainbg', 'rgba(59,180,5,0.05)');
-        cssroot.style.setProperty('--second', 'rgb(175,153,8)');
-        cssroot.style.setProperty('--secondbg', 'rgba(175,153,8,0.05)');
-        cssroot.style.setProperty('--third', 'rgb(244,105,102)');
-        cssroot.style.setProperty('--thirdbg', 'rgba(244,105,102,0.05)');
-      break;
-      case 'gray':
-        cssroot.style.setProperty('--structurecolor', 'rgb(150,150,150)');
-        cssroot.style.setProperty('--main', 'rgb(150,150,150)');
-        cssroot.style.setProperty('--mainbg', 'rgba(150,150,150,0.05)');
-        cssroot.style.setProperty('--second', 'rgb(150,150,150)');
-        cssroot.style.setProperty('--secondbg', 'rgba(150,150,150,0.05)');
-        cssroot.style.setProperty('--third', 'rgb(150,150,150)');
-        cssroot.style.setProperty('--thirdbg', 'rgba(150,150,150,0.05)');
-      break;
-      case 'black':
-        cssroot.style.setProperty('--structurecolor', 'rgb(0,0,0)');
-        cssroot.style.setProperty('--main', 'rgb(0,0,0)');
-        cssroot.style.setProperty('--mainbg', 'rgba(0,0,0,0.05)');
-        cssroot.style.setProperty('--second', 'rgb(0,0,0)');
-        cssroot.style.setProperty('--secondbg', 'rgba(0,0,0,0.05)');
-        cssroot.style.setProperty('--third', 'rgb(0,0,0)');
-        cssroot.style.setProperty('--thirdbg', 'rgba(0,0,0,0.05)');
-      break;
-    default:
-        cssroot.style.setProperty('--structurecolor', 'rgb(60,113,183)');
-        cssroot.style.setProperty('--main', 'rgb(0,166,82)');
-        cssroot.style.setProperty('--mainbg', 'rgba(0,166,82,0.05)');
-        cssroot.style.setProperty('--second', 'rgb(255,134,24)');
-        cssroot.style.setProperty('--secondbg', 'rgba(255,134,24,0.05)');
-        cssroot.style.setProperty('--third', 'rgb(0,174,247)');
-        cssroot.style.setProperty('--thirdbg', 'rgba(0,174,247,0.05)');
-    }
-  });
-  </script>
-
-
-<style type="text/css">
+<title>kaggle - 5&nbsp; 学生成绩水平分类</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -204,989 +80,807 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./6-mass-shoot.html" rel="next">
+<link href="./4-creditcard.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Elegant Bookdown Template</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>简介</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#theorem-block"><i class="fa fa-check"></i><b>0.1</b> 已有 Block</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#math-formular"><i class="fa fa-check"></i><b>0.2</b> 数学公式</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#custom-block"><i class="fa fa-check"></i><b>0.3</b> 自定义 block</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="1-vgsales.html"><a href="1-vgsales.html"><i class="fa fa-check"></i><b>1</b> Video Games Sales</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="1-vgsales.html"><a href="1-vgsales.html#game-sales-intro"><i class="fa fa-check"></i><b>1.1</b> 准备</a></li>
-<li class="chapter" data-level="1.2" data-path="1-vgsales.html"><a href="1-vgsales.html#缺失值处理"><i class="fa fa-check"></i><b>1.2</b> 缺失值处理</a></li>
-<li class="chapter" data-level="1.3" data-path="1-vgsales.html"><a href="1-vgsales.html#描述性分析"><i class="fa fa-check"></i><b>1.3</b> 描述性分析</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="1-vgsales.html"><a href="1-vgsales.html#常规分析"><i class="fa fa-check"></i><b>1.3.1</b> 常规分析</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="1-vgsales.html"><a href="1-vgsales.html#探索性分析"><i class="fa fa-check"></i><b>1.4</b> 探索性分析</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="1-vgsales.html"><a href="1-vgsales.html#世界最畅销游戏"><i class="fa fa-check"></i><b>1.4.1</b> 世界最畅销游戏</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="1-vgsales.html"><a href="1-vgsales.html#媒体打分与玩家打分的关系"><i class="fa fa-check"></i><b>1.5</b> 媒体打分与玩家打分的关系</a></li>
-<li class="chapter" data-level="1.6" data-path="1-vgsales.html"><a href="1-vgsales.html#玩家与媒体分别最喜欢哪个发行商"><i class="fa fa-check"></i><b>1.6</b> 玩家与媒体分别最喜欢哪个发行商</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="1-vgsales.html"><a href="1-vgsales.html#玩家"><i class="fa fa-check"></i><b>1.6.1</b> 玩家</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html"><i class="fa fa-check"></i><b>2</b> Olympic history</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#olympic-intro"><i class="fa fa-check"></i><b>2.1</b> 介绍</a></li>
-<li class="chapter" data-level="2.2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#运动员国家和时间"><i class="fa fa-check"></i><b>2.2</b> 运动员、国家和时间</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#随着时间的推移运动员国家和赛事的数量是否发生了变化"><i class="fa fa-check"></i><b>2.2.1</b> 随着时间的推移，运动员、国家和赛事的数量是否发生了变化？</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#sec:art-com"><i class="fa fa-check"></i><b>2.3</b> 艺术竞赛（The Art Competitions）</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#运动员时间参赛项目"><i class="fa fa-check"></i><b>2.3.1</b> 运动员、时间、参赛项目</a></li>
-<li class="chapter" data-level="2.3.2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多"><i class="fa fa-check"></i><b>2.3.2</b> 获得奖牌情况-哪个国家获得的艺术竞赛类奖牌数量最多</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#奥林匹克中的女将们"><i class="fa fa-check"></i><b>2.4</b> 奥林匹克中的女将们</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#男女运动员数量比较"><i class="fa fa-check"></i><b>2.4.1</b> 男女运动员数量比较</a></li>
-<li class="chapter" data-level="2.4.2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#各国参赛男女运动员间数量关系"><i class="fa fa-check"></i><b>2.4.2</b> 各国参赛男女运动员间数量关系</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#奖牌榜medal-count"><i class="fa fa-check"></i><b>2.5</b> 奖牌榜（Medal Count）</a></li>
-<li class="chapter" data-level="2.6" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#地理信息地图"><i class="fa fa-check"></i><b>2.6</b> 地理信息地图</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#年奥运会情况"><i class="fa fa-check"></i><b>2.6.1</b> 1928年奥运会情况</a></li>
-<li class="chapter" data-level="2.6.2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#年奥运会情况-1"><i class="fa fa-check"></i><b>2.6.2</b> 1972年奥运会情况</a></li>
-<li class="chapter" data-level="2.6.3" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#年奥运会情况-2"><i class="fa fa-check"></i><b>2.6.3</b> 2016年奥运会情况</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#参赛运动员身高体重"><i class="fa fa-check"></i><b>2.7</b> 参赛运动员身高体重</a>
-<ul>
-<li class="chapter" data-level="2.7.1" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#数据完整性及可用性检测"><i class="fa fa-check"></i><b>2.7.1</b> 数据完整性及可用性检测</a></li>
-<li class="chapter" data-level="2.7.2" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#身高体重"><i class="fa fa-check"></i><b>2.7.2</b> 身高体重</a></li>
-<li class="chapter" data-level="2.7.3" data-path="2-Olympic-history.html"><a href="2-Olympic-history.html#change-in-weight-vs-change-in-height-over-times-across-mens-sports"><i class="fa fa-check"></i><b>2.7.3</b> change in Weight VS change in Height over times across men’s sports</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html"><i class="fa fa-check"></i><b>3</b> 员工离职分析</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:first2"><i class="fa fa-check"></i><b>3.1</b> 描述性分析</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:first21"><i class="fa fa-check"></i><b>3.1.1</b> 数据概览</a></li>
-<li class="chapter" data-level="3.1.2" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:first22"><i class="fa fa-check"></i><b>3.1.2</b> 员工离职情况与员工满意度、月均工作时间、绩效评估和在职年限的关系</a></li>
-<li class="chapter" data-level="3.1.3" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:first23"><i class="fa fa-check"></i><b>3.1.3</b> 员工离职情况与项目参与个数、五年内升职情况和薪资的关系</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:three-model1"><i class="fa fa-check"></i><b>3.2</b> 建模预测1-回归树+混淆矩阵</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#提取数据"><i class="fa fa-check"></i><b>3.2.1</b> 提取数据</a></li>
-<li class="chapter" data-level="3.2.2" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#确定交叉验证方法"><i class="fa fa-check"></i><b>3.2.2</b> 确定交叉验证方法</a></li>
-<li class="chapter" data-level="3.2.3" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#分层抽样-分层抽样"><i class="fa fa-check"></i><b>3.2.3</b> 分层抽样 </a></li>
-<li class="chapter" data-level="3.2.4" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#实际建模"><i class="fa fa-check"></i><b>3.2.4</b> 实际建模</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:three-model2"><i class="fa fa-check"></i><b>3.3</b> 建模预测2-朴素贝叶斯</a></li>
-<li class="chapter" data-level="3.4" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#sec:three-model-use"><i class="fa fa-check"></i><b>3.4</b> 模型评估及应用</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#roc曲线绘制"><i class="fa fa-check"></i><b>3.4.1</b> <code>ROC</code>曲线绘制</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#模型应用"><i class="fa fa-check"></i><b>3.5</b> 模型应用</a></li>
-<li class="chapter" data-level="3.6" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#mlr3建模"><i class="fa fa-check"></i><b>3.6</b> mlr3建模</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#回归树模型"><i class="fa fa-check"></i><b>3.6.1</b> 回归树模型</a></li>
-<li class="chapter" data-level="3.6.2" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#朴素贝叶斯模型"><i class="fa fa-check"></i><b>3.6.2</b> 朴素贝叶斯模型</a></li>
-<li class="chapter" data-level="3.6.3" data-path="3-HR-comma-sep.html"><a href="3-HR-comma-sep.html#利用mlr3进行roc曲线绘制"><i class="fa fa-check"></i><b>3.6.3</b> 利用mlr3进行ROC曲线绘制</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="4-creditcard.html"><a href="4-creditcard.html"><i class="fa fa-check"></i><b>4</b> 信用卡欺诈识别</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five1"><i class="fa fa-check"></i><b>4.1</b> 数据变量说明</a></li>
-<li class="chapter" data-level="4.2" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five2"><i class="fa fa-check"></i><b>4.2</b> 数据预处理</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five22"><i class="fa fa-check"></i><b>4.2.1</b> 分层抽样</a></li>
-<li class="chapter" data-level="4.2.2" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five23"><i class="fa fa-check"></i><b>4.2.2</b> 标准化</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five3"><i class="fa fa-check"></i><b>4.3</b> 描述性分析</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="4-creditcard.html"><a href="4-creditcard.html#不同时间诈骗次数-条形图"><i class="fa fa-check"></i><b>4.3.1</b> 不同时间诈骗次数-条形图</a></li>
-<li class="chapter" data-level="4.3.2" data-path="4-creditcard.html"><a href="4-creditcard.html#不同时间诈骗金额-箱线图"><i class="fa fa-check"></i><b>4.3.2</b> 不同时间诈骗金额-箱线图</a></li>
-<li class="chapter" data-level="4.3.3" data-path="4-creditcard.html"><a href="4-creditcard.html#不同时间平均诈骗金额-条形图"><i class="fa fa-check"></i><b>4.3.3</b> 不同时间平均诈骗金额-条形图</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five4"><i class="fa fa-check"></i><b>4.4</b> 自动参数调整调参-使用<code>caret</code>包</a></li>
-<li class="chapter" data-level="4.5" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five5"><i class="fa fa-check"></i><b>4.5</b> kNN建模</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="4-creditcard.html"><a href="4-creditcard.html#原理"><i class="fa fa-check"></i><b>4.5.1</b> 原理</a></li>
-<li class="chapter" data-level="4.5.2" data-path="4-creditcard.html"><a href="4-creditcard.html#模型建立"><i class="fa fa-check"></i><b>4.5.2</b> 模型建立</a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="4-creditcard.html"><a href="4-creditcard.html#sec:five6"><i class="fa fa-check"></i><b>4.6</b> 模型评估</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html"><i class="fa fa-check"></i><b>5</b> 学生成绩水平分类</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#sec:data-intro-edu"><i class="fa fa-check"></i><b>5.1</b> 数据变量说明</a></li>
-<li class="chapter" data-level="5.2" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#sec:descriptive-analysis"><i class="fa fa-check"></i><b>5.2</b> 描述性分析</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#封装绘图函数"><i class="fa fa-check"></i><b>5.2.1</b> 封装绘图函数</a></li>
-<li class="chapter" data-level="5.2.2" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#不同教育程度的学生选择课程主题"><i class="fa fa-check"></i><b>5.2.2</b> 不同教育程度的学生选择课程主题</a></li>
-<li class="chapter" data-level="5.2.3" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#不同课程主题监护人情况"><i class="fa fa-check"></i><b>5.2.3</b> 不同课程主题监护人情况</a></li>
-<li class="chapter" data-level="5.2.4" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#不同课程学生学习成绩"><i class="fa fa-check"></i><b>5.2.4</b> 不同课程学生学习成绩</a></li>
-<li class="chapter" data-level="5.2.5" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#不同教室学生成绩水平"><i class="fa fa-check"></i><b>5.2.5</b> 不同教室学生成绩水平</a></li>
-<li class="chapter" data-level="5.2.6" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#不同学期不同成绩水平与监护人的关系"><i class="fa fa-check"></i><b>5.2.6</b> 不同学期、不同成绩水平与监护人的关系</a></li>
-<li class="chapter" data-level="5.2.7" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><i class="fa fa-check"></i><b>5.2.7</b> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</a></li>
-<li class="chapter" data-level="5.2.8" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#性别逃课次数与学生成绩水平的关系"><i class="fa fa-check"></i><b>5.2.8</b> 性别、逃课次数与学生成绩水平的关系</a></li>
-<li class="chapter" data-level="5.2.9" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#举手次数和参加讨论次数与成绩水平关系"><i class="fa fa-check"></i><b>5.2.9</b> 举手次数和参加讨论次数与成绩水平关系</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#模型建立-1"><i class="fa fa-check"></i><b>5.3</b> 模型建立</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#回归树模型建立"><i class="fa fa-check"></i><b>5.3.1</b> 回归树模型建立</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#随机数模型"><i class="fa fa-check"></i><b>5.3.2</b> 随机数模型</a></li>
-<li class="chapter" data-level="5.3.3" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#svm建模-支持向量机需要再研究"><i class="fa fa-check"></i><b>5.3.3</b> SVM建模-支持向量机(需要再研究)</a></li>
-<li class="chapter" data-level="5.3.4" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#模型融合"><i class="fa fa-check"></i><b>5.3.4</b> 模型融合</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#mlr3模型建立"><i class="fa fa-check"></i><b>5.4</b> mlr3模型建立</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#回归树模型-1"><i class="fa fa-check"></i><b>5.4.1</b> 回归树模型</a></li>
-<li class="chapter" data-level="5.4.2" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#随机森林模型"><i class="fa fa-check"></i><b>5.4.2</b> 随机森林模型</a></li>
-<li class="chapter" data-level="5.4.3" data-path="5-Student-performance-level.html"><a href="5-Student-performance-level.html#支持向量机模型"><i class="fa fa-check"></i><b>5.4.3</b> 支持向量机模型</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html"><i class="fa fa-check"></i><b>6</b> 美国大规模枪击案</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#变量说明"><i class="fa fa-check"></i><b>6.1</b> 变量说明</a></li>
-<li class="chapter" data-level="6.2" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#描述性分析-1"><i class="fa fa-check"></i><b>6.2</b> 描述性分析</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#枪击案中伤亡人数"><i class="fa fa-check"></i><b>6.2.1</b> 枪击案中伤亡人数</a></li>
-<li class="chapter" data-level="6.2.2" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#绘制枪击案频率伤亡总人数和平均伤亡人数月为单位"><i class="fa fa-check"></i><b>6.2.2</b> 绘制枪击案频率、伤亡总人数和平均伤亡人数（月为单位）</a></li>
-<li class="chapter" data-level="6.2.3" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#枪手与种族之间的关系"><i class="fa fa-check"></i><b>6.2.3</b> 枪手与种族之间的关系</a></li>
-<li class="chapter" data-level="6.2.4" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#杀手性别和精神状况"><i class="fa fa-check"></i><b>6.2.4</b> 杀手性别和精神状况</a></li>
-<li class="chapter" data-level="6.2.5" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#伤亡水平和不同伤亡水平伤亡人数"><i class="fa fa-check"></i><b>6.2.5</b> 伤亡水平和不同伤亡水平伤亡人数</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#枪击发生地的可视化地图"><i class="fa fa-check"></i><b>6.3</b> 枪击发生地的可视化（地图）</a></li>
-<li class="chapter" data-level="6.4" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#枪击案发生地点是否露天"><i class="fa fa-check"></i><b>6.4</b> 枪击案发生地点（是否露天）</a></li>
-<li class="chapter" data-level="6.5" data-path="6-mass-shoot.html"><a href="6-mass-shoot.html#不同枪击案起因"><i class="fa fa-check"></i><b>6.5</b> 不同枪击案起因</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="7-mushrooms.html"><a href="7-mushrooms.html"><i class="fa fa-check"></i><b>7</b> 毒蘑菇分析</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="7-mushrooms.html"><a href="7-mushrooms.html#变量说明-1"><i class="fa fa-check"></i><b>7.1</b> 变量说明</a></li>
-<li class="chapter" data-level="7.2" data-path="7-mushrooms.html"><a href="7-mushrooms.html#数据预处理-统计每列因子水品个数"><i class="fa fa-check"></i><b>7.2</b> 数据预处理-统计每列因子水品个数</a></li>
-<li class="chapter" data-level="7.3" data-path="7-mushrooms.html"><a href="7-mushrooms.html#统计建模"><i class="fa fa-check"></i><b>7.3</b> 统计建模</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="7-mushrooms.html"><a href="7-mushrooms.html#随机森林模型-mlr3"><i class="fa fa-check"></i><b>7.3.1</b> 随机森林模型-mlr3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="8-Movies.html"><a href="8-Movies.html"><i class="fa fa-check"></i><b>8</b> 电影</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="8-Movies.html"><a href="8-Movies.html#数据"><i class="fa fa-check"></i><b>8.1</b> 数据</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="8-Movies.html"><a href="8-Movies.html#录入"><i class="fa fa-check"></i><b>8.1.1</b> 录入</a></li>
-<li class="chapter" data-level="8.1.2" data-path="8-Movies.html"><a href="8-Movies.html#数据概览"><i class="fa fa-check"></i><b>8.1.2</b> 数据概览</a></li>
-<li class="chapter" data-level="8.1.3" data-path="8-Movies.html"><a href="8-Movies.html#sec:top-genres"><i class="fa fa-check"></i><b>8.1.3</b> 筛选电影类型</a></li>
-<li class="chapter" data-level="8.1.4" data-path="8-Movies.html"><a href="8-Movies.html#sec:credits"><i class="fa fa-check"></i><b>8.1.4</b> 演职人员</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="8-Movies.html"><a href="8-Movies.html#数据探索"><i class="fa fa-check"></i><b>8.2</b> 数据探索</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="8-Movies.html"><a href="8-Movies.html#投票数量"><i class="fa fa-check"></i><b>8.2.1</b> 投票数量</a></li>
-<li class="chapter" data-level="8.2.2" data-path="8-Movies.html"><a href="8-Movies.html#评分"><i class="fa fa-check"></i><b>8.2.2</b> 评分</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="8-Movies.html"><a href="8-Movies.html#电影类型"><i class="fa fa-check"></i><b>8.3</b> 电影类型</a>
-<ul>
-<li class="chapter" data-level="8.3.1" data-path="8-Movies.html"><a href="8-Movies.html#电影类型的数量"><i class="fa fa-check"></i><b>8.3.1</b> 电影类型的数量</a></li>
-<li class="chapter" data-level="8.3.2" data-path="8-Movies.html"><a href="8-Movies.html#不同类型电影的评分"><i class="fa fa-check"></i><b>8.3.2</b> 不同类型电影的评分</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="8-Movies.html"><a href="8-Movies.html#最受欢迎的演员和导演"><i class="fa fa-check"></i><b>8.4</b> 最受欢迎的演员和导演</a>
-<ul>
-<li class="chapter" data-level="8.4.1" data-path="8-Movies.html"><a href="8-Movies.html#section"><i class="fa fa-check"></i><b>8.4.1</b> </a></li>
-<li class="chapter" data-level="8.4.2" data-path="8-Movies.html"><a href="8-Movies.html#指导最多电影的导演"><i class="fa fa-check"></i><b>8.4.2</b> 指导最多电影的导演</a></li>
-</ul></li>
-<li class="chapter" data-level="8.5" data-path="8-Movies.html"><a href="8-Movies.html#keywords"><i class="fa fa-check"></i><b>8.5</b> keywords</a>
-<ul>
-<li class="chapter" data-level="8.5.1" data-path="8-Movies.html"><a href="8-Movies.html#使用最多的关键词"><i class="fa fa-check"></i><b>8.5.1</b> 使用最多的关键词</a></li>
-</ul></li>
-<li class="chapter" data-level="8.6" data-path="8-Movies.html"><a href="8-Movies.html#电影推荐"><i class="fa fa-check"></i><b>8.6</b> 电影推荐</a>
-<ul>
-<li class="chapter" data-level="8.6.1" data-path="8-Movies.html"><a href="8-Movies.html#基于类型和语言的简单推荐"><i class="fa fa-check"></i><b>8.6.1</b> 基于类型和语言的简单推荐</a></li>
-<li class="chapter" data-level="8.6.2" data-path="8-Movies.html"><a href="8-Movies.html#基于电影内容的推荐演员导演类型"><i class="fa fa-check"></i><b>8.6.2</b> 基于电影内容的推荐（演员、导演、类型）</a></li>
-</ul></li>
-</ul></li>
-<li class="appendix"><span><b>附录</b></span></li>
-<li class="chapter" data-level="A" data-path="23-appendix.html"><a href="23-appendix.html"><i class="fa fa-check"></i><b>A</b> 附录</a></li>
-<li class="chapter" data-level="" data-path="24-references.html"><a href="24-references.html"><i class="fa fa-check"></i>参考文献</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">学生成绩水平分类</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Kaggle数据项目实战</a>
-          </h1>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">kaggle</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">简介</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-vgsales.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Video Games Sales</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Olympic-history.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Olympic history</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-HR-comma-sep.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">员工离职分析</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-creditcard.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">信用卡欺诈识别</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-Student-performance-level.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">学生成绩水平分类</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-mass-shoot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">美国大规模枪击案</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7-mushrooms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">毒蘑菇分析</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9990-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">9990-references.html</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec:data-intro-edu" id="toc-sec:data-intro-edu" class="nav-link active" data-scroll-target="#sec\:data-intro-edu"> <span class="header-section-number">5.1</span> 数据变量说明</a></li>
+  <li><a href="#sec:descriptive-analysis" id="toc-sec:descriptive-analysis" class="nav-link" data-scroll-target="#sec\:descriptive-analysis"> <span class="header-section-number">5.2</span> 描述性分析</a>
+  <ul class="collapse">
+  <li><a href="#封装绘图函数" id="toc-封装绘图函数" class="nav-link" data-scroll-target="#封装绘图函数"> <span class="header-section-number">5.2.1</span> 封装绘图函数</a></li>
+  <li><a href="#不同教育程度的学生选择课程主题" id="toc-不同教育程度的学生选择课程主题" class="nav-link" data-scroll-target="#不同教育程度的学生选择课程主题"> <span class="header-section-number">5.2.2</span> 不同教育程度的学生选择课程主题</a></li>
+  <li><a href="#不同课程主题监护人情况" id="toc-不同课程主题监护人情况" class="nav-link" data-scroll-target="#不同课程主题监护人情况"> <span class="header-section-number">5.2.3</span> 不同课程主题监护人情况</a></li>
+  <li><a href="#不同课程学生学习成绩" id="toc-不同课程学生学习成绩" class="nav-link" data-scroll-target="#不同课程学生学习成绩"> <span class="header-section-number">5.2.4</span> 不同课程学生学习成绩</a></li>
+  <li><a href="#不同教室学生成绩水平" id="toc-不同教室学生成绩水平" class="nav-link" data-scroll-target="#不同教室学生成绩水平"> <span class="header-section-number">5.2.5</span> 不同教室学生成绩水平</a></li>
+  <li><a href="#不同学期不同成绩水平与监护人的关系" id="toc-不同学期不同成绩水平与监护人的关系" class="nav-link" data-scroll-target="#不同学期不同成绩水平与监护人的关系"> <span class="header-section-number">5.2.6</span> 不同学期、不同成绩水平与监护人的关系</a></li>
+  <li><a href="#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" id="toc-家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" class="nav-link" data-scroll-target="#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"> <span class="header-section-number">5.2.7</span> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</a></li>
+  <li><a href="#性别逃课次数与学生成绩水平的关系" id="toc-性别逃课次数与学生成绩水平的关系" class="nav-link" data-scroll-target="#性别逃课次数与学生成绩水平的关系"> <span class="header-section-number">5.2.8</span> 性别、逃课次数与学生成绩水平的关系</a></li>
+  <li><a href="#举手次数和参加讨论次数与成绩水平关系" id="toc-举手次数和参加讨论次数与成绩水平关系" class="nav-link" data-scroll-target="#举手次数和参加讨论次数与成绩水平关系"> <span class="header-section-number">5.2.9</span> 举手次数和参加讨论次数与成绩水平关系</a></li>
+  </ul></li>
+  <li><a href="#模型建立" id="toc-模型建立" class="nav-link" data-scroll-target="#模型建立"> <span class="header-section-number">5.3</span> 模型建立</a>
+  <ul class="collapse">
+  <li><a href="#回归树模型建立" id="toc-回归树模型建立" class="nav-link" data-scroll-target="#回归树模型建立"> <span class="header-section-number">5.3.1</span> 回归树模型建立</a></li>
+  <li><a href="#随机数模型" id="toc-随机数模型" class="nav-link" data-scroll-target="#随机数模型"> <span class="header-section-number">5.3.2</span> 随机数模型</a></li>
+  <li><a href="#svm建模-支持向量机需要再研究" id="toc-svm建模-支持向量机需要再研究" class="nav-link" data-scroll-target="#svm建模-支持向量机需要再研究"> <span class="header-section-number">5.3.3</span> SVM建模-支持向量机(需要再研究)</a></li>
+  <li><a href="#模型融合" id="toc-模型融合" class="nav-link" data-scroll-target="#模型融合"> <span class="header-section-number">5.3.4</span> 模型融合</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="scoreClass" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">学生成绩水平分类</span></span></h1>
+</div>
 
-            <section class="normal" id="section-">
-<div id="scoreClass" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">第 5 章</span> 学生成绩水平分类<a href="5-Student-performance-level.html#scoreClass" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="sec:data-intro-edu" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> 数据变量说明<a href="5-Student-performance-level.html#sec:data-intro-edu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="sec:data-intro-edu" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec:data-intro-edu"><span class="header-section-number">5.1</span> 数据变量说明</h2>
 <p><a href="https://www.kaggle.com/aljarah/xAPI-Edu-Data">变量说明</a>。</p>
 <p>变量中最重要的的为<code>Class</code>学生等级变量，是我们建模的目标变量。</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="5-Student-performance-level.html#cb144-1" aria-hidden="true" tabindex="-1"></a>edudata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/xAPI-Edu-Data.csv&quot;</span>)</span>
-<span id="cb144-2"><a href="5-Student-performance-level.html#cb144-2" aria-hidden="true" tabindex="-1"></a>edudata<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(edudata<span class="sc">$</span>Class, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;L&quot;</span>))</span>
-<span id="cb144-3"><a href="5-Student-performance-level.html#cb144-3" aria-hidden="true" tabindex="-1"></a>edudata<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(edudata<span class="sc">$</span>gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
-<span id="cb144-4"><a href="5-Student-performance-level.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(edudata)</span></code></pre></div>
-<pre><code>## spec_tbl_df [480 x 17] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ gender                  : Factor w/ 2 levels &quot;M&quot;,&quot;F&quot;: 1 1 1 1 1 ..
-##  $ NationalITy             : chr [1:480] &quot;KW&quot; &quot;KW&quot; &quot;KW&quot; &quot;KW&quot; ...
-##  $ PlaceofBirth            : chr [1:480] &quot;KuwaIT&quot; &quot;KuwaIT&quot; &quot;KuwaIT&quot;..
-##  $ StageID                 : chr [1:480] &quot;lowerlevel&quot; &quot;lowerlevel&quot;&quot;..
-##  $ GradeID                 : chr [1:480] &quot;G-04&quot; &quot;G-04&quot; &quot;G-04&quot; &quot;G-0&quot;..
-##  $ SectionID               : chr [1:480] &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; ...
-##  $ Topic                   : chr [1:480] &quot;IT&quot; &quot;IT&quot; &quot;IT&quot; &quot;IT&quot; ...
-##  $ Semester                : chr [1:480] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
-##  $ Relation                : chr [1:480] &quot;Father&quot; &quot;Father&quot; &quot;Father&quot;..
-##  $ raisedhands             : num [1:480] 15 20 10 30 40 42 35 50 12..
-##  $ VisITedResources        : num [1:480] 16 20 7 25 50 30 12 10 21 ..
-##  $ AnnouncementsView       : num [1:480] 2 3 0 5 12 13 0 15 16 25 ...
-##  $ Discussion              : num [1:480] 20 25 30 35 50 70 17 22 50..
-##  $ ParentAnsweringSurvey   : chr [1:480] &quot;Yes&quot; &quot;Yes&quot; &quot;No&quot; &quot;No&quot; ...
-##  $ ParentschoolSatisfaction: chr [1:480] &quot;Good&quot; &quot;Good&quot; &quot;Bad&quot; &quot;Bad&quot; ..
-##  $ StudentAbsenceDays      : chr [1:480] &quot;Under-7&quot; &quot;Under-7&quot; &quot;Abov&quot;..
-##  $ Class                   : Factor w/ 3 levels &quot;H&quot;,&quot;M&quot;,&quot;L&quot;: 2 2 3 ..
-##  - attr(*, &quot;spec&quot;)=
-##   .. cols(
-##   ..   gender = col_character(),
-##   ..   NationalITy = col_character(),
-##   ..   PlaceofBirth = col_character(),
-##   ..   StageID = col_character(),
-##   ..   GradeID = col_character(),
-##   ..   SectionID = col_character(),
-##   ..   Topic = col_character(),
-##   ..   Semester = col_character(),
-##   ..   Relation = col_character(),
-##   ..   raisedhands = col_double(),
-##   ..   VisITedResources = col_double(),
-##   ..   AnnouncementsView = col_double(),
-##   ..   Discussion = col_double(),
-##   ..   ParentAnsweringSurvey = col_character(),
-##   ..   ParentschoolSatisfaction = col_character(),
-##   ..   StudentAbsenceDays = col_character(),
-##   ..   Class = col_character()
-##   .. )
-##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>edudata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/xAPI-Edu-Data.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>edudata<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(edudata<span class="sc">$</span>Class, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>edudata<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(edudata<span class="sc">$</span>gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(edudata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spec_tbl_df [480 × 17] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ gender                  : Factor w/ 2 levels "M","F": 1 1 1 1 1 2 1 1 2 2 ...
+ $ NationalITy             : chr [1:480] "KW" "KW" "KW" "KW" ...
+ $ PlaceofBirth            : chr [1:480] "KuwaIT" "KuwaIT" "KuwaIT" "KuwaIT" ...
+ $ StageID                 : chr [1:480] "lowerlevel" "lowerlevel" "lowerlevel" "lowerlevel" ...
+ $ GradeID                 : chr [1:480] "G-04" "G-04" "G-04" "G-04" ...
+ $ SectionID               : chr [1:480] "A" "A" "A" "A" ...
+ $ Topic                   : chr [1:480] "IT" "IT" "IT" "IT" ...
+ $ Semester                : chr [1:480] "F" "F" "F" "F" ...
+ $ Relation                : chr [1:480] "Father" "Father" "Father" "Father" ...
+ $ raisedhands             : num [1:480] 15 20 10 30 40 42 35 50 12 70 ...
+ $ VisITedResources        : num [1:480] 16 20 7 25 50 30 12 10 21 80 ...
+ $ AnnouncementsView       : num [1:480] 2 3 0 5 12 13 0 15 16 25 ...
+ $ Discussion              : num [1:480] 20 25 30 35 50 70 17 22 50 70 ...
+ $ ParentAnsweringSurvey   : chr [1:480] "Yes" "Yes" "No" "No" ...
+ $ ParentschoolSatisfaction: chr [1:480] "Good" "Good" "Bad" "Bad" ...
+ $ StudentAbsenceDays      : chr [1:480] "Under-7" "Under-7" "Above-7" "Above-7" ...
+ $ Class                   : Factor w/ 3 levels "H","M","L": 2 2 3 3 2 2 3 2 2 2 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   gender = col_character(),
+  ..   NationalITy = col_character(),
+  ..   PlaceofBirth = col_character(),
+  ..   StageID = col_character(),
+  ..   GradeID = col_character(),
+  ..   SectionID = col_character(),
+  ..   Topic = col_character(),
+  ..   Semester = col_character(),
+  ..   Relation = col_character(),
+  ..   raisedhands = col_double(),
+  ..   VisITedResources = col_double(),
+  ..   AnnouncementsView = col_double(),
+  ..   Discussion = col_double(),
+  ..   ParentAnsweringSurvey = col_character(),
+  ..   ParentschoolSatisfaction = col_character(),
+  ..   StudentAbsenceDays = col_character(),
+  ..   Class = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
-<div id="sec:descriptive-analysis" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> 描述性分析<a href="5-Student-performance-level.html#sec:descriptive-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="封装绘图函数" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> 封装绘图函数<a href="5-Student-performance-level.html#封装绘图函数" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="5-Student-performance-level.html#cb146-1" aria-hidden="true" tabindex="-1"></a>fun_bar <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, fillc, pos, xname, yname, legend){</span>
-<span id="cb146-2"><a href="5-Student-performance-level.html#cb146-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
-<span id="cb146-3"><a href="5-Student-performance-level.html#cb146-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> <span class="co"># dplyr中的自定函数参数需要使用{{}}括起来</span></span>
-<span id="cb146-4"><a href="5-Student-performance-level.html#cb146-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-5"><a href="5-Student-performance-level.html#cb146-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>({{xlab}}, count), count, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
-<span id="cb146-6"><a href="5-Student-performance-level.html#cb146-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">position =</span> pos) <span class="sc">+</span> <span class="co">#pos = &quot;stack&quot; or &quot;fill&quot;</span></span>
-<span id="cb146-7"><a href="5-Student-performance-level.html#cb146-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
-<span id="cb146-8"><a href="5-Student-performance-level.html#cb146-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb146-9"><a href="5-Student-performance-level.html#cb146-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb146-10"><a href="5-Student-performance-level.html#cb146-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> legend))</span>
-<span id="cb146-11"><a href="5-Student-performance-level.html#cb146-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="不同教育程度的学生选择课程主题" class="section level3 hasAnchor" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> 不同教育程度的学生选择课程主题<a href="5-Student-performance-level.html#不同教育程度的学生选择课程主题" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="5-Student-performance-level.html#cb147-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> StageID,</span>
-<span id="cb147-2"><a href="5-Student-performance-level.html#cb147-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_Count&quot;</span>,</span>
-<span id="cb147-3"><a href="5-Student-performance-level.html#cb147-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend =</span> <span class="st">&quot;教育程度&quot;</span>)</span>
-<span id="cb147-4"><a href="5-Student-performance-level.html#cb147-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> StageID,</span>
-<span id="cb147-5"><a href="5-Student-performance-level.html#cb147-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Per_Student_Count&quot;</span>,</span>
-<span id="cb147-6"><a href="5-Student-performance-level.html#cb147-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend =</span> <span class="st">&quot;教育程度&quot;</span>)</span>
-<span id="cb147-7"><a href="5-Student-performance-level.html#cb147-7" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:school-level"></span>
-<img src="5-Student-performance-level_files/figure-html/school-level-1.png" alt="不同教育程度的学生选择课程主题" width="672" />
-<p class="caption">
-图 5.1: 不同教育程度的学生选择课程主题
-</p>
+</section>
+<section id="sec:descriptive-analysis" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec:descriptive-analysis"><span class="header-section-number">5.2</span> 描述性分析</h2>
+<section id="封装绘图函数" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="封装绘图函数"><span class="header-section-number">5.2.1</span> 封装绘图函数</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fun_bar <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, fillc, pos, xname, yname, legend){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> <span class="co"># dplyr中的自定函数参数需要使用{{}}括起来</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>({{xlab}}, count), count, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">position =</span> pos) <span class="sc">+</span> <span class="co">#pos = "stack" or "fill"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> legend))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:school-level">5.1</a>可以看出：</p>
+</section>
+<section id="不同教育程度的学生选择课程主题" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="不同教育程度的学生选择课程主题"><span class="header-section-number">5.2.2</span> 不同教育程度的学生选择课程主题</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> StageID,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Student_Count"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend =</span> <span class="st">"教育程度"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> StageID,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Per_Student_Count"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend =</span> <span class="st">"教育程度"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/school-level-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">不同教育程度的学生选择课程主题</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>由图@ref(fig:school-level)可以看出：</p>
 <ul>
 <li><p>课程主题最多的为IT、French和Arabic，其中选择IT的课程主题的学员远高于其他课。</p></li>
 <li><p>无论哪种教育程度，IT、Science、Math和English四种课程都是必修的（三种颜色都有）。</p></li>
 </ul>
-</div>
-<div id="不同课程主题监护人情况" class="section level3 hasAnchor" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> 不同课程主题监护人情况<a href="5-Student-performance-level.html#不同课程主题监护人情况" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section>
+<section id="不同课程主题监护人情况" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="不同课程主题监护人情况"><span class="header-section-number">5.2.3</span> 不同课程主题监护人情况</h3>
 <p>这部分主要针对家长的情况进行分析，了解父母对学员学习的不同情况。对应在数据集中的变量为<code>Relation</code>。</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="5-Student-performance-level.html#cb148-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Relation,</span>
-<span id="cb148-2"><a href="5-Student-performance-level.html#cb148-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb148-3"><a href="5-Student-performance-level.html#cb148-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb148-4"><a href="5-Student-performance-level.html#cb148-4" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Relation,</span>
-<span id="cb148-5"><a href="5-Student-performance-level.html#cb148-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb148-6"><a href="5-Student-performance-level.html#cb148-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb148-7"><a href="5-Student-performance-level.html#cb148-7" aria-hidden="true" tabindex="-1"></a>p3<span class="sc">/</span>p4</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:relation"></span>
-<img src="5-Student-performance-level_files/figure-html/relation-1.png" alt="不同课程主题监护人情况" width="672" />
-<p class="caption">
-图 5.2: 不同课程主题监护人情况
-</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Relation,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Relation,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>p3<span class="sc">/</span>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/relation-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">不同课程主题监护人情况</figcaption><p></p>
+</figure>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:relation">5.2</a>可以看出：</p>
+</div>
+</div>
+<p>由图@ref(fig:relation)可以看出：</p>
 <ul>
 <li><p>总体而言，监护人为父亲的较多。其中，IT和Math课程中，负责人为父亲的超过75%。</p></li>
 <li><p>French课程，监护人大多数为母亲，占70%左右。</p></li>
 </ul>
+</section>
+<section id="不同课程学生学习成绩" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="不同课程学生学习成绩"><span class="header-section-number">5.2.4</span> 不同课程学生学习成绩</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Class,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"学生成绩"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Class,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Topic"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"学生成绩"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>p5<span class="sc">/</span>p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/class-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">不同课程学生学习成绩</figcaption><p></p>
+</figure>
 </div>
-<div id="不同课程学生学习成绩" class="section level3 hasAnchor" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> 不同课程学生学习成绩<a href="5-Student-performance-level.html#不同课程学生学习成绩" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="5-Student-performance-level.html#cb149-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Class,</span>
-<span id="cb149-2"><a href="5-Student-performance-level.html#cb149-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb149-3"><a href="5-Student-performance-level.html#cb149-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;学生成绩&quot;</span>)</span>
-<span id="cb149-4"><a href="5-Student-performance-level.html#cb149-4" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Topic, <span class="at">fillc =</span> Class,</span>
-<span id="cb149-5"><a href="5-Student-performance-level.html#cb149-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb149-6"><a href="5-Student-performance-level.html#cb149-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;学生成绩&quot;</span>)</span>
-<span id="cb149-7"><a href="5-Student-performance-level.html#cb149-7" aria-hidden="true" tabindex="-1"></a>p5<span class="sc">/</span>p6</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:class"></span>
-<img src="5-Student-performance-level_files/figure-html/class-1.png" alt="不同课程学生学习成绩" width="672" />
-<p class="caption">
-图 5.3: 不同课程学生学习成绩
-</p>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:class">5.3</a>:</p>
+</div>
+<p>由图@ref(fig:class):</p>
 <ul>
 <li><p>所有课程中，只有Biology课程中，属于高水平的学生数超过了50%。</p></li>
 <li><p>在Geology课程中，没有低水平的学生。</p></li>
 </ul>
+</section>
+<section id="不同教室学生成绩水平" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="不同教室学生成绩水平"><span class="header-section-number">5.2.5</span> 不同教室学生成绩水平</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p7 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> SectionID, <span class="at">fillc =</span> Class,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Section_ID"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"学生成绩"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>p8 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> SectionID, <span class="at">fillc =</span> Class,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Section_ID"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"学生成绩"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>p7<span class="sc">/</span>p8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/score-section-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">不同教室学生成绩水平</figcaption><p></p>
+</figure>
 </div>
-<div id="不同教室学生成绩水平" class="section level3 hasAnchor" number="5.2.5">
-<h3><span class="header-section-number">5.2.5</span> 不同教室学生成绩水平<a href="5-Student-performance-level.html#不同教室学生成绩水平" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="5-Student-performance-level.html#cb150-1" aria-hidden="true" tabindex="-1"></a>p7 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> SectionID, <span class="at">fillc =</span> Class,</span>
-<span id="cb150-2"><a href="5-Student-performance-level.html#cb150-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Section_ID&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb150-3"><a href="5-Student-performance-level.html#cb150-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;学生成绩&quot;</span>)</span>
-<span id="cb150-4"><a href="5-Student-performance-level.html#cb150-4" aria-hidden="true" tabindex="-1"></a>p8 <span class="ot">&lt;-</span> <span class="fu">fun_bar</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> SectionID, <span class="at">fillc =</span> Class,</span>
-<span id="cb150-5"><a href="5-Student-performance-level.html#cb150-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Section_ID&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb150-6"><a href="5-Student-performance-level.html#cb150-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;学生成绩&quot;</span>)</span>
-<span id="cb150-7"><a href="5-Student-performance-level.html#cb150-7" aria-hidden="true" tabindex="-1"></a>p7<span class="sc">/</span>p8</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:score-section"></span>
-<img src="5-Student-performance-level_files/figure-html/score-section-1.png" alt="不同教室学生成绩水平" width="672" />
-<p class="caption">
-图 5.4: 不同教室学生成绩水平
-</p>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:score-section">5.4</a>可以看出：</p>
+</div>
+<p>由图@ref(fig:score-section)可以看出：</p>
 <ul>
 <li><p>在A班的学生最多，C班的学生最少。</p></li>
 <li><p>C班的低水平成绩的学生相对较多，其它两个班级的成绩水平基本一致。</p></li>
 </ul>
+</section>
+<section id="不同学期不同成绩水平与监护人的关系" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="不同学期不同成绩水平与监护人的关系"><span class="header-section-number">5.2.6</span> 不同学期、不同成绩水平与监护人的关系</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 封装函数，去掉坐标轴翻转</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fun_bar2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, fillc, pos, xname, yname, legend){</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> <span class="co"># dplyr中的自定函数参数需要使用{{}}括起来</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>({{xlab}}, count), count, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">position =</span> pos) <span class="sc">+</span> <span class="co">#pos = "stack" or "fill"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> legend))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="不同学期不同成绩水平与监护人的关系" class="section level3 hasAnchor" number="5.2.6">
-<h3><span class="header-section-number">5.2.6</span> 不同学期、不同成绩水平与监护人的关系<a href="5-Student-performance-level.html#不同学期不同成绩水平与监护人的关系" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="5-Student-performance-level.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 封装函数，去掉坐标轴翻转</span></span>
-<span id="cb151-2"><a href="5-Student-performance-level.html#cb151-2" aria-hidden="true" tabindex="-1"></a>fun_bar2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, fillc, pos, xname, yname, legend){</span>
-<span id="cb151-3"><a href="5-Student-performance-level.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
-<span id="cb151-4"><a href="5-Student-performance-level.html#cb151-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> <span class="co"># dplyr中的自定函数参数需要使用{{}}括起来</span></span>
-<span id="cb151-5"><a href="5-Student-performance-level.html#cb151-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb151-6"><a href="5-Student-performance-level.html#cb151-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>({{xlab}}, count), count, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
-<span id="cb151-7"><a href="5-Student-performance-level.html#cb151-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">position =</span> pos) <span class="sc">+</span> <span class="co">#pos = &quot;stack&quot; or &quot;fill&quot;</span></span>
-<span id="cb151-8"><a href="5-Student-performance-level.html#cb151-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
-<span id="cb151-9"><a href="5-Student-performance-level.html#cb151-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb151-10"><a href="5-Student-performance-level.html#cb151-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> legend))</span>
-<span id="cb151-11"><a href="5-Student-performance-level.html#cb151-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="5-Student-performance-level.html#cb152-1" aria-hidden="true" tabindex="-1"></a>p9 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Semester, Relation, <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>,</span>
-<span id="cb152-2"><a href="5-Student-performance-level.html#cb152-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">xname =</span> <span class="st">&quot;Semester&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb152-3"><a href="5-Student-performance-level.html#cb152-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb152-4"><a href="5-Student-performance-level.html#cb152-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-5"><a href="5-Student-performance-level.html#cb152-5" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Semester, Relation, <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>,</span>
-<span id="cb152-6"><a href="5-Student-performance-level.html#cb152-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">xname =</span> <span class="st">&quot;Semester&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;per_Student_count&quot;</span>,</span>
-<span id="cb152-7"><a href="5-Student-performance-level.html#cb152-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb152-8"><a href="5-Student-performance-level.html#cb152-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-9"><a href="5-Student-performance-level.html#cb152-9" aria-hidden="true" tabindex="-1"></a>p11 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, Relation, <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>,</span>
-<span id="cb152-10"><a href="5-Student-performance-level.html#cb152-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>,</span>
-<span id="cb152-11"><a href="5-Student-performance-level.html#cb152-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb152-12"><a href="5-Student-performance-level.html#cb152-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-13"><a href="5-Student-performance-level.html#cb152-13" aria-hidden="true" tabindex="-1"></a>p12 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, Relation, <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>,</span>
-<span id="cb152-14"><a href="5-Student-performance-level.html#cb152-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>, <span class="at">yname =</span> <span class="st">&quot;per_Student_count&quot;</span>,</span>
-<span id="cb152-15"><a href="5-Student-performance-level.html#cb152-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">&quot;监护人情况&quot;</span>)</span>
-<span id="cb152-16"><a href="5-Student-performance-level.html#cb152-16" aria-hidden="true" tabindex="-1"></a>(p9<span class="sc">|</span>p10) <span class="sc">/</span> (p11<span class="sc">|</span>p12)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:semester"></span>
-<img src="5-Student-performance-level_files/figure-html/semester-1.png" alt="不同学期、不同成绩水平与监护人的关系" width="672" />
-<p class="caption">
-图 5.5: 不同学期、不同成绩水平与监护人的关系
-</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p9 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Semester, Relation, <span class="at">pos =</span> <span class="st">"stack"</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">xname =</span> <span class="st">"Semester"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Semester, Relation, <span class="at">pos =</span> <span class="st">"fill"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">xname =</span> <span class="st">"Semester"</span>, <span class="at">yname =</span> <span class="st">"per_Student_count"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>p11 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, Relation, <span class="at">pos =</span> <span class="st">"stack"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">xname =</span> <span class="st">"Class"</span>, <span class="at">yname =</span> <span class="st">"Student_count"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>p12 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, Relation, <span class="at">pos =</span> <span class="st">"fill"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">xname =</span> <span class="st">"Class"</span>, <span class="at">yname =</span> <span class="st">"per_Student_count"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend =</span> <span class="st">"监护人情况"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>(p9<span class="sc">|</span>p10) <span class="sc">/</span> (p11<span class="sc">|</span>p12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/semester-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">不同学期、不同成绩水平与监护人的关系</figcaption><p></p>
+</figure>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:semester">5.5</a>可知：</p>
+</div>
+</div>
+<p>由图@ref(fig:semester)可知：</p>
 <ul>
 <li><p>第一学期父亲作为监护人的学生数比第二学期多。</p></li>
 <li><p>总体看，成绩水平较高的学生中，监护人为母亲的比较多；其它水平均是父亲较多。</p></li>
 </ul>
+</section>
+<section id="家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" class="level3" data-number="5.2.7">
+<h3 data-number="5.2.7" class="anchored" data-anchor-id="家长是否回答调查问卷成绩水平与家长对学校是否满意的关系"><span class="header-section-number">5.2.7</span> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p13 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, ParentAnsweringSurvey, ParentschoolSatisfaction, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"ParentAnsweringSurvey"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Student_count"</span>, <span class="at">legend =</span> <span class="st">"是否满意"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>p14 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, ParentAnsweringSurvey, ParentschoolSatisfaction, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"ParentAnsweringSurvey"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Per_Student_count"</span>, <span class="at">legend =</span> <span class="st">"是否满意"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>p15 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, ParentschoolSatisfaction, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Class"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Student_count"</span>, <span class="at">legend =</span> <span class="st">"是否满意"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>p16 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, ParentschoolSatisfaction, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Class"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Per_Student_count"</span>, <span class="at">legend =</span> <span class="st">"是否满意"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>(p13<span class="sc">|</span>p14)<span class="sc">/</span>(p15<span class="sc">|</span>p16)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/surey-class-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系</figcaption><p></p>
+</figure>
 </div>
-<div id="家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" class="section level3 hasAnchor" number="5.2.7">
-<h3><span class="header-section-number">5.2.7</span> 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系<a href="5-Student-performance-level.html#家长是否回答调查问卷成绩水平与家长对学校是否满意的关系" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="5-Student-performance-level.html#cb153-1" aria-hidden="true" tabindex="-1"></a>p13 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, ParentAnsweringSurvey, ParentschoolSatisfaction, </span>
-<span id="cb153-2"><a href="5-Student-performance-level.html#cb153-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;ParentAnsweringSurvey&quot;</span>,</span>
-<span id="cb153-3"><a href="5-Student-performance-level.html#cb153-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;是否满意&quot;</span>)</span>
-<span id="cb153-4"><a href="5-Student-performance-level.html#cb153-4" aria-hidden="true" tabindex="-1"></a>p14 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, ParentAnsweringSurvey, ParentschoolSatisfaction, </span>
-<span id="cb153-5"><a href="5-Student-performance-level.html#cb153-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;ParentAnsweringSurvey&quot;</span>,</span>
-<span id="cb153-6"><a href="5-Student-performance-level.html#cb153-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Per_Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;是否满意&quot;</span>)</span>
-<span id="cb153-7"><a href="5-Student-performance-level.html#cb153-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-8"><a href="5-Student-performance-level.html#cb153-8" aria-hidden="true" tabindex="-1"></a>p15 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, ParentschoolSatisfaction, </span>
-<span id="cb153-9"><a href="5-Student-performance-level.html#cb153-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>,</span>
-<span id="cb153-10"><a href="5-Student-performance-level.html#cb153-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;是否满意&quot;</span>)</span>
-<span id="cb153-11"><a href="5-Student-performance-level.html#cb153-11" aria-hidden="true" tabindex="-1"></a>p16 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, Class, ParentschoolSatisfaction, </span>
-<span id="cb153-12"><a href="5-Student-performance-level.html#cb153-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>,</span>
-<span id="cb153-13"><a href="5-Student-performance-level.html#cb153-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Per_Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;是否满意&quot;</span>)</span>
-<span id="cb153-14"><a href="5-Student-performance-level.html#cb153-14" aria-hidden="true" tabindex="-1"></a>(p13<span class="sc">|</span>p14)<span class="sc">/</span>(p15<span class="sc">|</span>p16)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:surey-class"></span>
-<img src="5-Student-performance-level_files/figure-html/surey-class-1.png" alt="家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系" width="672" />
-<p class="caption">
-图 5.6: 家长是否回答调查问卷、成绩水平与家长对学校是否满意的关系
-</p>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:surey-class">5.6</a>可以看出：</p>
+</div>
+<p>由图@ref(fig:surey-class)可以看出：</p>
 <ul>
 <li><p>有超过一半的家长回答了问卷，其中，回答问卷的家长大部分对学校满意，而未回答问卷的则大部分对学校不满。</p></li>
 <li><p>成绩越高，家长对学校越满意。</p></li>
 </ul>
+</section>
+<section id="性别逃课次数与学生成绩水平的关系" class="level3" data-number="5.2.8">
+<h3 data-number="5.2.8" class="anchored" data-anchor-id="性别逃课次数与学生成绩水平的关系"><span class="header-section-number">5.2.8</span> 性别、逃课次数与学生成绩水平的关系</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p17 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, gender, Class, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Student_count"</span>, <span class="at">legend =</span> <span class="st">"成绩水平"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>p18 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, gender, Class, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Per_Student_count"</span>, <span class="at">legend =</span> <span class="st">"成绩水平"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>p19 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, StudentAbsenceDays, Class, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"stack"</span>, <span class="at">xname =</span> <span class="st">"Class"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Student_count"</span>, <span class="at">legend =</span> <span class="st">"成绩水平"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>p20 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, StudentAbsenceDays, Class, </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">"fill"</span>, <span class="at">xname =</span> <span class="st">"Class"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">"Per_Student_count"</span>, <span class="at">legend =</span> <span class="st">"成绩水平"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>(p17<span class="sc">|</span>p18)<span class="sc">/</span>(p19<span class="sc">|</span>p20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/gender-absence-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">性别、逃课次数与学生成绩水平的关系</figcaption><p></p>
+</figure>
 </div>
-<div id="性别逃课次数与学生成绩水平的关系" class="section level3 hasAnchor" number="5.2.8">
-<h3><span class="header-section-number">5.2.8</span> 性别、逃课次数与学生成绩水平的关系<a href="5-Student-performance-level.html#性别逃课次数与学生成绩水平的关系" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="5-Student-performance-level.html#cb154-1" aria-hidden="true" tabindex="-1"></a>p17 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, gender, Class, </span>
-<span id="cb154-2"><a href="5-Student-performance-level.html#cb154-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Gender&quot;</span>,</span>
-<span id="cb154-3"><a href="5-Student-performance-level.html#cb154-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;成绩水平&quot;</span>)</span>
-<span id="cb154-4"><a href="5-Student-performance-level.html#cb154-4" aria-hidden="true" tabindex="-1"></a>p18 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, gender, Class, </span>
-<span id="cb154-5"><a href="5-Student-performance-level.html#cb154-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Gender&quot;</span>,</span>
-<span id="cb154-6"><a href="5-Student-performance-level.html#cb154-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Per_Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;成绩水平&quot;</span>)</span>
-<span id="cb154-7"><a href="5-Student-performance-level.html#cb154-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb154-8"><a href="5-Student-performance-level.html#cb154-8" aria-hidden="true" tabindex="-1"></a>p19 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, StudentAbsenceDays, Class, </span>
-<span id="cb154-9"><a href="5-Student-performance-level.html#cb154-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;stack&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>,</span>
-<span id="cb154-10"><a href="5-Student-performance-level.html#cb154-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;成绩水平&quot;</span>)</span>
-<span id="cb154-11"><a href="5-Student-performance-level.html#cb154-11" aria-hidden="true" tabindex="-1"></a>p20 <span class="ot">&lt;-</span> <span class="fu">fun_bar2</span>(edudata, StudentAbsenceDays, Class, </span>
-<span id="cb154-12"><a href="5-Student-performance-level.html#cb154-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pos =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">xname =</span> <span class="st">&quot;Class&quot;</span>,</span>
-<span id="cb154-13"><a href="5-Student-performance-level.html#cb154-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">yname =</span> <span class="st">&quot;Per_Student_count&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;成绩水平&quot;</span>)</span>
-<span id="cb154-14"><a href="5-Student-performance-level.html#cb154-14" aria-hidden="true" tabindex="-1"></a>(p17<span class="sc">|</span>p18)<span class="sc">/</span>(p19<span class="sc">|</span>p20)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:gender-absence"></span>
-<img src="5-Student-performance-level_files/figure-html/gender-absence-1.png" alt="性别、逃课次数与学生成绩水平的关系" width="672" />
-<p class="caption">
-图 5.7: 性别、逃课次数与学生成绩水平的关系
-</p>
 </div>
-<p>由图<a href="5-Student-performance-level.html#fig:gender-absence">5.7</a>可知：</p>
+</div>
+<p>由图@ref(fig:gender-absence)可知：</p>
 <ul>
 <li><p>女生比男生数量少很多，但高水平成绩的人数明显比男生多；中水平成绩男女比例基本持平。</p></li>
 <li><p>逃课超过7天的的学生基本无法取得好的成绩。</p></li>
 </ul>
+</section>
+<section id="举手次数和参加讨论次数与成绩水平关系" class="level3" data-number="5.2.9">
+<h3 data-number="5.2.9" class="anchored" data-anchor-id="举手次数和参加讨论次数与成绩水平关系"><span class="header-section-number">5.2.9</span> 举手次数和参加讨论次数与成绩水平关系</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fun_bar3 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, ylab, fillc, xname, yname){</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Mcount =</span> <span class="fu">mean</span>({{ylab}})) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>({{xlab}}, Mcount, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="举手次数和参加讨论次数与成绩水平关系" class="section level3 hasAnchor" number="5.2.9">
-<h3><span class="header-section-number">5.2.9</span> 举手次数和参加讨论次数与成绩水平关系<a href="5-Student-performance-level.html#举手次数和参加讨论次数与成绩水平关系" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="5-Student-performance-level.html#cb155-1" aria-hidden="true" tabindex="-1"></a>fun_bar3 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xlab, ylab, fillc, xname, yname){</span>
-<span id="cb155-2"><a href="5-Student-performance-level.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
-<span id="cb155-3"><a href="5-Student-performance-level.html#cb155-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{xlab}}) <span class="sc">%&gt;%</span> </span>
-<span id="cb155-4"><a href="5-Student-performance-level.html#cb155-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Mcount =</span> <span class="fu">mean</span>({{ylab}})) <span class="sc">%&gt;%</span> </span>
-<span id="cb155-5"><a href="5-Student-performance-level.html#cb155-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>({{xlab}}, Mcount, <span class="at">fill =</span> {{fillc}})) <span class="sc">+</span></span>
-<span id="cb155-6"><a href="5-Student-performance-level.html#cb155-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
-<span id="cb155-7"><a href="5-Student-performance-level.html#cb155-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> xname, <span class="at">y =</span> yname) <span class="sc">+</span></span>
-<span id="cb155-8"><a href="5-Student-performance-level.html#cb155-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb155-9"><a href="5-Student-performance-level.html#cb155-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb155-10"><a href="5-Student-performance-level.html#cb155-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="5-Student-performance-level.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># edudata$Class &lt;- factor(edudata$Class, c(&quot;H&quot;, &quot;M&quot;, &quot;L&quot;), ordered = TRUE)</span></span>
-<span id="cb156-2"><a href="5-Student-performance-level.html#cb156-2" aria-hidden="true" tabindex="-1"></a>p21 <span class="ot">&lt;-</span> <span class="fu">fun_bar3</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Class, <span class="at">ylab =</span> raisedhands, </span>
-<span id="cb156-3"><a href="5-Student-performance-level.html#cb156-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">fillc =</span> Class, <span class="st">&quot;成绩水平&quot;</span>, <span class="st">&quot;平均举手次数&quot;</span> )</span>
-<span id="cb156-4"><a href="5-Student-performance-level.html#cb156-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-5"><a href="5-Student-performance-level.html#cb156-5" aria-hidden="true" tabindex="-1"></a>p22 <span class="ot">&lt;-</span> <span class="fu">fun_bar3</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Class, <span class="at">ylab =</span> Discussion, </span>
-<span id="cb156-6"><a href="5-Student-performance-level.html#cb156-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">fillc =</span> Class, <span class="st">&quot;成绩水平&quot;</span>, <span class="st">&quot;平均参与讨论次数&quot;</span> )</span>
-<span id="cb156-7"><a href="5-Student-performance-level.html#cb156-7" aria-hidden="true" tabindex="-1"></a>p21<span class="sc">|</span>p22</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:raisedhands-discuss"></span>
-<img src="5-Student-performance-level_files/figure-html/raisedhands-discuss-1.png" alt="举手次数和参加讨论次数与成绩水平关系" width="672" />
-<p class="caption">
-图 5.8: 举手次数和参加讨论次数与成绩水平关系
-</p>
-</div>
-<p>由图<a href="5-Student-performance-level.html#fig:raisedhands-discuss">5.8</a>可知： 举手次数和参与讨论次数越多，成绩水平越高。</p>
-<hr />
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># edudata$Class &lt;- factor(edudata$Class, c("H", "M", "L"), ordered = TRUE)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>p21 <span class="ot">&lt;-</span> <span class="fu">fun_bar3</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Class, <span class="at">ylab =</span> raisedhands, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">fillc =</span> Class, <span class="st">"成绩水平"</span>, <span class="st">"平均举手次数"</span> )</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>p22 <span class="ot">&lt;-</span> <span class="fu">fun_bar3</span>(<span class="at">data =</span> edudata, <span class="at">xlab =</span> Class, <span class="at">ylab =</span> Discussion, </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">fillc =</span> Class, <span class="st">"成绩水平"</span>, <span class="st">"平均参与讨论次数"</span> )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>p21<span class="sc">|</span>p22</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5-Student-performance-level_files/figure-html/raisedhands-discuss-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">举手次数和参加讨论次数与成绩水平关系</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div id="模型建立-1" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> 模型建立<a href="5-Student-performance-level.html#模型建立-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="回归树模型建立" class="section level3 hasAnchor" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> 回归树模型建立<a href="5-Student-performance-level.html#回归树模型建立" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="5-Student-performance-level.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb157-2"><a href="5-Student-performance-level.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照数据目标8:2进行分层抽样，返回矩阵形式的抽样索引</span></span>
-<span id="cb157-3"><a href="5-Student-performance-level.html#cb157-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(edudata<span class="sc">$</span>Class, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
-<span id="cb157-4"><a href="5-Student-performance-level.html#cb157-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> edudata[index, ]</span>
-<span id="cb157-5"><a href="5-Student-performance-level.html#cb157-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> edudata[<span class="sc">-</span>index, ]</span>
-<span id="cb157-6"><a href="5-Student-performance-level.html#cb157-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-7"><a href="5-Student-performance-level.html#cb157-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立回归树模型</span></span>
-<span id="cb157-8"><a href="5-Student-performance-level.html#cb157-8" aria-hidden="true" tabindex="-1"></a>rpart_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Class <span class="sc">~</span>., <span class="at">data =</span> train)</span>
-<span id="cb157-9"><a href="5-Student-performance-level.html#cb157-9" aria-hidden="true" tabindex="-1"></a><span class="co"># type = &quot;class&quot;指定预测结果是具体的某个类别</span></span>
-<span id="cb157-10"><a href="5-Student-performance-level.html#cb157-10" aria-hidden="true" tabindex="-1"></a>pred_rp <span class="ot">&lt;-</span> <span class="fu">predict</span>(rpart_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb157-11"><a href="5-Student-performance-level.html#cb157-11" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_rp, test<span class="sc">$</span>Class)</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  H  M  L
-##          H 18  3  0
-##          M  9 29  3
-##          L  1 10 22
-## 
-## Overall Statistics
-##                                           
-##                Accuracy : 0.7263          
-##                  95% CI : (0.6252, 0.8128)
-##     No Information Rate : 0.4421          
-##     P-Value [Acc &gt; NIR] : 1.882e-08       
-##                                           
-##                   Kappa : 0.5806          
-##                                           
-##  Mcnemar&#39;s Test P-Value : 0.05103         
-## 
-## Statistics by Class:
-## 
-##                      Class: H Class: M Class: L
-## Sensitivity            0.6429   0.6905   0.8800
-## Specificity            0.9552   0.7736   0.8429
-## Pos Pred Value         0.8571   0.7073   0.6667
-## Neg Pred Value         0.8649   0.7593   0.9516
-## Prevalence             0.2947   0.4421   0.2632
-## Detection Rate         0.1895   0.3053   0.2316
-## Detection Prevalence   0.2211   0.4316   0.3474
-## Balanced Accuracy      0.7990   0.7320   0.8614</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="5-Student-performance-level.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(rpart_model)</span></code></pre></div>
-<p><img src="5-Student-performance-level_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="随机数模型" class="section level3 hasAnchor" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> 随机数模型<a href="5-Student-performance-level.html#随机数模型" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="5-Student-performance-level.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb160-2"><a href="5-Student-performance-level.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="co"># importance = T:稍后对变量进行重要性的可视化</span></span>
-<span id="cb160-3"><a href="5-Student-performance-level.html#cb160-3" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Class<span class="sc">~</span>., <span class="at">data =</span> train, <span class="at">importance =</span> T)</span>
-<span id="cb160-4"><a href="5-Student-performance-level.html#cb160-4" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb160-5"><a href="5-Student-performance-level.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_rf, test<span class="sc">$</span>Class) <span class="co"># 混淆矩阵判断模型准确率</span></span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  H  M  L
-##          H 20  4  0
-##          M  8 36  4
-##          L  0  2 21
-## 
-## Overall Statistics
-##                                           
-##                Accuracy : 0.8105          
-##                  95% CI : (0.7172, 0.8837)
-##     No Information Rate : 0.4421          
-##     P-Value [Acc &gt; NIR] : 1.886e-13       
-##                                           
-##                   Kappa : 0.7032          
-##                                           
-##  Mcnemar&#39;s Test P-Value : NA              
-## 
-## Statistics by Class:
-## 
-##                      Class: H Class: M Class: L
-## Sensitivity            0.7143   0.8571   0.8400
-## Specificity            0.9403   0.7736   0.9714
-## Pos Pred Value         0.8333   0.7500   0.9130
-## Neg Pred Value         0.8873   0.8723   0.9444
-## Prevalence             0.2947   0.4421   0.2632
-## Detection Rate         0.2105   0.3789   0.2211
-## Detection Prevalence   0.2526   0.5053   0.2421
-## Balanced Accuracy      0.8273   0.8154   0.9057</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="5-Student-performance-level.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model) <span class="co"># 可视化变量重要性函数</span></span></code></pre></div>
-<p><img src="5-Student-performance-level_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>由图@ref(fig:raisedhands-discuss)可知： 举手次数和参与讨论次数越多，成绩水平越高。</p>
+<hr>
+</section>
+</section>
+<section id="模型建立" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="模型建立"><span class="header-section-number">5.3</span> 模型建立</h2>
+<section id="回归树模型建立" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="回归树模型建立"><span class="header-section-number">5.3.1</span> 回归树模型建立</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照数据目标8:2进行分层抽样，返回矩阵形式的抽样索引</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(edudata<span class="sc">$</span>Class, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> edudata[index, ]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> edudata[<span class="sc">-</span>index, ]</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立回归树模型</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>rpart_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Class <span class="sc">~</span>., <span class="at">data =</span> train)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># type = "class"指定预测结果是具体的某个类别</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>pred_rp <span class="ot">&lt;-</span> <span class="fu">predict</span>(rpart_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_rp, test<span class="sc">$</span>Class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  H  M  L
+         H 18  3  0
+         M  9 29  3
+         L  1 10 22
+
+Overall Statistics
+                                          
+               Accuracy : 0.7263          
+                 95% CI : (0.6252, 0.8128)
+    No Information Rate : 0.4421          
+    P-Value [Acc &gt; NIR] : 1.882e-08       
+                                          
+                  Kappa : 0.5806          
+                                          
+ Mcnemar's Test P-Value : 0.05103         
+
+Statistics by Class:
+
+                     Class: H Class: M Class: L
+Sensitivity            0.6429   0.6905   0.8800
+Specificity            0.9552   0.7736   0.8429
+Pos Pred Value         0.8571   0.7073   0.6667
+Neg Pred Value         0.8649   0.7593   0.9516
+Prevalence             0.2947   0.4421   0.2632
+Detection Rate         0.1895   0.3053   0.2316
+Detection Prevalence   0.2211   0.4316   0.3474
+Balanced Accuracy      0.7990   0.7320   0.8614</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(rpart_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5-Student-performance-level_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="随机数模型" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="随机数模型"><span class="header-section-number">5.3.2</span> 随机数模型</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># importance = T:稍后对变量进行重要性的可视化</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Class<span class="sc">~</span>., <span class="at">data =</span> train, <span class="at">importance =</span> T)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_rf, test<span class="sc">$</span>Class) <span class="co"># 混淆矩阵判断模型准确率</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  H  M  L
+         H 20  4  0
+         M  8 36  4
+         L  0  2 21
+
+Overall Statistics
+                                          
+               Accuracy : 0.8105          
+                 95% CI : (0.7172, 0.8837)
+    No Information Rate : 0.4421          
+    P-Value [Acc &gt; NIR] : 1.886e-13       
+                                          
+                  Kappa : 0.7032          
+                                          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: H Class: M Class: L
+Sensitivity            0.7143   0.8571   0.8400
+Specificity            0.9403   0.7736   0.9714
+Pos Pred Value         0.8333   0.7500   0.9130
+Neg Pred Value         0.8873   0.8723   0.9444
+Prevalence             0.2947   0.4421   0.2632
+Detection Rate         0.2105   0.3789   0.2211
+Detection Prevalence   0.2526   0.5053   0.2421
+Balanced Accuracy      0.8273   0.8154   0.9057</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model) <span class="co"># 可视化变量重要性函数</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5-Student-performance-level_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p>阅读上图：</p>
 <ul>
 <li><p>圆点越靠近右侧越重要。</p></li>
 <li><p>我们重点观察排名前五的变量。通过左右两图的对比发现，两图中前四个变量相同（交叉），可以判定这四个变量是数据中最重要的变量。</p></li>
 </ul>
+</section>
+<section id="svm建模-支持向量机需要再研究" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="svm建模-支持向量机需要再研究"><span class="header-section-number">5.3.3</span> SVM建模-支持向量机(需要再研究)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab) <span class="co"># Kernel-Based Machine Learning Lab</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">ksvm</span>(Class<span class="sc">~</span>., <span class="at">data =</span> test, <span class="at">kernel =</span> <span class="st">"rbfdot"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># type = "response":指定预测结果是具体的某个列别</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>pred_svm <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_svm, test<span class="sc">$</span>Class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  H  M  L
+         H 23  4  0
+         M  5 36  1
+         L  0  2 24
+
+Overall Statistics
+                                         
+               Accuracy : 0.8737         
+                 95% CI : (0.7897, 0.933)
+    No Information Rate : 0.4421         
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+                                         
+                  Kappa : 0.8053         
+                                         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: H Class: M Class: L
+Sensitivity            0.8214   0.8571   0.9600
+Specificity            0.9403   0.8868   0.9714
+Pos Pred Value         0.8519   0.8571   0.9231
+Neg Pred Value         0.9265   0.8868   0.9855
+Prevalence             0.2947   0.4421   0.2632
+Detection Rate         0.2421   0.3789   0.2526
+Detection Prevalence   0.2842   0.4421   0.2737
+Balanced Accuracy      0.8809   0.8720   0.9657</code></pre>
 </div>
-<div id="svm建模-支持向量机需要再研究" class="section level3 hasAnchor" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> SVM建模-支持向量机(需要再研究)<a href="5-Student-performance-level.html#svm建模-支持向量机需要再研究" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="5-Student-performance-level.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb163-2"><a href="5-Student-performance-level.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab) <span class="co"># Kernel-Based Machine Learning Lab</span></span>
-<span id="cb163-3"><a href="5-Student-performance-level.html#cb163-3" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">ksvm</span>(Class<span class="sc">~</span>., <span class="at">data =</span> test, <span class="at">kernel =</span> <span class="st">&quot;rbfdot&quot;</span>)</span>
-<span id="cb163-4"><a href="5-Student-performance-level.html#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="co"># type = &quot;response&quot;:指定预测结果是具体的某个列别</span></span>
-<span id="cb163-5"><a href="5-Student-performance-level.html#cb163-5" aria-hidden="true" tabindex="-1"></a>pred_svm <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, test[<span class="sc">-</span><span class="dv">17</span>], <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb163-6"><a href="5-Student-performance-level.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred_svm, test<span class="sc">$</span>Class)</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  H  M  L
-##          H 23  4  0
-##          M  5 36  1
-##          L  0  2 24
-## 
-## Overall Statistics
-##                                          
-##                Accuracy : 0.8737         
-##                  95% CI : (0.7897, 0.933)
-##     No Information Rate : 0.4421         
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
-##                                          
-##                   Kappa : 0.8053         
-##                                          
-##  Mcnemar&#39;s Test P-Value : NA             
-## 
-## Statistics by Class:
-## 
-##                      Class: H Class: M Class: L
-## Sensitivity            0.8214   0.8571   0.9600
-## Specificity            0.9403   0.8868   0.9714
-## Pos Pred Value         0.8519   0.8571   0.9231
-## Neg Pred Value         0.9265   0.8868   0.9855
-## Prevalence             0.2947   0.4421   0.2632
-## Detection Rate         0.2421   0.3789   0.2526
-## Detection Prevalence   0.2842   0.4421   0.2737
-## Balanced Accuracy      0.8809   0.8720   0.9657</code></pre>
 </div>
-<div id="模型融合" class="section level3 hasAnchor" number="5.3.4">
-<h3><span class="header-section-number">5.3.4</span> 模型融合<a href="5-Student-performance-level.html#模型融合" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section>
+<section id="模型融合" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="模型融合"><span class="header-section-number">5.3.4</span> 模型融合</h3>
 <p>将各个模型的结果做一个融合（合并至一个数据框）。</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="5-Student-performance-level.html#cb165-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">rpart =</span> pred_rp,</span>
-<span id="cb165-2"><a href="5-Student-performance-level.html#cb165-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">randomForest =</span> pred_rf,</span>
-<span id="cb165-3"><a href="5-Student-performance-level.html#cb165-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">svm =</span> pred_svm,</span>
-<span id="cb165-4"><a href="5-Student-performance-level.html#cb165-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">actual_class =</span> test<span class="sc">$</span>Class, </span>
-<span id="cb165-5"><a href="5-Student-performance-level.html#cb165-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">final_pred =</span> <span class="fu">rep</span>(<span class="st">&quot;-&quot;</span>, <span class="fu">nrow</span>(test)))</span>
-<span id="cb165-6"><a href="5-Student-performance-level.html#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code></pre></div>
-<pre><code>##   rpart randomForest svm actual_class final_pred
-## 1     M            M   M            M          -
-## 2     L            L   L            L          -
-## 3     L            L   L            L          -
-## 4     M            M   L            M          -
-## 5     L            L   L            L          -
-## 6     M            M   M            M          -</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="5-Student-performance-level.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 封装求众数函数</span></span>
-<span id="cb167-2"><a href="5-Student-performance-level.html#cb167-2" aria-hidden="true" tabindex="-1"></a>fun_pred <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb167-3"><a href="5-Student-performance-level.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span>
-<span id="cb167-4"><a href="5-Student-performance-level.html#cb167-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb167-5"><a href="5-Student-performance-level.html#cb167-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-6"><a href="5-Student-performance-level.html#cb167-6" aria-hidden="true" tabindex="-1"></a>result<span class="sc">$</span>final_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">apply</span>(result[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">1</span>, fun_pred))</span>
-<span id="cb167-7"><a href="5-Student-performance-level.html#cb167-7" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(result<span class="sc">$</span>actual_class, result<span class="sc">$</span>final_pred)</span></code></pre></div>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  H  L  M
-##          H 21  1  6
-##          L  0 23  2
-##          M  7 10 25
-## 
-## Overall Statistics
-##                                           
-##                Accuracy : 0.7263          
-##                  95% CI : (0.6252, 0.8128)
-##     No Information Rate : 0.3579          
-##     P-Value [Acc &gt; NIR] : 3.029e-13       
-##                                           
-##                   Kappa : 0.5887          
-##                                           
-##  Mcnemar&#39;s Test P-Value : 0.09327         
-## 
-## Statistics by Class:
-## 
-##                      Class: H Class: L Class: M
-## Sensitivity            0.7500   0.6765   0.7576
-## Specificity            0.8955   0.9672   0.7258
-## Pos Pred Value         0.7500   0.9200   0.5952
-## Neg Pred Value         0.8955   0.8429   0.8491
-## Prevalence             0.2947   0.3579   0.3474
-## Detection Rate         0.2211   0.2421   0.2632
-## Detection Prevalence   0.2947   0.2632   0.4421
-## Balanced Accuracy      0.8228   0.8218   0.7417</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="5-Student-performance-level.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code></pre></div>
-<pre><code>##   rpart randomForest svm actual_class final_pred
-## 1     M            M   M            M          M
-## 2     L            L   L            L          L
-## 3     L            L   L            L          L
-## 4     M            M   L            M          M
-## 5     L            L   L            L          L
-## 6     M            M   M            M          M</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">rpart =</span> pred_rp,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">randomForest =</span> pred_rf,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">svm =</span> pred_svm,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">actual_class =</span> test<span class="sc">$</span>Class, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">final_pred =</span> <span class="fu">rep</span>(<span class="st">"-"</span>, <span class="fu">nrow</span>(test)))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rpart randomForest svm actual_class final_pred
+1     M            M   M            M          -
+2     L            L   L            L          -
+3     L            L   L            L          -
+4     M            M   L            M          -
+5     L            L   L            L          -
+6     M            M   M            M          -</code></pre>
 </div>
 </div>
-<div id="mlr3模型建立" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> mlr3模型建立<a href="5-Student-performance-level.html#mlr3模型建立" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="5-Student-performance-level.html#cb171-1" aria-hidden="true" tabindex="-1"></a>edudata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/xAPI-Edu-Data.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb171-2"><a href="5-Student-performance-level.html#cb171-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col_types =</span> <span class="st">&quot;fffffffffddddffff&quot;</span>)</span>
-<span id="cb171-3"><a href="5-Student-performance-level.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(edudata)</span></code></pre></div>
-<pre><code>## cols(
-##   gender = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   NationalITy = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   PlaceofBirth = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   StageID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   GradeID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   SectionID = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   Topic = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   Semester = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   Relation = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   raisedhands = col_double(),
-##   VisITedResources = col_double(),
-##   AnnouncementsView = col_double(),
-##   Discussion = col_double(),
-##   ParentAnsweringSurvey = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   ParentschoolSatisfaction = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   StudentAbsenceDays = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
-##   Class = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE)
-## )</code></pre>
-<div id="回归树模型-1" class="section level3 hasAnchor" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> 回归树模型<a href="5-Student-performance-level.html#回归树模型-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="5-Student-performance-level.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3verse)</span>
-<span id="cb173-2"><a href="5-Student-performance-level.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立任务</span></span>
-<span id="cb173-3"><a href="5-Student-performance-level.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb173-4"><a href="5-Student-performance-level.html#cb173-4" aria-hidden="true" tabindex="-1"></a>task_rp <span class="ot">&lt;-</span> </span>
-<span id="cb173-5"><a href="5-Student-performance-level.html#cb173-5" aria-hidden="true" tabindex="-1"></a>  TaskClassif<span class="sc">$</span><span class="fu">new</span>(<span class="at">id =</span> <span class="st">&quot;edu_rp&quot;</span>, <span class="at">backend =</span> edudata,</span>
-<span id="cb173-6"><a href="5-Student-performance-level.html#cb173-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">target =</span> <span class="st">&quot;Class&quot;</span>)</span>
-<span id="cb173-7"><a href="5-Student-performance-level.html#cb173-7" aria-hidden="true" tabindex="-1"></a>task_rp</span></code></pre></div>
-<pre><code>## &lt;TaskClassif:edu_rp&gt; (480 x 17)
-## * Target: Class
-## * Properties: multiclass
-## * Features (16):
-##   - fct (12): GradeID, NationalITy, ParentAnsweringSurvey,
-##     ParentschoolSatisfaction, PlaceofBirth, Relation,
-##     SectionID, Semester, StageID, StudentAbsenceDays, Topic,
-##     gender
-##   - dbl (4): AnnouncementsView, Discussion, VisITedResources,
-##     raisedhands</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="5-Student-performance-level.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择学习器</span></span>
-<span id="cb175-2"><a href="5-Student-performance-level.html#cb175-2" aria-hidden="true" tabindex="-1"></a>learner_rp <span class="ot">&lt;-</span> <span class="fu">lrn</span>(<span class="st">&quot;classif.rpart&quot;</span>)</span>
-<span id="cb175-3"><a href="5-Student-performance-level.html#cb175-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-4"><a href="5-Student-performance-level.html#cb175-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 划分测试集和训练集</span></span>
-<span id="cb175-5"><a href="5-Student-performance-level.html#cb175-5" aria-hidden="true" tabindex="-1"></a>train_set <span class="ot">&lt;-</span> <span class="fu">sample</span>(task_rp<span class="sc">$</span>nrow, <span class="fl">0.8</span> <span class="sc">*</span> task_rp<span class="sc">$</span>nrow)</span>
-<span id="cb175-6"><a href="5-Student-performance-level.html#cb175-6" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(task_rp<span class="sc">$</span>nrow), train_set)</span>
-<span id="cb175-7"><a href="5-Student-performance-level.html#cb175-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-8"><a href="5-Student-performance-level.html#cb175-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 模型训练</span></span>
-<span id="cb175-9"><a href="5-Student-performance-level.html#cb175-9" aria-hidden="true" tabindex="-1"></a>learner_rp<span class="sc">$</span><span class="fu">train</span>(task_rp, <span class="at">row_ids =</span> train_set)</span>
-<span id="cb175-10"><a href="5-Student-performance-level.html#cb175-10" aria-hidden="true" tabindex="-1"></a>learner_rp<span class="sc">$</span>model</span></code></pre></div>
-<pre><code>## n= 384 
-## 
-## node), split, n, loss, yval, (yprob)
-##       * denotes terminal node
-## 
-##   1) root 384 215 M (0.44010417 0.26562500 0.29427083)  
-##     2) StudentAbsenceDays=Above-7 157  64 L (0.38853503 0.59235669 0.01910828)  
-##       4) AnnouncementsView&gt;=30.5 62  16 M (0.74193548 0.20967742 0.04838710) *
-##       5) AnnouncementsView&lt; 30.5 95  15 L (0.15789474 0.84210526 0.00000000)  
-##        10) ParentAnsweringSurvey=Yes 25  10 L (0.40000000 0.60000000 0.00000000)  
-##          20) raisedhands&gt;=15.5 11   3 M (0.72727273 0.27272727 0.00000000) *
-##          21) raisedhands&lt; 15.5 14   2 L (0.14285714 0.85714286 0.00000000) *
-##        11) ParentAnsweringSurvey=No 70   5 L (0.07142857 0.92857143 0.00000000) *
-##     3) StudentAbsenceDays=Under-7 227 117 H (0.47577093 0.03964758 0.48458150)  
-##       6) Relation=Father 110  40 M (0.63636364 0.08181818 0.28181818)  
-##        12) VisITedResources&lt; 88.5 82  21 M (0.74390244 0.09756098 0.15853659)  
-##          24) GradeID=G-07,G-08,G-09,G-12,G-10 47   5 M (0.89361702 0.08510638 0.02127660) *
-##          25) GradeID=G-04,G-06,G-11,G-02 35  16 M (0.54285714 0.11428571 0.34285714)  
-##            50) raisedhands&lt; 37.5 22   7 M (0.68181818 0.18181818 0.13636364) *
-##            51) raisedhands&gt;=37.5 13   4 H (0.30769231 0.00000000 0.69230769) *
-##        13) VisITedResources&gt;=88.5 28  10 H (0.32142857 0.03571429 0.64285714)  
-##          26) Topic=IT,Arabic,Science,English,French,History 16   7 M (0.56250000 0.06250000 0.37500000) *
-##          27) Topic=Quran,Biology,Chemistry,Geology 12   0 H (0.00000000 0.00000000 1.00000000) *
-##       7) Relation=Mum 117  38 H (0.32478632 0.00000000 0.67521368)  
-##        14) PlaceofBirth=KuwaIT,USA,Jordan,Iran,Morocco,Palestine 93  37 H (0.39784946 0.00000000 0.60215054)  
-##          28) VisITedResources&lt; 91.5 76  36 H (0.47368421 0.00000000 0.52631579)  
-##            56) Topic=IT,Arabic,Quran,Spanish,French,Chemistry,Geology 49  19 M (0.61224490 0.00000000 0.38775510)  
-##             112) gender=M 30   8 M (0.73333333 0.00000000 0.26666667) *
-##             113) gender=F 19   8 H (0.42105263 0.00000000 0.57894737) *
-##            57) Topic=Science,English,History,Biology 27   6 H (0.22222222 0.00000000 0.77777778) *
-##          29) VisITedResources&gt;=91.5 17   1 H (0.05882353 0.00000000 0.94117647) *
-##        15) PlaceofBirth=lebanon,Egypt,venzuela,Tunis,Syria,Iraq 24   1 H (0.04166667 0.00000000 0.95833333) *</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="5-Student-performance-level.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 模型预测</span></span>
-<span id="cb177-2"><a href="5-Student-performance-level.html#cb177-2" aria-hidden="true" tabindex="-1"></a>pred_rp <span class="ot">&lt;-</span> learner_rp<span class="sc">$</span><span class="fu">predict</span>(task_rp, <span class="at">row_ids =</span> test_set)</span>
-<span id="cb177-3"><a href="5-Student-performance-level.html#cb177-3" aria-hidden="true" tabindex="-1"></a>pred_rp</span></code></pre></div>
-<pre><code>## &lt;PredictionClassif&gt; for 96 observations:
-##     row_ids truth response
-##           1     M        M
-##           5     M        L
-##           7     L        L
-## ---                       
-##         469     L        L
-##         470     L        L
-##         478     M        M</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="5-Student-performance-level.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 精度</span></span>
-<span id="cb179-2"><a href="5-Student-performance-level.html#cb179-2" aria-hidden="true" tabindex="-1"></a>pred_rp<span class="sc">$</span>confusion</span></code></pre></div>
-<pre><code>##         truth
-## response  M  L  H
-##        M 27  7 12
-##        L  3 18  0
-##        H 12  0 17</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="5-Student-performance-level.html#cb181-1" aria-hidden="true" tabindex="-1"></a>measure <span class="ot">&lt;-</span> <span class="fu">msr</span>(<span class="st">&quot;classif.acc&quot;</span>)</span>
-<span id="cb181-2"><a href="5-Student-performance-level.html#cb181-2" aria-hidden="true" tabindex="-1"></a>pred_rp<span class="sc">$</span><span class="fu">score</span>(measure) <span class="co"># 预测精度</span></span></code></pre></div>
-<pre><code>## classif.acc 
-##   0.6458333</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="5-Student-performance-level.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(learner_rp<span class="sc">$</span>model) <span class="co"># 作图</span></span></code></pre></div>
-<p><img src="5-Student-performance-level_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-</div>
-<div id="随机森林模型" class="section level3 hasAnchor" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> 随机森林模型<a href="5-Student-performance-level.html#随机森林模型" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="5-Student-performance-level.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 建立任务</span></span>
-<span id="cb184-2"><a href="5-Student-performance-level.html#cb184-2" aria-hidden="true" tabindex="-1"></a>task_rf <span class="ot">&lt;-</span> TaskClassif<span class="sc">$</span><span class="fu">new</span>(<span class="at">id =</span> <span class="st">&quot;task_rf&quot;</span>, <span class="at">backend =</span> edudata,</span>
-<span id="cb184-3"><a href="5-Student-performance-level.html#cb184-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">target =</span> <span class="st">&quot;Class&quot;</span>)</span>
-<span id="cb184-4"><a href="5-Student-performance-level.html#cb184-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-5"><a href="5-Student-performance-level.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择学习器</span></span>
-<span id="cb184-6"><a href="5-Student-performance-level.html#cb184-6" aria-hidden="true" tabindex="-1"></a>learner_rf <span class="ot">&lt;-</span> <span class="fu">lrn</span>(<span class="st">&quot;classif.ranger&quot;</span>)</span>
-<span id="cb184-7"><a href="5-Student-performance-level.html#cb184-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-8"><a href="5-Student-performance-level.html#cb184-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用之前设定好的测试集和训练集进行模型训练和预测</span></span>
-<span id="cb184-9"><a href="5-Student-performance-level.html#cb184-9" aria-hidden="true" tabindex="-1"></a>learner_rf<span class="sc">$</span><span class="fu">train</span>(task_rf, <span class="at">row_ids =</span> train_set)</span>
-<span id="cb184-10"><a href="5-Student-performance-level.html#cb184-10" aria-hidden="true" tabindex="-1"></a>learner_rf<span class="sc">$</span>model</span></code></pre></div>
-<pre><code>## Ranger result
-## 
-## Call:
-##  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == &quot;prob&quot;, case.weights = task$weights$weight,      num.threads = 1L) 
-## 
-## Type:                             Classification 
-## Number of trees:                  500 
-## Sample size:                      384 
-## Number of independent variables:  16 
-## Mtry:                             4 
-## Target node size:                 1 
-## Variable importance mode:         none 
-## Splitrule:                        gini 
-## OOB prediction error:             22.40 %</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="5-Student-performance-level.html#cb186-1" aria-hidden="true" tabindex="-1"></a>pred_rf <span class="ot">&lt;-</span> learner_rf<span class="sc">$</span><span class="fu">predict</span>(task_rf, <span class="at">row_ids =</span> test_set)</span>
-<span id="cb186-2"><a href="5-Student-performance-level.html#cb186-2" aria-hidden="true" tabindex="-1"></a>pred_rf</span></code></pre></div>
-<pre><code>## &lt;PredictionClassif&gt; for 96 observations:
-##     row_ids truth response
-##           1     M        M
-##           5     M        L
-##           7     L        L
-## ---                       
-##         469     L        L
-##         470     L        L
-##         478     M        M</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="5-Student-performance-level.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 精度预测</span></span>
-<span id="cb188-2"><a href="5-Student-performance-level.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 建立混淆矩阵</span></span>
-<span id="cb188-3"><a href="5-Student-performance-level.html#cb188-3" aria-hidden="true" tabindex="-1"></a>pred_rf<span class="sc">$</span>confusion</span></code></pre></div>
-<pre><code>##         truth
-## response  M  L  H
-##        M 33  3  7
-##        L  2 22  0
-##        H  7  0 22</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="5-Student-performance-level.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 设定精度预测方法</span></span>
-<span id="cb190-2"><a href="5-Student-performance-level.html#cb190-2" aria-hidden="true" tabindex="-1"></a>measure <span class="ot">&lt;-</span> <span class="fu">msr</span>(<span class="st">&quot;classif.acc&quot;</span>)</span>
-<span id="cb190-3"><a href="5-Student-performance-level.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 预测精度</span></span>
-<span id="cb190-4"><a href="5-Student-performance-level.html#cb190-4" aria-hidden="true" tabindex="-1"></a>pred_rf<span class="sc">$</span><span class="fu">score</span>(measure)</span></code></pre></div>
-<pre><code>## classif.acc 
-##   0.8020833</code></pre>
-</div>
-<div id="支持向量机模型" class="section level3 hasAnchor" number="5.4.3">
-<h3><span class="header-section-number">5.4.3</span> 支持向量机模型<a href="5-Student-performance-level.html#支持向量机模型" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="todo">完善内容</span></p>
-<ol style="list-style-type: decimal">
-<li><p>edudata1 &lt;- read_csv(“data/xAPI-Edu-Data.csv”,
-col_types = ““)
-str(edudata1)</p></li>
-<li><p>建立任务
-edudata1<span class="math inline">\(Class &lt;- factor(edudata1\)</span>Class)
-task_svm &lt;- TaskClassif$new(id = “task_svm”, edudata1,
-target = “Class”)</p></li>
-<li><p>选择学习器
-learner_svm &lt;- lrn(“classif.svm”)</p></li>
-<li><p>利用之前确定的训练集训练模型
-learner_svm<span class="math inline">\(train(task_svm, row_ids = train_set) learner_svm\)</span>model</p></li>
-</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 封装求众数函数</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fun_pred <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>result<span class="sc">$</span>final_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">apply</span>(result[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">1</span>, fun_pred))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(result<span class="sc">$</span>actual_class, result<span class="sc">$</span>final_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
 
-</div>
-</div>
-</div>
-            </section>
+          Reference
+Prediction  H  L  M
+         H 21  1  6
+         L  0 23  2
+         M  7 10 25
 
-          </div>
-        </div>
-      </div>
-<a href="4-creditcard.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="6-mass-shoot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+Overall Statistics
+                                          
+               Accuracy : 0.7263          
+                 95% CI : (0.6252, 0.8128)
+    No Information Rate : 0.3579          
+    P-Value [Acc &gt; NIR] : 3.029e-13       
+                                          
+                  Kappa : 0.5887          
+                                          
+ Mcnemar's Test P-Value : 0.09327         
+
+Statistics by Class:
+
+                     Class: H Class: L Class: M
+Sensitivity            0.7500   0.6765   0.7576
+Specificity            0.8955   0.9672   0.7258
+Pos Pred Value         0.7500   0.9200   0.5952
+Neg Pred Value         0.8955   0.8429   0.8491
+Prevalence             0.2947   0.3579   0.3474
+Detection Rate         0.2211   0.2421   0.2632
+Detection Prevalence   0.2947   0.2632   0.4421
+Balanced Accuracy      0.8228   0.8218   0.7417</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rpart randomForest svm actual_class final_pred
+1     M            M   M            M          M
+2     L            L   L            L          L
+3     L            L   L            L          L
+4     M            M   L            M          M
+5     L            L   L            L          L
+6     M            M   M            M          M</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./4-creditcard.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">信用卡欺诈识别</span></span>
+      </a>          
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": {}
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/XiangyunHuang/masr/edit/master/5-Student-performance-level.rmd",
-"text": "编辑"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": "https://github.com/XiangyunHuang/masr/blob/master/5-Student-performance-level.rmd",
-"text": "查看"
-},
-"download": ["elegantbookdown.pdf", "elegantbookdown.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
+  <div class="nav-page nav-page-next">
+      <a href="./6-mass-shoot.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">美国大规模枪击案</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+</body></html>
