@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.436">
+<meta name="generator" content="quarto-0.9.464">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,24 +80,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./4-creditcard.html" rel="next">
-<link href="./2-Olympic-history.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -120,7 +102,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-</head>
+<script src="site_libs\quarto-nav\quarto-nav.js"></script><script src="site_libs\quarto-nav\headroom.min.js"></script><script src="site_libs\clipboard\clipboard.min.js"></script><script src="site_libs\quarto-search\autocomplete.umd.js"></script><script src="site_libs\quarto-search\fuse.min.js"></script><script src="site_libs\quarto-search\quarto-search.js"></script><meta name="quarto:offset" content="./"><link href="/4-creditcard.html" rel="next"><link href="/2-Olympic-history.html" rel="prev"><script src="site_libs\quarto-html\quarto.js"></script><script src="site_libs\quarto-html\popper.min.js"></script><script src="site_libs\quarto-html\tippy.umd.min.js"></script><script src="site_libs\quarto-html\anchor.min.js"></script><link href="site_libs\quarto-html\tippy.css" rel="stylesheet"><link href="site_libs\quarto-html\quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><script src="site_libs\bootstrap\bootstrap.min.js"></script><link href="site_libs\bootstrap\bootstrap-icons.css" rel="stylesheet"><link href="site_libs\bootstrap\bootstrap.min.css" rel="stylesheet"></head>
 
 <body class="nav-sidebar floating">
 
@@ -184,6 +166,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6-mass-shoot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">美国大规模枪击案</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7-hotel-demond.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">酒店房间预定预测</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -696,11 +683,11 @@ response    0    1
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 应用重采样方法</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>rr_rpart <span class="ot">&lt;-</span> <span class="fu">resample</span>(task_hr, learner_rpart, resampling_rpart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>INFO  [16:58:50.710] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 1/5) 
-INFO  [16:58:50.788] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 3/5) 
-INFO  [16:58:50.835] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 5/5) 
-INFO  [16:58:50.877] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 2/5) 
-INFO  [16:58:50.920] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 4/5) </code></pre>
+<pre><code>INFO  [18:54:50.866] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 1/5) 
+INFO  [18:54:50.959] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 3/5) 
+INFO  [18:54:51.019] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 5/5) 
+INFO  [18:54:51.071] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 2/5) 
+INFO  [18:54:51.133] [mlr3] Applying learner 'classif.rpart' on task 'left' (iter 4/5) </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 每次重采样建模评分</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>rr_rpart<span class="sc">$</span><span class="fu">score</span>(measure_rpart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -888,11 +875,11 @@ response    0    1
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>resampling_nb <span class="ot">&lt;-</span> <span class="fu">rsmp</span>(<span class="st">"cv"</span>, <span class="at">folds =</span> 5L)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>rr_nb <span class="ot">&lt;-</span> <span class="fu">resample</span>(task_hr_nb, learner_nb, resampling_nb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>INFO  [16:58:52.053] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 1/5) 
-INFO  [16:58:52.440] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 3/5) 
-INFO  [16:58:52.813] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 5/5) 
-INFO  [16:58:53.176] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 2/5) 
-INFO  [16:58:53.537] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 4/5) </code></pre>
+<pre><code>INFO  [18:54:52.391] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 1/5) 
+INFO  [18:54:52.820] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 3/5) 
+INFO  [18:54:53.230] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 5/5) 
+INFO  [18:54:53.634] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 2/5) 
+INFO  [18:54:54.031] [mlr3] Applying learner 'classif.naive_bayes' on task 'left' (iter 4/5) </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>rr_nb<span class="sc">$</span><span class="fu">score</span>(measure_nb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
